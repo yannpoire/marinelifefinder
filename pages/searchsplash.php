@@ -1,6 +1,5 @@
 <?php
-	include_once '../common/header.php';
-	include_once '../common/mainnav.php';
+	include_once($_SERVER['DOCUMENT_ROOT']."common/base.php");
 ?>
 
 <div class="container">

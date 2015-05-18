@@ -10,11 +10,11 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="apple-touch-icon" href="apple-touch-icon.png">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>css/bootstrap.min.css">
 	 <style>body { padding-top: 50px; padding-bottom: 20px; }</style>
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="css/main.css">
-	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>css/main.css">
+	<script src="<?php echo BASE_URL; ?>js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
 <body>
 	<!--[if lt IE 8]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->

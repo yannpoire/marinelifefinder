@@ -1,8 +1,9 @@
 <?php
+	include_once("common/base.php");
 	$pageTitle = "Welcome on Marine Life Finder";
-	include_once 'common/header.php';
-	include_once 'common/mainnav.php';
-	include_once 'common/base.php';
+	include_once(ROOT_PATH."common/header.php");
+	include_once(ROOT_PATH."common/mainnav.php");
+	
 ?>
     <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
@@ -20,17 +21,17 @@
 		<div class="col-md-4">
 			<h2>Quick Search</h2>
 			<p>As most fishes have distinct traits, it is quite easy to narrow down what family and species he belongs to and what it his name. Try this interactive search using the most common but efficient criterias when identifying marine life.</p>
-			<p><a class="btn btn-default" href="pages/searchsplash.php" role="button">Start searching &raquo;</a></p>
+			<p><a class="btn btn-default" href="<?php echo BASE_URL; ?>pages/searchsplash.php" role="button">Start searching &raquo;</a></p>
 		</div>
 		<div class="col-md-4">
 			<h2>Advanced Search</h2>
 			<p>You have some more advanced knowledge about marine life or want to use more advanced criterias.</p>
-			<p><a class="btn btn-default" href="pages/searchsplash.php" role="button">Start searching &raquo;</a></p>
+			<p><a class="btn btn-default" href="<?php echo BASE_URL; ?>pages/searchsplash.php" role="button">Start searching &raquo;</a></p>
 		</div>
 		<div class="col-md-4">
 			<h2>Custom Search</h2>
 			<p>Create a custom tailored searches by selecting the criterias you want and save them in your profile for reuse.</p>
-			<p><a class="btn btn-default" href="pages/searchsplash.php" role="button">Start searching &raquo;</a></p>
+			<p><a class="btn btn-default" href="<?php echo BASE_URL; ?>pages/searchsplash.php" role="button">Start searching &raquo;</a></p>
 		</div>
 	</div>
 
@@ -74,7 +75,7 @@
 			<div id="share-area">
 				<p>Public list URL: <a href="#">URL GOES HERE</a><small>(Nobody but YOU will be able to edit this list)</small></p>
 			</div>
-				<p><a href="/logout.php" class="button" role="button">Log out</a> <a href="/account.php" class="button">Your Account</a></p>
+				<p><a href="/logout.php" class="button" role="button">Log out</a> <a href="<?php echo BASE_URL; ?>account.php" class="button">Your Account</a></p>
 			<?php else: ?>
 				<!-- IF LOGGED OUT -->
 				<!-- Alternate content here -->
@@ -90,13 +91,13 @@
 					<span>Milk</span>
 				</li>
 			</ul>
-			<img src="/images/newlist.jpg" alt="Your new list here!" />
-				<p><a class="btn btn-default" href="signup.php">Sign up</a> &nbsp; <a class="btn btn-default" href="login.php" role="button">Log in</a></p>
+			<img src="<?php echo BASE_URL; ?>/images/newlist.jpg" alt="Your new list here!" />
+				<p><a class="btn btn-default" href="<?php echo BASE_URL; ?>signup.php">Sign up</a> &nbsp; <a class="btn btn-default" href="login.php" role="button">Log in</a></p>
 				<!-- END OF IF STATEMENT -->
 			<?php endif; ?>			
 		</div>
 	</div>
 
 <div>
-	<?php include_once 'common/footer.php'; ?>
+	<?php include_once(ROOT_PATH."common/footer.php"); ?>
 </div>
