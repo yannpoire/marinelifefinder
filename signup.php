@@ -13,16 +13,20 @@
 <div class="container">
 	<!-- Example row of columns -->
 	<div class="row">
-        <h1>Sign up</h1>
-        <h2>Sign up for an account now! Unlock features such as saving custom searches, creating favorite lists and more.</h2>
-        <p>Join the community of people who share interest.</p>
-        <form method="post" action="signup.php" id="registerform" role="form">
-            <div class="form-group" style="width: 200px;">
-                <label for="username">Email</label><br />
-                <input type="text" name="username" id="username" class="form-control"  /><br />
-                <input type="submit" name="register" id="register" value="Sign me up!" class="btn btn-default" role="button" />
-            </div>
-        </form>
+		<div class="col-md-4">&nbsp;</div>
+		<div class="col-md-4">
+	        <h1>Sign up</h1>
+	        <h2>Sign up for an account now! Unlock features such as saving custom searches, creating favorite lists and more.</h2>
+	        <p>Join the community of people who share interest.</p>
+	        <form method="post" action="signup.php" id="registerform" role="form">
+	            <div class="form-group">
+	                <label for="username">Email</label><br />
+	                <input type="text" name="username" id="username" class="form-control"  /><br />
+	                <input type="submit" name="register" id="register" value="Sign me up!" class="btn btn-default" role="button" />
+	            </div>
+	        </form>
+		</div>
+		<div class="col-md-4">&nbsp;</div>
 	</div>
 	<hr>
 <div>

@@ -1,8 +1,8 @@
 <?php
-	include_once("common/base.php");
+	include_once "common/base.php";
 	$pageTitle = "Welcome on Marine Life Finder";
-	include_once(ROOT_PATH."common/header.php");
-	include_once(ROOT_PATH."common/mainnav.php");
+	include_once ROOT_PATH."common/header.php";
+	include_once ROOT_PATH."common/mainnav.php";
 	
 ?>
     <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -42,29 +42,14 @@
 			<?php if(isset($_SESSION['LoggedIn']) && isset($_SESSION['username']) && $_SESSION['LoggedIn']==1):	?>
 				<!-- IF LOGGED IN -->
 			<!-- Content here -->
-			<p>You are logged in!</p>
-			<ul id="list">
-				<li class="colorRed">
-					<span>Walk the dog</span>
+			<p>Welcome</p>
+			<ul>
+				<li>
 			        <div class="draggertab tab"></div>
 			        <div class="colortab tab"></div>
 			        <div class="deletetab tab"></div>
 			        <div class="donetab tab"></div>
 			    </li>
-				<li class="colorBlue">
-			        <span>Pick up dry cleaning</span>
-			        <div class="draggertab tab"></div>
-			        <div class="colortab tab"></div>
-			        <div class="deletetab tab"></div>
-			        <div class="donetab tab"></div>
-				</li>
-				<li class="colorGreen">
-			        <span>Milk</span>
-			        <div class="draggertab tab"></div>
-			        <div class="colortab tab"></div>
-			        <div class="deletetab tab"></div>
-			        <div class="donetab tab"></div>
-				</li>
 			</ul>
 			<form action="" id="add-new"> 
 				<div>
@@ -75,7 +60,7 @@
 			<div id="share-area">
 				<p>Public list URL: <a href="#">URL GOES HERE</a><small>(Nobody but YOU will be able to edit this list)</small></p>
 			</div>
-				<p><a href="/logout.php" class="button" role="button">Log out</a> <a href="<?php echo BASE_URL; ?>account.php" class="button">Your Account</a></p>
+				<p><a href="<?php echo BASE_URL; ?>logout.php" class="button" role="button">Log out</a> <a href="<?php echo BASE_URL; ?>account.php" class="button">Your Account</a></p>
 			<?php else: ?>
 				<!-- IF LOGGED OUT -->
 				<!-- Alternate content here -->

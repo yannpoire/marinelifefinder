@@ -7,7 +7,10 @@ ini_set("display_errors", 1);
 session_start();
 
 // Include site constants
-include_once "/inc/config.inc.php";
+if (!defined('ROOT_PATH')) {
+	define("ROOT_PATH", $_SERVER["DOCUMENT_ROOT"] . "/marinelifefinder/");
+}
+include_once ROOT_PATH."inc/config.inc.php";
 
 // Create a database object
 try {

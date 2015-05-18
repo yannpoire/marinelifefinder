@@ -7,7 +7,7 @@
 				<span class="icon-bar">Icon 2</span>
 				<span class="icon-bar">Icon 3</span>
 			</button>
-			<a class="navbar-brand" href="index.php">Project name</a>
+			<a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php">Project name</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<!-- <form class="navbar-form navbar-right" role="form">

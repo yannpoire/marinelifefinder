@@ -33,18 +33,21 @@
 
 <div class="container">
 	<div class="row">
-        <h2>Reset Your Password</h2>
-
-        <form method="post" action="accountverify.php">
-            <div class="form-group">
-                <label for="p">Choose a New Password:</label>
-                <input type="password" name="p" id="p" class="form-control" /><br />
-                <label for="r">Re-Type Password:</label>
-                <input type="password" name="r" id="r" class="form-control" /><br />
-                <input type="hidden" name="v" value="<?php echo $_GET['v'] ?>" />
-                <input type="submit" name="verify" id="verify" value="Reset Your Password" />
-            </div>
-        </form>
+		<div class="col-md-4">&nbsp;</div>
+		<div class="col-md-4">
+	        <h2>Reset Your Password</h2>
+	        <form method="post" action="accountverify.php">
+	            <div class="form-group">
+	                <label for="p">Choose a New Password:</label>
+	                <input type="password" name="p" id="p" class="form-control" /><br />
+	                <label for="r">Re-Type Password:</label>
+	                <input type="password" name="r" id="r" class="form-control" /><br />
+	                <input type="hidden" name="v" value="<?php echo $_GET['v'] ?>" />
+	                <input type="submit" name="verify" id="verify" value="Reset Your Password" />
+	            </div>
+	        </form>
+		</div>
+		<div class="col-md-4">&nbsp;</div>
 	</div>
 </div>
 

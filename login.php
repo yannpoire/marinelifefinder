@@ -7,6 +7,8 @@
 
 <div class="container">
 	<div class="row">
+		<div class="col-md-4">&nbsp;</div>
+		<div class="col-md-4">
 <?php  if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['username'])): ?>
         <p>You are currently <strong>logged in.</strong></p>
         <p><a href="/logout.php">Log out</a></p>
@@ -48,6 +50,8 @@
         </form><br /><br />
         <p><a href="password.php">Did you forget your password?</a></p>
 <?php endif; ?>
+	</div>
+	<div class="col-md-4"></div>
 </div>
 </div>
 

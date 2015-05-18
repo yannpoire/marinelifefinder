@@ -6,8 +6,12 @@
 ?>
 <div class="container">
 	<div class="row">
-        <h2>Password Reset Requested</h2>
-        <p>Check your email to finish the reset process.</p>
+		<div class="col-md-4">&nbsp;</div>
+		<div class="col-md-4">
+	        <h2>Password Reset Requested</h2>
+	        <p>Check your email to finish the reset process.</p>
+		</div>
+		<div class="col-md-4">&nbsp;</div>
      </div>
 </div>
 <?php include_once "common/footer.php"; ?>
