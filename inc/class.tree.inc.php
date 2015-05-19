@@ -29,9 +29,26 @@ class MLFTree {
 	}
 	
 	public function createAccount() {
-        $b = trim($_POST['branchname']);
-        $f = trim($_POST['branchfrom']);
-		$c = trim($_POST['branchcommonname']);
+        $bn = trim($_POST['branchname']);
+		$ba = preg_replace($pattern, ' ', trim($_POST['branchalias']) );
+		$bc = trim($_POST['branchcommonname']);
+        $bf = trim($_POST['branchfrom']);
+		$kb = trim($_POST['knownbranch']);
+		$sb = trim($_POST['selectbranch']);
+		$bs = trim($_POST['branchsummary']);
+		
+		$sql = "SELECT COUNT(branchalias) AS theCount FROM marine_tree WHERE branchalias=:branchalias";
+		if ( $stmt = $this->_db->prepare($sql) ) {
+			$stmt->bindParam(":branchalias", $u, PDO::PARAM_STR);
+            $stmt->execute();
+            $row = $stmt->fetch();
+			if ($row['theCount'] != 0) {
+				return '<h2>Error</h2><p>Sorry, that branch is already growing in the tree!</p>'
+			}
+			if 
+		}
+
+		
 
         $sql = "SELECT COUNT(username) AS theCount FROM marine_users WHERE username=:email";
         if ( $stmt = $this->_db->prepare($sql) ) {
@@ -73,5 +90,7 @@ class MLFTree {
     }
 	
 }
+
+
 
 ?>

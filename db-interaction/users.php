@@ -32,7 +32,7 @@ elseif ($_POST['action']=="resetpassword") {
     }
     exit;
 } else {
-    header("Location: ../index.php");
+    header("Location: ".ROOT_PATH."/index.php");
     exit;
 }
 

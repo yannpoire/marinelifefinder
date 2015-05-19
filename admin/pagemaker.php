@@ -10,9 +10,8 @@
 		<div>
 			<h1>Create a new branch in the tree</h1>
 			<p>Create a new branch or leaf in the tree, anywhere</p>
-			<p>As this marine life directory grows, caching, performance and speed will have to be tested so be patient...</p><br />
-			<form method="post" action=<?php echo ROOT_PATH; ?>db-interaction/branch.php" role="form">
-				<input type="hidden" name="action" value="addbranch" />
+			<p>As this directory grows, caching, performance and speed will have to be tested so be patient...</p><br />
+			<form role="form">
 				<fieldset>
 				<legend>New branch details</legend>
 				<div class="form-group">
@@ -40,9 +39,7 @@
 					<p>Enter a summary for the branch</p>
 					<label for="branchsummary">Branch summary</label><br />
 					<textarea id="branchsummary" class="textarea"></textarea><br /><br /><br />
-					<!-- ADD A RESET FEATURE
-						<input type="submit" name="resetfields" id="resetfields" value="Reset Form" class="btn btn-default" role="button" />&nbsp;&nbsp;&nbsp;
-					-->
+					<input type="submit" name="resetfields" id="resetfields" value="Reset Form" class="btn btn-default" role="button" />&nbsp;&nbsp;&nbsp;
 					<input type="submit" name="addnewbranch" id="addnewbranch" value="Add Branch" class="btn btn-default" role="button" />
 				</div>
 				</fieldset>

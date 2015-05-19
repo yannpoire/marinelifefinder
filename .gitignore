@@ -45,3 +45,10 @@ Temporary Items
 #Aptana project and setting files
 .project
 .settings
+snippets
+*.txt
+initializr
+fonts
+css
+js
+img
