@@ -17,7 +17,7 @@
         include_once 'inc/class.users.inc.php';
         $users = new MLFUsers($db);
         if($users->accountLogin()===TRUE):
-            echo "<meta http-equiv='refresh' content='0;/'>";
+            echo "<meta http-equiv='refresh' content='0;".BASE_URL."'>";
             exit;
         else:
 ?>

@@ -8,7 +8,7 @@
 	//Path of server
 	define("BASE_URL", "/marinelifefinder/");
 	if (!defined("ROOT_PATH")) {
-		define("ROOT_PATH", $_SERVER["DOCUMENT_ROOT"] . "/marinelifefinder/");
+		define("ROOT_PATH", $_SERVER["DOCUMENT_ROOT"] . "marinelifefinder/");
 	}
 	//define("ROOT_PATH", $_SERVER["DOCUMENT_ROOT"] . "/marinelifefinder/");
 ?>

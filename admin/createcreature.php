@@ -74,5 +74,5 @@
 		</div>
 		</form>
 	</div>
-		<?php include_once(ROOT_PATH."common/footer.php"); ?>
+	<?php include_once(ROOT_PATH."common/footer.php"); ?>
 </div>
