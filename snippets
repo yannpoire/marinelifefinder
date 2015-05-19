@@ -1,0 +1,9 @@
+<?php 
+					/*
+			 * For each lifegroups entry in values.php
+			 */
+				foreach ($lifegroups as $lifegroup) {
+					$lfg = strtolower($lifegroup);
+					echo '<label><input id="'  .$lfg.  '" value="'.$lfg.'" type="radio" class="" />&nbsp;'.$lifegroup.'</label><br />';
+				}
+			?>

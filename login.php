@@ -1,8 +1,8 @@
 <?php
     include_once "common/base.php";
     $pageTitle = "Login Marine Life Finder";
-    include_once "common/header.php";
-	include_once "common/mainnav.php";
+    include_once ROOT_PATH."common/header.php";
+	include_once ROOT_PATH."common/mainnav.php";
 ?>
 
 <div class="container">
@@ -25,10 +25,10 @@
         <form method="post" action="login.php" name="loginform" id="loginform">
             <div class="form-group">
             	<label for="username">Email</label>
-                <input type="text" name="username" id="username" class="form-control" />
+                <input type="text" name="username" id="username" class="" required="required" autofocus="autofocus"/>
                 <br /><br />
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="form-control" />
+                <input type="password" name="password" id="password" class="" required="required" />
                 <br /><br />
                 <input type="submit" name="login" id="login" value="Login" class="button" />
             </div>
@@ -39,11 +39,11 @@
         <h2>Your list awaits...</h2>
         <form method="post" action="login.php" name="loginform" id="loginform">
             <div class="form-group">
-                <input type="text" name="username" id="username" class="form-control" />
-                <label for="username">Email</label>
+            	<label for="username">Email</label>
+                <input type="text" name="username" id="username" class="" required="required" autofocus="autofocus" />
                 <br /><br />
-                <input type="password" name="password" id="password" class="form-control" />
-                <label for="password">Password</label>
+				<label for="password">Password</label>
+                <input type="password" name="password" id="password" class="" required="required" />
                 <br /><br />
                 <input type="submit" name="login" id="login" value="Login" class="button" />
             </div>
@@ -53,8 +53,5 @@
 	</div>
 	<div class="col-md-4"></div>
 </div>
+	<?php include_once ROOT_PATH."common/footer.php"; ?>
 </div>
-
-
-        <div style="clear: both;"></div>
-<?php include_once "common/footer.php"; ?>
