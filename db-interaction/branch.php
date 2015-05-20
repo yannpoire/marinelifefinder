@@ -3,51 +3,39 @@ session_start();
 include_once "../inc/config.inc.php";
 include_once "../inc/class.tree.inc.php";
 $treeObj = new MLFTree();
-$formVal = array();
+	/*
+	 * Check user access and validate post from form is not empty
+	 */
+if(!empty($_POST['action']) && $_POST['action'] == 'addbranch' && isset ($_SESSION['LoggedIn']) && $_SESSION['LoggedIn']==1) {
 
-print_r($_POST);
+	//echo "Logged in and all values good";
+	$bn = trim($_POST['branam']);
+	$ba = preg_replace('/\s+/', '', strtolower($bn));
+	$bc = trim($_POST['bracomnam']);
+	$bf;
+	$bt = $_POST['bratax'];
+	$bs = trim($_POST['brasum']);
+	$r = trim($_POST['rank']);
+	// get mother branch name
 
-$bn = trim($_POST['branchname']);
-$ba = preg_replace($pattern, ' ', $bn);
-$bc = trim($_POST['branchcommonname']);
-$typ = NULL;
-$sb = trim($_POST['selectbranch']);
-$kb = trim($_POST['knownbranch']);
-
-$bt;
-$bs = trim($_POST['branchsummary']);
-
-$formval = array(trim($_POST['branchname']),
-	preg_replace('/\s+/', '', trim(strtolower($_POST['branchname']))),
-	trim($_POST['branchcommonname']) ) ;
-		
-		/*
-		 * Check required fields for empty values 
-		 */
-		if (empty($ba)) {
-			return '<h2>Error</h2><p>Houston! We have a big problem, there were no alias set for the branch</p>';
-		} elseif (empty($bn)) {
-			return '<h2>Error</h2><p>Oups! Sorry, a branch must have a name';
-		} elseif (empty($kb) && empty($sb) || $kb !== $sb) {
-	/// Will require client side disabling of one or another field
-			return '<h2>Error</h2><p>Oups! Sorry, no mother branch to grow on or two different mother branch has been selected</p>';
-		} else {
-			if (!empty($kb)) {
-				$bf = $kb;
-			} else {
-				$bf = $sb;
-			}
+	if (!empty($r)) {
+		switch ($r) {
+			case 's':
+				$bf = $_POST['brafrosel'];
+				break;
+			case 't':
+				$bf = preg_replace('/\s+/', '', trim($_POST['brafrotyp']));
+				break;
+			default:
+				echo "No value for rank radio?";
+				break;
 		}
-//Check if user is authenticated and admin
-// *** ADD ADMIN IN USER DB ***
-if(!empty($_POST['action']) && $_POST == 'addbranch' && isset ($_SESSION['LoggedIn']) && $_SESSION['LoggedIn']==1) {
-	echo "add branch";
-	print_r($treeObj);
-	//$treeObj->addBranch();
-	//$status = $userObj->addBranch();
+	}
+	
+	$treeObj->growBranch($bn, $ba, $bc, $bf, $bt, $bs);
+
 } else {
-	echo "else";
-    //header("Location: ../index.php");
-    exit;
+	echo "<h2>Error!</h2><p>Invalid form or not logged in</p>";
 }
+
 ?>

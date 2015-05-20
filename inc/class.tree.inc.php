@@ -23,62 +23,41 @@ class MLFTree {
         }
     }
 	
-	public function addBranch() {
-        $bn = trim($_POST['branchname']);
-		$ba = preg_replace($pattern, ' ', trim($_POST['branchalias']) );
-		$bc = trim($_POST['branchcommonname']);
-		$kb = trim($_POST['knownbranch']);
-		$sb = trim($_POST['selectbranch']);
-		$bf;
-		$bs = trim($_POST['branchsummary']);
-		
-		/*
-		 * Check required fields for empty values 
-		 */
-		if (empty($ba)) {
-			return '<h2>Error</h2><p>Houston! We have a big problem, there were no alias set for the branch</p>';
-		} elseif (empty($bn)) {
-			return '<h2>Error</h2><p>Oups! Sorry, a branch must have a name';
-		} elseif (empty($kb) && empty($sb) || $kb !== $sb) {
-	/// Will require client side disabling of one or another field
-			return '<h2>Error</h2><p>Oups! Sorry, no mother branch to grow on or two different mother branch has been selected</p>';
-		} else {
-			if (!empty($kb)) {
-				$bf = $kb;
-			} else {
-				$bf = $sb;
-			}
-		}
+	public function growBranch($bn,	$ba,	$bc,	$bf, $bt, $bs) {
 		
 		/*
 		 * Check if the branch exist in the tree
 		 */
-		$sql = "SELECT COUNT(branchalias) AS theCount FROM marine_tree WHERE branchalias=:branchalias";
+		$sql = "SELECT COUNT(balias) AS theCount FROM mlf_tree WHERE balias=:balias";
 		if ( $stmt = $this->_db->prepare($sql) ) {
-			$stmt->bindParam(":branchalias", $ba, PDO::PARAM_STR);
+			$stmt->bindParam(":balias", $ba, PDO::PARAM_STR);
             $stmt->execute();
             $row = $stmt->fetch();
 			if ($row['theCount'] != 0) {
-				return '<h2>Error</h2><p>Oups! Sorry, that branch is already growing in the tree!</p>';
+				echo '<h2>Error</h2><p>Oups! Sorry, that branch is already growing in the tree!</p>';
+				$stmt->closeCursor();
+			} else {
+		/*
+		 * Add branch to the tree
+		 */
+				$sql = "SELECT @myRight := rgt FROM mlf_tree WHERE branchfrom = :branchfrom; UPDATE mlf_tree SET rgt = rgt + 2 WHERE rgt > @myRight; UPDATE mlf_tree SET lft = lft + 2 WHERE lft > @myRight; INSERT INTO mlf_tree(branchname, branchalias, lft, rgt, branchcommonname, branchfrom, branchtaxonomy, branchsummary) VALUES(:branchname, :branchalias, @myRight + 1, @myRight + 2, :branchcommonname, :branchfrom, :branchtaxonomy, :branchsummary)";
+				if ($stmt = $this->_db->prepare($sql) ) {
+		            $stmt->bindParam(":branchname", $bn, PDO::PARAM_STR);
+		            $stmt->bindParam(":branchalias", $ba, PDO::PARAM_STR);
+		            $stmt->bindParam(":branchcommonname", $bc, PDO::PARAM_STR);
+					$stmt->bindParam(":branchfrom", $bf, PDO::PARAM_STR);
+					$stmt->bindParam(":branchtaxonomy", $bt, PDO::PARAM_STR);
+					$stmt->bindParam(":branchsummary", $bt, PDO::PARAM_STR);
+					$stmt->execute();
+					$stmt->closeCursor();
+					echo '<h2>Success!</h2><p>The data has been entered in DB</p>';
+					return;
+				} 
 			}
-			$stmt->closeCursor();
-		}
-
-
-		$sql = "LOCK TABLE mlf_tree WRITE; SELECT @myRight := rgt FROM mlf_tree WHERE branchfrom = :branchfrom; UPDATE mlf_tree SET rgt = rgt + 2 WHERE rgt > @myRight; UPDATE mlf_tree SET lft = lft + 2 WHERE lft > @myRight; INSERT INTO mlf_tree(branchname, branchalias, lft, rgt, branchcommonname, branchsummary) VALUES(:branchname, :branchalias, @myRight + 1, @myRight + 2, :branchcommonname, :branchsummary); UNLOCK TABLES;";
-		if ($stmt = $this->_db->prepare($sql) ) {
-            $stmt->bindParam(":branchname", $bn, PDO::PARAM_STR);
-            $stmt->bindParam(":branchalias", $ba, PDO::PARAM_STR);
-			$stmt->bindParam(":branchcommonname", $bc, PDO::PARAM_STR);
-			$stmt->bindParam(":branchfrom", $bf, PDO::PARAM_STR);
-			$stmt->bindParam(":branchsummary", $bs, PDO::PARAM_STR);
-			$stmt->execute();
-            $stmt->closeCursor();
-			return '<h2>Success!</h2><p>A new branch grew from the tree!</p>';
 		}
 	}
 		
-		public function showTree () {
+	public function showTree () {
 			
 			$sql = "SELECT CONCAT( REPEAT( ' ', (COUNT(parent.name) - 1) ), node.name) AS name FROM nested_category AS node, nested_category AS parent WHERE node.lft BETWEEN parent.lft AND parent.rgt GROUP BY node.name ORDER BY node.lft;";
 			if($stmt = $this->_db->prepare($sql) ) {

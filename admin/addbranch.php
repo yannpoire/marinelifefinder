@@ -18,36 +18,36 @@
 				<fieldset>
 				<legend>New branch names</legend>
 				<div class="form-group">
-					<label for="braname">New branch name*   </label>
-					<input id="braname" name="braname" type="text" placeholder="Name of the branch" required="required" autofocus="autofocus" tabindex="1" /><br /><br />
+					<label for="branam">New branch name*   </label>
+					<input id="branam" name="branam" type="text" placeholder="Name of the branch" required="required" autofocus="autofocus" tabindex="1" /><br /><br />
 			<!-- Alias for unique identifier by name -->
-					<label for="bracomname">New branch common name   </label>
-					<input id="bracomname" name="bracomname" type="text" placeholder="Enter branch common name" tabindex="2" /><span>eg: butterflyfishes, slugs</span><br /><br />
+					<label for="bracomnam">New branch common name   </label>
+					<input id="bracomnam" name="bracomnam" type="text" placeholder="Enter branch common name" tabindex="2" /><span>eg: butterflyfishes, slugs</span><br /><br />
 					</div>
 				</fieldset>
 				<fieldset>
 					<legend>The branch in the tree</legend>
 					<p>If the name of the mother branch is known it can be typed in directly if not it can be selected</p>
 					<div class="form-group">
-					<input id="selected" name="rank" type="radio" value="c" tabindex="3"><label for="brafromsel"> Select mother branch name   </label>
-					<select id="brafromsel" tabindex="4">
-						<option>Animalia</option>
-						<option>Chordata</option>
-						<option>Eukaryota</option>
+					<input id="selected" name="rank" type="radio" value="s" tabindex="3" checked=""><label for="brafrosel"> Select mother branch name   </label>
+					<select id="brafrosel" name="brafrosel" tabindex="4">
+						<option value="Animalia">Animalia</option>
+						<option value="Chordata">Chordata</option>
+						<option value="Eukaryota">Eukaryota</option>
 					</select><br /><br />
-					<input id="typed" name="rank" type="radio" value="t" tabindex="5"><label for="branchfrom"> Type mother branch name   </label>					
-					<input id="brafrokno" name="brafrokno" type="text" placeholder="Type the name" tabindex="6" /><br /><br />
-					<label for="taxonomy">Choose a taxonomy term</label>
-					<select id="taxonomy" name="taxonomy" tabindex="7">
+					<input id="typed" name="rank" type="radio" value="t" tabindex="5"><label for="brafrotyp"> Type mother branch name   </label>					
+					<input id="brafrotyp" name="brafrotyp" type="text" placeholder=" Type the name" tabindex="6" /><br /><br />
+					<label for="bratax">Choose a taxonomy term</label>
+					<select id="bratax" name="bratax" tabindex="7">
 						<?php 
 							/*
 							 * For each taxonomy entry in values.php
 							 */
 							 	if ($branchranks) {
+							 		echo '<option value=""></option>';
 							 		$bs = $branchranks;
-									foreach ($bs as $l) {
-										$b = strtolower($bs);
-										echo '<option value="'.$b.'" />&nbsp;'.$l.'</option>';
+									foreach ($bs as $u) {
+										echo '<option value="'.$u.'" />'.$u.'</option>';
 									}
 								} else {
 									echo "Could not load field values";
@@ -60,12 +60,12 @@
 					<div class="form-group">
 					<legend>Branch details</legend>
 					<p>Enter a summary for the branch</p>
-					<label for="branchsummary">Branch summary</label><br />
-					<textarea id="branchsummary" class="textarea" tabindex="8"></textarea><br /><br /><br />
+					<label for="brasum">Branch summary</label><br />
+					<textarea id="brasum" name="brasum" class="textarea" tabindex="8"></textarea><br /><br /><br />
 					<!-- ADD A RESET FEATURE
 						<input type="submit" name="resetfields" id="resetfields" value="Reset Form" class="btn btn-default" role="button" />&nbsp;&nbsp;&nbsp;
 					-->
-					<input type="submit" name="addnewbranch" id="addnewbranch" value="Add Branch" class="btn btn-default" role="button" tabindex="9" /><br /><br />
+					<input type="submit" name="braadd" id="braadd" value="Add Branch" class="btn btn-default" role="button" tabindex="9" /><br /><br />
 				</div>
 				</fieldset>
 			</form>
