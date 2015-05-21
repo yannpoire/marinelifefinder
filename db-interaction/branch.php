@@ -9,22 +9,22 @@ $treeObj = new MLFTree();
 if(!empty($_POST['action']) && $_POST['action'] == 'addbranch' && isset ($_SESSION['LoggedIn']) && $_SESSION['LoggedIn']==1) {
 
 	//echo "Logged in and all values good";
-	$bn = trim($_POST['branam']);
+	$bn = trim($_POST['bname']);
 	$ba = preg_replace('/\s+/', '', strtolower($bn));
-	$bc = trim($_POST['bracomnam']);
+	$bc = trim($_POST['bcommonname']);
 	$bf;
-	$bt = $_POST['bratax'];
-	$bs = trim($_POST['brasum']);
-	$r = trim($_POST['rank']);
+	$bt = $_POST['btaxonomy'];
+	$bs = trim($_POST['bsummary']);
+	$r = trim($_POST['brank']);
 	// get mother branch name
 
 	if (!empty($r)) {
 		switch ($r) {
 			case 's':
-				$bf = $_POST['brafrosel'];
+				$bf = $_POST['bfromselected'];
 				break;
 			case 't':
-				$bf = preg_replace('/\s+/', '', trim($_POST['brafrotyp']));
+				$bf = preg_replace('/\s+/', '', trim($_POST['bfromtyped']));
 				break;
 			default:
 				echo "No value for rank radio?";

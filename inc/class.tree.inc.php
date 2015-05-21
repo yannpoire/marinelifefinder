@@ -24,96 +24,108 @@ class MLFTree {
     }
 	
 	public function growBranch($bn,	$ba,	$bc,	$bf, $bt, $bs) {
-		
+
 		/*
 		 * Check if the branch exist in the tree
 		 */
 		$sql = "SELECT COUNT(balias) AS theCount FROM mlf_tree WHERE balias=:balias";
 		if ( $stmt = $this->_db->prepare($sql) ) {
+			echo "<br />Checking if it exist  ".$ba."      <br />";
 			$stmt->bindParam(":balias", $ba, PDO::PARAM_STR);
             $stmt->execute();
             $row = $stmt->fetch();
+			$stmt->closeCursor();
 			if ($row['theCount'] != 0) {
-				echo '<h2>Error</h2><p>Oups! Sorry, that branch is already growing in the tree!</p>';
-				$stmt->closeCursor();
+				echo '<h2>Error</h2><p>Oups! Sorry, that branch is already growing in the tree!</p><br />';
 			} else {
 		/*
-		 * Add branch to the tree
-		 */
-				$sql = "SELECT @myRight := rgt FROM mlf_tree WHERE branchfrom = :branchfrom; UPDATE mlf_tree SET rgt = rgt + 2 WHERE rgt > @myRight; UPDATE mlf_tree SET lft = lft + 2 WHERE lft > @myRight; INSERT INTO mlf_tree(branchname, branchalias, lft, rgt, branchcommonname, branchfrom, branchtaxonomy, branchsummary) VALUES(:branchname, :branchalias, @myRight + 1, @myRight + 2, :branchcommonname, :branchfrom, :branchtaxonomy, :branchsummary)";
-				if ($stmt = $this->_db->prepare($sql) ) {
-		            $stmt->bindParam(":branchname", $bn, PDO::PARAM_STR);
-		            $stmt->bindParam(":branchalias", $ba, PDO::PARAM_STR);
-		            $stmt->bindParam(":branchcommonname", $bc, PDO::PARAM_STR);
-					$stmt->bindParam(":branchfrom", $bf, PDO::PARAM_STR);
-					$stmt->bindParam(":branchtaxonomy", $bt, PDO::PARAM_STR);
-					$stmt->bindParam(":branchsummary", $bt, PDO::PARAM_STR);
+		 * Select left of
+		 */ 
+		 		
+				$sql = "SELECT rgt FROM mlf_tree WHERE bname = :bfrom";
+				if ( $stmt = $this->_db->prepare($sql) ) {					
+					$stmt->bindParam(":bfrom", $bf, PDO::PARAM_STR);
 					$stmt->execute();
-					$stmt->closeCursor();
-					echo '<h2>Success!</h2><p>The data has been entered in DB</p>';
-					return;
-				} 
+				    $row = $stmt->fetch();
+					$atmyright = $row[0];
+            		$stmt->closeCursor();
+            		//return TRUE;
+        		} 	
+				
+			/*
+			 * Set right with leftof +2
+			 */			
+				
+				$sql = "UPDATE mlf_tree SET rgt = rgt + 2 WHERE rgt > :atmyright";
+				if ( $stmt = $this->_db->prepare($sql) ) {
+					echo "Updating right values";
+					$stmt->bindParam(":atmyright", $atmyright, PDO::PARAM_STR);
+				    $stmt->execute();
+            		$stmt->closeCursor();
+        		}
+				
+			/*
+			 * Set left with leftof +2
+			 */
+				
+				$sql = "UPDATE mlf_tree SET lft = lft + 2 WHERE lft > :atmyright";
+				if ( $stmt = $this->_db->prepare($sql) ) {
+					$stmt->bindParam(":atmyright", $atmyright, PDO::PARAM_STR);
+				    $stmt->execute();
+            		$stmt->closeCursor();
+            		}
+				
+			/*
+			 * Trying to insert in DB
+			 */
+								
+				$sql = "INSERT INTO mlf_tree(bname, balias, lft, rgt, bcommonname, bfrom, btaxonomy, bsummary) VALUES(:bname, :balias, :atmyright + 1, :atmyright + 2, :bcommonname, :bfrom, :btaxonomy, :bsummary)";
+				try {
+					$stmt = $this->_db->prepare($sql);
+		            $stmt->bindParam(":bname", $bn, PDO::PARAM_STR);
+		            $stmt->bindParam(":balias", $ba, PDO::PARAM_STR);
+					$stmt->bindParam(":atmyright", $atmyright, PDO::PARAM_STR);
+		            $stmt->bindParam(":bcommonname", $bc, PDO::PARAM_STR);
+					$stmt->bindParam(":bfrom", $bf, PDO::PARAM_STR);
+					$stmt->bindParam(":btaxonomy", $bt, PDO::PARAM_STR);
+					$stmt->bindParam(":bsummary", $bs, PDO::PARAM_STR);
+				    $stmt->execute();
+            		$stmt->closeCursor();
+        		} catch(PDOException $e) {
+        			echo 'There should be an error here';
+					echo $e->getMessage();
+        		}
 			}
 		}
 	}
+
+			/*
+			 * 
+			 * Function to show the whole tree
+			 * 
+			 */
 		
 	public function showTree () {
 			
-			$sql = "SELECT CONCAT( REPEAT( ' ', (COUNT(parent.name) - 1) ), node.name) AS name FROM nested_category AS node, nested_category AS parent WHERE node.lft BETWEEN parent.lft AND parent.rgt GROUP BY node.name ORDER BY node.lft;";
-			if($stmt = $this->_db->prepare($sql) ) {
-				$stmt->bindParam(":branchalias", $ba, PDO::PARAM_STR);
-				$stmt->closeCursor();
+		$sql = "SELECT node.bname FROM mlf_tree AS node, mlf_tree AS parent WHERE node.lft BETWEEN parent.lft AND parent.rgt AND parent.balias = 'eukaryota' ORDER BY node.lft";
+		if( $stmt = $this->_db->prepare($sql) ) {
+			$stmt->execute();
+			$row = $stmt->fetch();
+			$stmt->closeCursor();
+			if (isset($row) && !empty($row)) {
+				return $row;
+			} else {
+				echo "<h2>Error!</h2><p>Something went wrong with the query</p>";
 			}
+			
 		}
+	}
+	
+	public function deleteBranch () {
+		echo"";
+	}
 							
 }					
-					
-				
-			
-		
-			
-			
-		
-		/*
-		 * Enter fields values in the DB if not empty or already exist
-		 */
-		
-		/*
-		 * First check if branch will have siblings or not (they are different ways to enter values according to this)
-		 */
-		/* $sql ="SELECT parent.:branchalias, COUNT(product.branchalias) FROM mlf_tree AS nodeCount , mlf_tree AS parent, product WHERE node.lft BETWEEN parent.lft AND parent.rgt AND node.branchuid = product.branchuid GROUP BY parent.name ORDER BY node.lft";
-		if ( $stmt = $this->_db->prepare($sql) ) {
-			$stmt->bindParam(":branchalias", $bs, PDO::PARAM_STR);
-            $stmt->execute();
-			$row = $stmt->fetch();
-			print_r($row);
-		// No children 
-			if ($row['nodeCount'] == 1) {
-				echo '<h2>Parent node has no children</h2>';
-				$sql = "LOCK TABLE mlf_tree WRITE; SELECT @myRight := rgt FROM mlf_tree WHERE branchalias = :branchalias; UPDATE mlf_tree SET rgt = rgt + 2 WHERE rgt > @myRight; UPDATE mlf_tree SET lft = lft + 2 WHERE lft > @myRight; INSERT INTO mlf_tree(branchalias, lft, rgt) VALUES('GAME CONSOLES', @myRight + 1, @myRight + 2); UNLOCK TABLES;";
-		// Has children
-			} elseif ($row['nodeCount'] > 1) {
-				echo '<h2>Parent node has '.$row['nodeCount'].' -1 childrens</h2>';
-			} 
-            $stmt->closeCursor();
-		}
-
-        $sql = "INSERT INTO marine_tree(branchname, branchalias, branchcommonname, branchsummary ) VALUES(:branchname, :branchalias, :branchcommonname, :branchsummary)";
-        if ( $stmt = $this->_db->prepare($sql) ) {
-            $stmt->bindParam(":branchname", $bn, PDO::PARAM_STR);
-            $stmt->bindParam(":branchalias", $ba, PDO::PARAM_STR);
-			$stmt->bindParam(":branchcommonname", $bc, PDO::PARAM_STR);
-			$stmt->bindParam(":branchfrom", $bf, PDO::PARAM_STR);
-			$stmt->bindParam(":branchsummary", $bs, PDO::PARAM_STR);
-            $stmt->execute();
-            $stmt->closeCursor();
-			
-			
-
-        } else {
-            return "<h2> Error </h2><p> Couldn't insert the " . "user information into the database. </p>";
-        }
-    } */
     
     /*
 	 * Function to cut a branch from the tree
