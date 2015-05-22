@@ -102,69 +102,22 @@ class MLFTree {
 			 * 
 			 */
 		
-	public function showTree () {
-		
-	/*	 $sql = "SELECT lft, rgt FROM mlf_tree WHERE balias = 'animalia'";
-		try {
-			$stmt = $this->_db->prepare($sql);
-			$stmt->execute();
-			$row = $stmt->fetch(PDO::FETCH_ASSOC);
-			$stmt->closeCursor();
-		} catch(PDOException $e) {
-			echo '<br />There should be an error here';
-			echo $e->getMessage();
-		} */
-		
-		$sql = "SELECT node.bname, node.rgt FROM mlf_tree AS node, mlf_tree AS parent WHERE node.lft BETWEEN parent.lft AND parent.rgt AND parent.bname = 'Eukaryota' ORDER BY node.lft";
-		if ( $stmt = $this->_db->prepare($sql) ) {
-			//$stmt->bindParam(":lft", $row['lft'], PDO::PARAM_STR);
-			//$stmt->bindParam(":rgt", $row['rgt'], PDO::PARAM_STR);
-			$stmt->execute();
-			$results = $stmt->fetchAll(); //PDO::FETCH_ASSOC);
-			//echo "<br />Fetching the rows in pub function from the table RESULTS = "; print_r($results);
-			$stmt->closeCursor();
-			return $results;
-		}
-	}
-
-        // add this node to the stack  
-
-        
-
- //   }
-		//	}
-			//$stmt->closeCursor();
-			//return $results;
-			/* $right = array();
-			foreach ( $results as $result ) {
-				if (count($right) > 0) {
-					while ($right[count($right)-1]<$results['rgt']) {  
-                		array_pop($right);
-					}
-				}
-				echo str_repeat('  ',count($right)).$results['bname']."n";  
-				 // add this node to the stack  
-				$right[] = $row['rgt'];
-				print_r($right);
-				return $right;			
-			} */
-			
-	//	}
-//	}			
-			
-	/*	$sql = "SELECT node.bname FROM mlf_tree AS node, mlf_tree AS parent WHERE node.lft BETWEEN parent.lft AND parent.rgt AND parent.balias = 'eukaryota' ORDER BY node.lft";
-		if( $stmt = $this->_db->prepare($sql) ) {
-			$stmt->execute();
-			$row = $stmt->fetch();
-			$stmt->closeCursor();
-			if (isset($row) && !empty($row)) {
-				return $row;
-			} else {
-				echo "<h2>Error!</h2><p>Something went wrong with the query</p>";
+	public function showBranchesList () {
+			$parentbranch = 'animalia';
+			$sql = "SELECT node.bname, node.balias, node.lft, node.bfrom FROM mlf_tree AS node, mlf_tree AS parent WHERE node.lft BETWEEN parent.lft AND parent.rgt AND parent.balias = :parent ORDER BY node.lft";
+			if ( $stmt = $this->_db->prepare($sql) ) {
+				$stmt->bindParam(":parent", $parentbranch, PDO::PARAM_STR);
+				//$stmt->bindParam(":rgt", $row['rgt'], PDO::PARAM_STR);
+				$stmt->execute();
+				$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				return $results;
+				$stmt->closeCursor();
 			}
-			
-		}
-	} */
+	}
+	
+	public function pruneBranch() {
+		
+	}		
 	
 	public function deleteBranch () {
 		echo"";

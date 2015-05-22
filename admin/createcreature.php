@@ -13,6 +13,7 @@
 		<p>Fields marked with an asterisk * are mandatory.</p>
 	</div>
 	<div class="row">
+		<div class="col-md-9">
 		<form role="form">
 			<div class="form-group">
 			<fieldset>
@@ -39,7 +40,7 @@
 			<fieldset>
 				<legend>Basic Info</legend>
 				<p>Enter the names of the organism</p>
-				<label for="commonname">Name*</label><br />
+				<label for="commonname">Common Name*</label><br />
 				<input id="commonname" type="text" class="" required="required" autofocus="autofocus" /><br /><br />
 				<label for="binomial">Binomial*</label><br />
 				<input id="binomialfirst" type="text" class="" />&nbsp;&nbsp;<input id="binomiallast" type="text" class="inline" /><br /><br />
@@ -49,7 +50,8 @@
 		</div>
 		<div class="form-group">
 			<fieldset>
-				<legend>Classification</legend>
+				<legend>Taxonomy & Classification</legend>
+				<p>Enter the genus or the closest taxon know</p>
 				<select>
 					<option value="tree">Tree</option>
 				</select><br /><br />
@@ -59,7 +61,8 @@
 			<fieldset>
 				<legend>Visual appearance</legend>
 				<select>
-					<option value="tree">Tree</option>
+					<option value=""></option>
+					<option value="Unknown">Unknown</option>
 				</select><br /><br />
 			</fieldset>
 		</div>
@@ -67,12 +70,26 @@
 			<fieldset>
 				<legend>Media</legend>
 				<p>Add images to the gallery</p>
-				<select>
-					<option value="tree">Tree</option>
-				</select><br /><br />
+				<input id="addimagefield" name="addimage" type="text"><br /><br />
+			</fieldset>
+		</div>
+		<div class="form-group">
+			<fieldset>
+				<legend>Links</legend>
+				<p>Links to other databases of fishes</p>
+				<label for="wikipedialink">On Wikipedia.org</label>
+				<input id="wikipedialink" name="wikipedialink" type="text"><br /><br />
+				<label for="fishbaselink">On Fishbase.org</label>
+				<input id="fishbaselink" name="fishbaselink" type="text"><br /><br />
+				<label for="wormslink">On WoRMS</label>
+				<input id="wormslink" name="wormslink" type="text"><br /><br />
 			</fieldset>
 		</div>
 		</form>
+		</div>
+		<div class="col-md-3">
+			<?php include_once("adminnav.php"); ?>
+		</div>
 	</div>
 	<?php include_once(ROOT_PATH."common/footer.php"); ?>
 </div>

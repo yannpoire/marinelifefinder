@@ -9,7 +9,7 @@
 
 <div class="container">
 	<div class="row">
-		<div>
+		<div class="col-md-9">
 			<h1>Create a new branch in the tree</h1>
 			<h2>Sprout a new branch or leaf anywhere in the tree</h2>
 			<p>As this marine life directory grows, caching, performance and speed will have to be tested so be patient...</p><br />
@@ -31,9 +31,15 @@
 					<div class="form-group">
 					<input id="selected" name="brank" type="radio" value="s" tabindex="3" checked=""><label for="bfromselected"> Select mother branch name   </label>
 					<select id="bfromselected" name="bfromselected" tabindex="4">
-						<option value="Animalia">Animalia</option>
-						<option value="Chordata">Chordata</option>
-						<option value="Eukaryota">Eukaryota</option>
+						<?php 
+							$tree = new MLFTree($db);
+			        		$results = $tree->showBranchesList();
+							//print_r($results);
+							foreach ($results as $result) {
+								//$count[] = $result['balias']);
+								echo "<option value='".$result['balias']."'>".$result['bname']."</option>";
+							}
+						?>
 					</select><br /><br />
 					<input id="bfromtyped" name="brank" type="radio" value="t" tabindex="5"><label for="bfromtyped"> Type mother branch name   </label>					
 					<input id="bfromtyped" name="bfromtyped" type="text" placeholder=" Type the name" tabindex="6" /><br /><br />
@@ -65,10 +71,13 @@
 					<!-- ADD A RESET FEATURE
 						<input type="submit" name="resetfields" id="resetfields" value="Reset Form" class="btn btn-default" role="button" />&nbsp;&nbsp;&nbsp;
 					-->
-					<input type="submit" name="badd" id="badd" value="Add Branch" class="btn btn-default" role="button" tabindex="9" /><br /><br />
+					<input type="submit" name="badd" id="badd" value="Sprout this branch in the tree" class="btn btn-default" role="button" tabindex="9" /><br /><br />
 				</div>
 				</fieldset>
 			</form>
+		</div>
+		<div class="col-md-3">
+			<?php include_once("adminnav.php"); ?>
 		</div>
 		</div>
 	<div class="row">
