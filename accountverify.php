@@ -27,7 +27,8 @@
     	echo isset($ret[1]) ? $ret[1] : NULL;
         if($ret[0]<3):
 ?>
-
+</head>
+<body>
         <h2>Choose a Password</h2>
 
         <form method="post" action="accountverify.php">

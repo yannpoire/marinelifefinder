@@ -6,6 +6,8 @@
 	include_once ROOT_PATH."common/header.php";
 	include_once ROOT_PATH."common/mainnav.php";
 ?>
+</head>
+<body>
 <div class="container">
 	<div class="row">
 		<h1>Enter a new lifeform in the directory</h1>
@@ -17,7 +19,7 @@
 		<form role="form">
 			<div class="form-group">
 			<fieldset>
-				<legend>Group</legend>
+				<legend>Group*</legend>
 				<select>
 					<?php 
 							/*
@@ -60,10 +62,17 @@
 		<div class="form-group">
 			<fieldset>
 				<legend>Visual appearance</legend>
+				<p>Select visual clues</p>
 				<select>
 					<option value=""></option>
-					<option value="Unknown">Unknown</option>
 				</select><br /><br />
+			</fieldset>
+		</div>
+		<div class="form-group">
+			<fieldset>
+				<legend>Summary</legend>
+				<label for="summary">Write a summary of the lifeform</label><br />
+				<input id="summary" />
 			</fieldset>
 		</div>
 		<div class="form-group">

@@ -1,0 +1,28 @@
+
+
+/* The whole tree ul wrapper */
+div.wholetree {
+	font-weight: bold;
+}
+
+div.wholetree ul li {
+	list-style-type: none;
+}
+
+.adminnav ul {
+	list-style-type: none;
+}
+
+ul.top-options {
+	list-style-type: none;
+}
+
+ul.top-options li {
+	display: inline;
+}
+
+div.pagestatus {
+	float: right;
+	clear: left;
+	
+}

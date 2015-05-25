@@ -45,8 +45,8 @@ Temporary Items
 #Aptana project and setting files
 snippets
 *.txt
-initializr
-fonts
-css
-js
-img
+initializr/
+fonts/
+js/
+img/
+plugins/

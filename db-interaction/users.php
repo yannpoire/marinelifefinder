@@ -23,17 +23,16 @@ if(!empty($_POST['action']) && isset ($_SESSION['LoggedIn']) && $_SESSION['Logge
             header("Location: /");
             break;
     }
-}
-elseif ($_POST['action']=="resetpassword") {
+} elseif ($_POST['action']=="resetpassword") {
     if($resp=$userObj->resetPassword()===TRUE) {
         header("Location: ../resetpending.php");
     } else {
-        echo $resp;
-    }
+		echo $resp;
+	}
     exit;
 } else {
-    header("Location: ".ROOT_PATH."/index.php");
-    exit;
+	header("Location: ".ROOT_PATH."/index.php");
+	exit;
 }
 
 ?>

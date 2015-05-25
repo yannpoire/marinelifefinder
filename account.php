@@ -36,7 +36,8 @@
 
         list($id, $v) = $users->retrieveAccountInfo();
 ?>
-
+</head>
+<body>
         <h2>Your Account details</h2>
         <form method="post" action="db-interaction/users.php">
             <div>

@@ -6,12 +6,14 @@
 	include_once ROOT_PATH."common/header.php";
 	include_once ROOT_PATH."common/mainnav.php";
 ?>
-
+</head>
+<body>
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
 			<h1>Create a search</h1>
 			<h2>Choose the criterias you would like for your search</h2>
+			<p>Start by selecting values from the left side, they will appear as you build it</p>
 			<p>As this Marine Life Finder directory grows, caching, performance and speed will have to be tested so be patient...</p><br />
 		</div>
 	</div>

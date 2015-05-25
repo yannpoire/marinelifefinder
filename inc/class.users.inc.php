@@ -31,7 +31,7 @@ class MLFUsers {
         $u = trim($_POST['username']);
         $v = sha1(time());
 
-        $sql = "SELECT COUNT(username) AS theCount FROM marine_users WHERE username=:email";
+        $sql = "SELECT COUNT(username) AS theCount FROM mlf_users WHERE username=:email";
         if ( $stmt = $this->_db->prepare($sql) ) {
             $stmt->bindParam(":email", $u, PDO::PARAM_STR);
             $stmt->execute();
@@ -45,7 +45,7 @@ class MLFUsers {
             $stmt->closeCursor();
         }
 
-        $sql = "INSERT INTO marine_users(username, ver_code) VALUES(:email, :ver)";
+        $sql = "INSERT INTO mlf_users(username, ver_code) VALUES(:email, :ver)";
         if ( $stmt = $this->_db->prepare($sql) ) {
             $stmt->bindParam(":email", $u, PDO::PARAM_STR);
             $stmt->bindParam(":ver", $v, PDO::PARAM_STR);
@@ -59,7 +59,7 @@ class MLFUsers {
              * If the UserID was successfully
              * retrieved, create a default list.
              */
-            $sql = "INSERT INTO marine_lists (UserID, ListURL) VALUES ($userID, $url)";
+            $sql = "INSERT INTO mlf_favorites (userid, favorite) VALUES ($userID, $url)";
             if(!$this->_db->query($sql)) {
                 return "<h2> Error </h2>" . "<p> Your account was created, but " . "creating your first list failed. </p>";
             } else {
@@ -107,6 +107,7 @@ Thanks!
 Yann Poire
 www.marinelifefinder.com
 EMAIL;
+		echo 'v='.$ver.'&e='.$e;
         return mail($to, $subject, $msg, $headers);
     }
 
@@ -116,7 +117,7 @@ EMAIL;
      * @return array    an array containing a status code and status message
      */
     public function verifyAccount() {
-        $sql = "SELECT username FROM marine_users WHERE ver_code=:ver AND SHA1(username)=:user AND verified=0";
+        $sql = "SELECT username FROM mlf_users WHERE ver_code=:ver AND SHA1(username)=:user AND verified=0";
 
         if( $stmt = $this->_db->prepare($sql) ) {
             $stmt->bindParam(':ver', $_GET['v'], PDO::PARAM_STR);
@@ -146,7 +147,7 @@ EMAIL;
      */
     public function updatePassword() {
         if ( isset($_POST['p']) && isset($_POST['r']) && $_POST['p'] == $_POST['r'] ) {
-            $sql = "UPDATE marine_users SET password=MD5(:pass), verified=1 WHERE ver_code=:ver LIMIT 1";
+            $sql = "UPDATE mlf_users SET password=MD5(:pass), verified=1 WHERE ver_code=:ver LIMIT 1";
             try {
                 $stmt = $this->_db->prepare($sql);
                 $stmt->bindParam(":pass", $_POST['p'], PDO::PARAM_STR);
@@ -170,7 +171,7 @@ EMAIL;
      * @return boolean    TRUE on success and FALSE on failure
      */
     public function accountLogin() {
-        $sql = "SELECT username FROM marine_users WHERE username=:user  AND password=MD5(:pass) LIMIT 1";
+        $sql = "SELECT username FROM mlf_users WHERE username=:user  AND password=MD5(:pass) LIMIT 1";
         try {
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':user', $_POST['username'], PDO::PARAM_STR);
@@ -195,7 +196,7 @@ EMAIL;
      * @return mixed    an array of info or FALSE on failure
      */
     public function retrieveAccountInfo() {
-        $sql = "SELECT id, ver_code FROM marine_users WHERE username=:user";
+        $sql = "SELECT userid, ver_code FROM mlf_users WHERE username=:user";
         try {
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':user', $_SESSION['username'], PDO::PARAM_STR);
@@ -215,7 +216,7 @@ EMAIL;
      * @return boolean    TRUE on success and FALSE on failure
      */
     public function updateEmail() {
-        $sql = "UPDATE marine_users SET username=:email WHERE id=:user LIMIT 1";
+        $sql = "UPDATE mlf_users SET username=:email WHERE id=:user LIMIT 1";
         try {
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':email', $_POST['username'], PDO::PARAM_STR);
@@ -242,7 +243,7 @@ EMAIL;
     {
         if ( isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == 1) {
             // Delete list items
-            $sql = "DELETE FROM marine_list_items WHERE ListID=( SELECT ListID FROM lists WHERE UserID=:user LIMIT 1 ";
+            $sql = "DELETE FROM mlf_list_items WHERE ListID=( SELECT favorites FROM lists WHERE userid=:user LIMIT 1 ";
             try {
                 $stmt = $this->_db->prepare($sql);
                 $stmt->bindParam(":user", $_POST['user-id'], PDO::PARAM_INT);
@@ -254,7 +255,7 @@ EMAIL;
             }
 
             // Delete the user's list(s)
-            $sql = "DELETE FROM marine_lists WHERE id=:user";
+            $sql = "DELETE FROM mlf_lists WHERE userid=:user";
             try {
                 $stmt = $this->_db->prepare($sql);
                 $stmt->bindParam(":user", $_POST['user-id'], PDO::PARAM_INT);
@@ -266,7 +267,7 @@ EMAIL;
             }
 
             // Delete the user
-            $sql = "DELETE FROM marine_users WHERE id=:user AND username=:email";
+            $sql = "DELETE FROM mlf_users WHERE userid=:user AND username=:email";
             try {
                 $stmt = $this->_db->prepare($sql);
                 $stmt->bindParam(":user", $_POST['user-id'], PDO::PARAM_INT);
@@ -294,7 +295,7 @@ EMAIL;
      * @return mixed    TRUE on success and a message on failure
      */
     public function resetPassword() {
-        $sql = "UPDATE marine_users SET verified=0 WHERE username=:user LIMIT 1";
+        $sql = "UPDATE mlf_users SET verified=0 WHERE username=:user LIMIT 1";
         try {
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(":user", $_POST['username'], PDO::PARAM_STR);

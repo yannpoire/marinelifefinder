@@ -1,48 +1,54 @@
 <?php
 	include_once "../common/base.php";
-	$pageTitle = "Create a new branch in the tree";
+	$pageTitle = "Create a new page for the site";
 	include_once ROOT_PATH."common/header.php";
 	include_once ROOT_PATH."common/mainnav.php";
 ?>
+<!-- Place inside the <head> of your HTML -->
+<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
 
+</head>
+<body>
 <div class="container">
 	<div class="row">
 		<div>
-			<h1>Create a new branch in the tree</h1>
-			<p>Create a new branch or leaf in the tree, anywhere</p>
-			<p>As this directory grows, caching, performance and speed will have to be tested so be patient...</p><br />
-			<form role="form">
+			<h1>Create a new page</h1>
+			<p>Create a new page</p>
+			<p>Create new static pages</p><br />
+			<form method="post" role="form">
 				<fieldset>
-				<legend>New branch details</legend>
+				<legend>New page details</legend>
 				<div class="form-group">
-					<label for="branchname">Name of the new branch*</label>
-					<input id="branchname" type="text" placeholder="Name of the branch" required="required" autofocus="autofocus" /><br /><br />
+					<label for="pagename">Name of the new page*</label>
+					<input id="pagename" type="text" placeholder="Name of the branch" required="required" autofocus="autofocus" /><br /><br />
 			<!-- Alias for unique identifier by name -->
-					<input id="branchalias" type="hidden" readonly="readonly" disabled="disabled" />
-					<label for="branchcommonname">Branch common name (if applicable eg: butterflyfishes)   </label>
-					<input id="branchcommonname" type="text" placeholder="Enter branch common name" /><br /><br />
-				</fieldset>
-				<fieldset>
-					<legend>Mother branch in the tree</legend>
-					<p>If the name of the mother branch is known it can be typed in directly if not it can be selected</p>
-					<label for="branchfrom">Branch from</label>					
-					<input id="knownbranchfrom" type="text" placeholder="Type the name if known" /><span>   (If mother branch name known) or</span><br /><br />
-					<label for="selectbranchfrom">Select mother branch name   </label>
-					<select id="selectbranchform">
-						<option>Kingdom</option>
-					</select><br /><br />
+			<!-- <input id="pagealias" type="hidden" readonly="readonly" disabled="disabled" /> -->
+					<label for="pagecategory">Choose page category   </label>
+					<select id="pagecategory" name="pagecategory">
+						<option value="uncategorized">Uncategorized</option>
+						<?php echo "Autres choix" ?>xczzx
+					</select>
 				</fieldset>
 				<fieldset>
 					
 				</fieldset>
-					<legend>Branch details</legend>
-					<p>Enter a summary for the branch</p>
-					<label for="branchsummary">Branch summary</label><br />
-					<textarea id="branchsummary" class="textarea"></textarea><br /><br /><br />
-					<input type="submit" name="resetfields" id="resetfields" value="Reset Form" class="btn btn-default" role="button" />&nbsp;&nbsp;&nbsp;
-					<input type="submit" name="addnewbranch" id="addnewbranch" value="Add Branch" class="btn btn-default" role="button" />
-				</div>
+					<legend>Page content</legend>
+					<p>Enter the page content</p>
+					<label for="newpagesummary">New page content</label><br />
+					<textarea id="newpagesummary" class="textarea"></textarea><br /><br /><br />
+					<input type="submit" name="createnewpage" id="createnewpage" value="Create new page" class="btn btn-default" role="button" />
 				</fieldset>
+				<fieldset>
+					<legend>Page meta and SEO stuff</legend>
+					<p>Enter the page meta keywords, description, URL</p>
+					<label for="metadescription">Meta description (160 chars)</label><br />
+					<textarea id="metadescription"></textarea><br /><br /><br />
+					<label for="metakeywords">Meta keywords (coma separated)</label><br />
+					<textarea id="metakeywords"></textarea><br /><br /><br />
+					<label for="uniqueURL">Perm URL</label><br />
+					<input id="uniqueURL" type="text"></textarea><br /><br /><br />
+				</fieldset>
+				</div>
 			</form>
 		</div>
 	</div>

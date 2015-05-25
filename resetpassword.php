@@ -30,7 +30,8 @@
 
         if($ret[0]<3):
 ?>
-
+</head>
+<body>
 <div class="container">
 	<div class="row">
 		<div class="col-md-4">&nbsp;</div>

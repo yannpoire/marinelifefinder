@@ -4,7 +4,8 @@
     include_once ROOT_PATH."common/header.php";
 	include_once ROOT_PATH."common/mainnav.php";
 ?>
-
+</head>
+<body>
 <div class="container">
 	<div class="row">
 		<div class="col-md-4">&nbsp;</div>

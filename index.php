@@ -5,6 +5,8 @@
 	include_once ROOT_PATH."common/mainnav.php";
 	
 ?>
+</head>
+<body>
     <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
 	<div class="container">

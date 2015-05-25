@@ -23,7 +23,7 @@ class MLFTree {
         }
     }
 	
-	public function growBranch($bn,	$ba,	$bc,	$bf, $bt, $bs) {
+	public function growBranch($bn, $ba, $bc, $bf, $bt, $bs) {
 
 		/*
 		 * Check if the branch exist in the tree

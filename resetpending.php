@@ -4,6 +4,8 @@
     include_once "common/header.php";
 	include_once 'common/mainnav.php';
 ?>
+</head>
+<body>
 <div class="container">
 	<div class="row">
 		<div class="col-md-4">&nbsp;</div>
