@@ -46,7 +46,7 @@ class MLFPages {
             $row = $stmt->fetch();
 			$stmt->closeCursor();
 			if ($row['theCount'] != 0) {
-				echo '<h2>Error</h2><p>Oups! Sorry, that branch is already growing in the tree!</p><br />';
+				echo '<h2>Error</h2><p>Oups! Sorry, that page already exist!</p><br />';
 			} else {
 				print_r($_POST);
 				$sql = "INSERT INTO mlf_pages (pagetitle, pagealias, pagecategory, created, lastedit, pagecontent, metadesc, metakeys, pageurl, pagestatus) VALUES (:pagetitle, :pagealias, :pagecategory, :created, :lastedit, :pagecontent, :metadesc, :metakeys, :pageurl, :pagestatus)";

@@ -1,6 +1,10 @@
-<footer>
-		<p>Copyright 2015 Yann Poir&eacute;</p>
-</footer>
+	<div class="row">
+		<div class="col-xs-12"
+			<footer>
+					<p>Copyright 2015 Yann Poir&eacute;</p>
+			</footer>
+		</div>
+	</div>
 </div> <!-- /container -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>

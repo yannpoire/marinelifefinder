@@ -23,6 +23,14 @@ ul.top-options li {
 
 div.pagestatus {
 	float: right;
-	clear: left;
+	clear: both;
 	
+}
+
+div.adminnav ul {
+	-webkit-padding-start: 0px;
+}
+
+footer {
+	margin-top: 20px;
 }
