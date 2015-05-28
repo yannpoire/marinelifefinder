@@ -23,10 +23,36 @@ class MLFPages {
         }
     }
 	
+	public function showPage($url) {
+		$sql = "SELECT * FROM mlf_pages WHERE pagealias= :pageurl LIMIT 1";
+		try {
+			$stmt = $this->_db->prepare($sql);
+			$stmt->bindParam(':pageurl', $url, PDO::PARAM_STR);
+			$stmt->execute();
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			$stmt->closeCursor();
+			if (isset($result) && $result['pagestatus'] == 0) {
+				echo "This is not published";
+				$result = NULL;
+				header("Location : index.php");
+			} else {
+				return $result;
+			}
+		} catch (PDOException $e) {
+            return FALSE;
+		}
+	}
+	
 	public function fetchPages($scope) {
-		$sql = "SELECT * WHERE pagecategory = :pagecat";
+		if (empty($scope)) {
+			$sql = "SELECT pagestatus, pagetitle, pagealias, pagecat, pagecontent, metadesc, metakeys, pageurl FROM mlf_pages GROUP BY pagetitle ASC";
+		} else {
+			$sql = "SELECT * FROM mlf_pages WHERE pagecat = :pagecat";
+		}
 		if ( $stmt = $this->_db->prepare($sql) ) {
-            $stmt->bindParam(":pagecat", $scope, PDO::PARAM_STR);
+			if (!empty($scope)) {
+            	$stmt->bindParam(":pagecat", $scope, PDO::PARAM_STR);
+			}
             $stmt->execute();
             $pages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			$stmt->closeCursor();
@@ -35,44 +61,56 @@ class MLFPages {
 	}
 	
 	public function createPage() {
-		$pagealias = strtolower(trim($_POST['pagetitle']));
-		$created = date();
-		$lastedit = $created;
-		
+		$alias = $_POST['pagealias'];
 		$sql = "SELECT COUNT(pagealias) AS theCount FROM mlf_pages WHERE pagealias= :pagealias";
 		if ( $stmt = $this->_db->prepare($sql) ) {
-			$stmt->bindParam(":pagealias", $_POST['pagealias'], PDO::PARAM_STR);
+			$stmt->bindParam(":pagealias", $alias, PDO::PARAM_STR);
             $stmt->execute();
             $row = $stmt->fetch();
 			$stmt->closeCursor();
 			if ($row['theCount'] != 0) {
 				echo '<h2>Error</h2><p>Oups! Sorry, that page already exist!</p><br />';
 			} else {
-				print_r($_POST);
-				$sql = "INSERT INTO mlf_pages (pagetitle, pagealias, pagecategory, created, lastedit, pagecontent, metadesc, metakeys, pageurl, pagestatus) VALUES (:pagetitle, :pagealias, :pagecategory, :created, :lastedit, :pagecontent, :metadesc, :metakeys, :pageurl, :pagestatus)";
-				$pagealias = strtolower(trim($_POST['pagetitle']));
-				$created = date();
-				$lastedit = $created;
-				echo "Page alias is =  ".$pagealias."<br>Date created = ".$created;
-				print_r ($elems);
-				if(isset($elems) && !empty($elems) && $stmt = $this->_db->prepare($sql)) {
-					$stmt->bindParam(":pagetitle", $_POST['pagetitle'], PDO::PARAM_STR);
-					$stmt->bindParam(":pagealias", $pagealias, PDO::PARAM_STR);
-					$stmt->bindParam(":pagecategory", $elems['pagecategory'], PDO::PARAM_STR);
-					$stmt->bindParam(":created", $created, PDO::PARAM_STR);
-					$stmt->bindParam(":lastedit", $lastedit, PDO::PARAM_STR);
-					$stmt->bindParam(":pagecontent", $elems['pagecontent'], PDO::PARAM_STR);
-					$stmt->bindParam(":metadesc", $elems['metadescription'], PDO::PARAM_STR);
-					$stmt->bindParam(":metakeys", $elems['metakeywords'], PDO::PARAM_STR);
-					$stmt->bindParam(":pageurl", $pagealias, PDO::PARAM_STR);
-					$stmt->bindParam(":pagestatus", $pagestatus, PDO::PARAM_STR);
-					$stmt->execute();
-					$stmt->closeCursor();
+				switch ($_POST['pagestatus']) {
+					case 'draft':
+						$status = 0;
+						break;
+					case 'published':
+						$status = 1;
+						break;
+					default :
+						$status = 0;
+						break;
+				}
+				$currenttime = time();
+				//echo "Page status return from switch ====".$status;
+				//echo "Starting to insert into DB";
+				//echo "The POST is equal to = "; print_r($_POST);
+				//echo "Current UNIX time ====".$currenttime;
+				$sql = "INSERT INTO mlf_pages (pagestatus, pagetitle, pagealias, pagecat, pagecontent, metadesc, metakeys, pageurl, created, modified, username ) VALUES (:pagestatus, :pagetitle, :pagealias, :pagecat, :pagecontent, :metadesc, :metakeys, :pageurl, :created, :modified, :username )";
+				if ($stmt = $this->_db->prepare($sql)) {
+					try { 
+						$stmt->bindParam(":lifestatus", $status, PDO::PARAM_INT);
+						$stmt->bindParam(":lifetitle", $_POST['pagetitle'], PDO::PARAM_STR);
+						$stmt->bindParam(":lifealias", $alias, PDO::PARAM_STR);
+						$stmt->bindParam(":lifegenus", $_POST['pagecat'], PDO::PARAM_STR);
+						$stmt->bindParam(":lifecontent", $_POST['pagecontent'], PDO::PARAM_STR);
+						$stmt->bindParam(":metadesc", $_POST['metadesc'], PDO::PARAM_STR);
+						$stmt->bindParam(":metakeys", $_POST['metakeys'], PDO::PARAM_STR);
+						$stmt->bindParam(":pageurl", $_POST['pageurl'], PDO::PARAM_STR);
+						$stmt->bindParam(":created", $currenttime, PDO::PARAM_INT);
+						$stmt->bindParam(":modified", $currenttime, PDO::PARAM_INT);
+						$stmt->bindParam(":username", $_SESSION['username'], PDO::PARAM_STR);
+						$stmt->execute();
+						$stmt->closeCursor(); 
+						}	catch (PDOException $e) {
+							$e->getMessage();
+						}
+						
 					echo "Page successfully created";
 					//header("Location: ../admin/pagemanager.php");
 				} else {
 					echo "There was an error creating the page";
-					print_r($elems);
 				}
 			}	
 		}

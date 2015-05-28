@@ -8,20 +8,20 @@ $pageObj = new MLFPages();
 
 if(!empty($_POST['action']) && isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn']==1) {
 	switch ($_POST['action']) {
-		case 'fetchpages' :
+		case 'fetchlife' :
 			echo"";
 			break;
-		case 'createpage' :
+		case 'createlife' :
 			$alias = strtolower(trim($_POST['pagetitle']));
 			$ali = preg_replace('/\s+/', '-', $alias);
 			$_POST['pagealias'] = $ali;
-			$pageObj->createPage();
+			$pageObj->createLife();
 			break;
-		case 'editpage' :
-			$pageObj->editPage();
+		case 'editlife' :
+			$pageObj->editLife();
 			break;
 		case 'deletepage' :
-			$pageObj->deletePage();
+			$pageObj->deleteLife();
 			break;
 		default : 
 			echo "There was an error processing the page request";

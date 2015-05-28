@@ -17,6 +17,10 @@ ul.top-options {
 	list-style-type: none;
 }
 
+ul.top-options {
+	padding-left: 0;
+}
+
 ul.top-options li {
 	display: inline;
 }
@@ -34,3 +38,4 @@ div.adminnav ul {
 footer {
 	margin-top: 20px;
 }
+

@@ -3,7 +3,6 @@
 	$pageTitle = "Create a new page for the site";
 	include_once ROOT_PATH."common/header.php";
 	include_once ROOT_PATH."common/mainnav.php";
-	include_once ROOT_PATH."common/mainnav.php";
 	include_once ROOT_PATH."admin/values.php";
 ?>
 <!-- Place inside the <head> of your HTML -->
@@ -26,13 +25,13 @@
 			<fieldset>	
 				<legend>New page details</legend>
 				<label for="pagetitle">Name of the new page*</label>
-				<input id="pagetitle" type="text" placeholder="Name of the page" required="required" autofocus="autofocus" tabindex="1" /><br /><br />			
-				<label for="pagecategory">Choose page category   </label>
-				<select id="pagecategory" name="pagecategory" tabindex="2">
+				<input id="pagetitle" name="pagetitle" type="text" placeholder="Name of the page" required="required" autofocus="autofocus" tabindex="1" /><br /><br />
+				<input type="hidden" id="pagealias" name="pagealias" value="pagealiasval" />		
+				<label for="pagecat">Choose page category   </label>
+				<select id="pagecat" name="pagecat" tabindex="2">
 						<?php
 						 if(isset($pagecat) && !empty($pagecat)) {
 								foreach ($pagecat as $cat) {
-									print_r($pagecat);
 									echo "<option value='".$cat."'>".$cat."</option>";
 								}
 						 } else {
@@ -44,7 +43,7 @@
 				<fieldset>
 					<legend>Page content</legend>
 					<label for="pagecontent">New page content</label><br />
-					<textarea name="pagecontent" id="pagecontent" rows="10" cols="80">
+					<textarea name="pagecontent" id="pagecontent" rows="10" cols="80" required="required">
 					</textarea>
             		<script>
                		 	CKEDITOR.replace( 'pagecontent' );
@@ -52,12 +51,12 @@
 				</fieldset>
 				<fieldset>
 					<legend>Page meta and SEO stuff</legend>
-					<label for="metadescription">Meta description (160 chars)</label><br />
-					<textarea id="metadescription" tabindex="4"></textarea><br /><br />
-					<label for="metakeywords">Meta keywords (coma separated)</label><br />
-					<textarea id="metakeywords" tabindex="5"></textarea><br /><br />
-					<label for="uniqueURL">Perm URL</label>
-					<input id="uniqueURL" type="text" tabindex="6"></textarea><br />
+					<label for="metadesc">Meta description (160 chars)</label><br />
+					<textarea id="metadesc" name="metadesc" tabindex="4"></textarea><br /><br />
+					<label for="metakeys">Meta keywords (coma separated)</label><br />
+					<textarea id="metakeys" name="metakeys" tabindex="5"></textarea><br /><br />
+					<label for="pageurl">Perm URL</label>
+					<input id="pageurl" name="pageurl" type="text" tabindex="6"></textarea><br />
 				</fieldset>
 				<fieldset>
 				</fieldset>
