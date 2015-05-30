@@ -5,8 +5,8 @@
 	include_once ROOT_PATH."common/mainnav.php";
 	include_once ROOT_PATH."admin/values.php";
 ?>
-<!-- Place inside the <head> of your HTML -->
-<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+<!-- <script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script> -->
+<script type="text/javascript" src="<?php echo BASE_URL; ?>plugins/ckeditor/ckeditor.js"></script> 
 </head>
 <body>
 <div class="container">
