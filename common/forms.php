@@ -10,4 +10,10 @@ function customDdown ($values) {
 	}
 }
 
+function checkBox ($values) {
+	foreach ($values as $l) {
+		echo '<option id="'  .$l.  '" value="'.$l.'" />&nbsp;'.$l.'</option>';
+	}
+}
+
 ?>

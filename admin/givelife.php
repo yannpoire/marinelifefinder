@@ -210,7 +210,7 @@
 		</div>
 		<div class="form-group">
 			<fieldset>
-				<legend>Summary</legend>
+				<legend>Some text about the organism</legend>
 				<label for="lifesummary">Write a summary of the lifeform, used for result display and classification display</label><br />
 				<input id="lifesummary" name="lifesummary" type="textarea" /><br /><br />
 				<label for="lifecontent">Full content of single page of the organism</label><br />
@@ -290,6 +290,13 @@
 		</div>
 		<div class="form-group">
 			<fieldset>
+				<legend>Distribution</legend>
+				<p>Global localization</p>
+				<select multiple="" id="continent" name="continent" type="text"><br /><br />
+			</fieldset>
+		</div>
+		<div class="form-group">
+			<fieldset>
 				<legend>Media</legend>
 				<p>Add images to the gallery</p>
 				<input id="addimagefield" name="addimagefield" type="text"><br /><br />
@@ -335,7 +342,7 @@ tinymce.init({
     selector: "textarea.lifecontent",
     plugins : [ "link, image, hr, anchor, pagebreak, media, wordcount, table, responsivefilemanager"],
     image_advtab: true,
-	external_filemanager_path:"<?php echo BASE_URL; ?>plugins/filemanager/",
+	external_filemanager_path:"../plugins/filemanager/",
 	filemanager_title:"Responsive Filemanager" ,
 	external_plugins: { "filemanager" : "plugins/responsivefilemanager/plugin.min.js"}
  });
