@@ -22,9 +22,10 @@ $colors = array_merge($tints, $colorbase);
 
 
 
-/*
- * Fishes gnathostomata includes sharks to bony fishes but not hagfish in craniata
- */
+ /*
+	 * Fishes gnathostomata includes sharks to bony fishes but not hagfish in craniata
+	 */
+
 
 $gnathostomata = array(
 	"generalshape" => array(	"Round", "Elongated", "Spade", "Squared", "Diamond", "Snake-like", "Tapered", "Disc-vertical", "Disc-horizontal", "Squared", "Drop-like", "Irregular" ),
@@ -33,7 +34,8 @@ $gnathostomata = array(
 		"shape" => array( "Beak", "Big lips", "Crocodile like",  "Elongated", "Short", "Sideway", "Terminal", "Tubular", "Tubular Snout", "Under", "Upward" ),
 		"lipssize" => array( "Not apparent", "Small", "Medium", "Big", "Upper", "Lower"),
 		"position" => array("Under", "Terminal", "Over"),
-		"sizetohead" => array( "Tiny", "Small", "Normal", "Big", "Oversized" )
+		"sizetohead" => array( "Tiny", "Small", "Normal", "Big", "Oversized" ),
+		"reltoeyes" => array("Before", "Equal", "After")
 	),
 	
 	"head" => array(
@@ -41,7 +43,7 @@ $gnathostomata = array(
 		"sizetobody" => array( "Tiny", "Small", "Balanced", "Big", "Huge" )
 	),
 	
-	"features" => array ( "Horns", "Antennas", "Oversized Fins", "Suction disk on head", "Suction disk stomac", "Bill nose", "Appendages" ),
+	"features" => array ( "Horns", "Antennas", "Oversized Fins", "Suction disk on head", "Suction disk stomac", "Bill nose", "Appendages", "Thorns" ),
 	
 	"patterns" => array(	"Dots", "Spots", "Lines", "Blotches", "Saddled", "Masked", "Rings", "Bands", "Stripes", "Zebra", "Honeycombs", "Fake Eye" ),
 	
@@ -54,7 +56,7 @@ $gnathostomata = array(
 		"shape" => array( "Straight", "Curved")
 	),
 	
-	"opercules" => array( "Spined", "Appendages" ),
+	"operculums" => array( "Spined", "Appendages", "None" ),
 	
 	"scales" => array(
 		"size" =>array( "None", "Tiny", "Small", "Medium", "Large", "Plates" ),
@@ -70,7 +72,8 @@ $gnathostomata = array(
 		),
 		
 		"caudal" => array( 
-			"shape" => array("Rounded", "Truncated", "Lunate", "Forked", "Marginated", "Pointed", "Indented", "Heterocercal", "Curled" ),
+			"shape" => array("Rounded", "Truncated", "Lunate", "Forked", "Marginated", "Pointed", "Indented", "Curled" ),
+			"type" => array( "Heterocercal" ),
 			"patterns" => array("Dotted", "Spotted", "Lined", "Banded", "Blotched", "Clear rays" )
 		),
 		
@@ -92,8 +95,102 @@ $gnathostomata = array(
 	)
 );
 
-// Nudibranchs, sea slugs, sea hare
+
+
+// NUDIBRANCHS, SLUGS, SEA HARE, FLATWORMS
+
 $opisthobranchia = array();
+
+// HABITAT & DISTRIBUTION
+
+$habitat = array( "Open Water", "Deep Open Water", "Reef", "Sand", "Algaes", "Corals", "Rocks", "Burrowed", "Anemones", "Under Rocks", "Cracks", "Cave" );
+
+$distribution = array(
+	"oceans" => array( 
+		"Artic" => array(
+			"seas" => array( "Amundsen Gulf", "Baffin Bay", "Barents Sea", "Beaufort Sea", "Chukchi Sea", "East Siberian Sea", "Greenland Sea", "Hudson Bay", "James Bay", "Kara Sea", "Kara Strait",
+				"Laptev Sea", "Lincoln Sea", "Prince Gustav Adolf Sea", "Pechora Sea", "Wandel Sea", "White Sea" )
+		),
+		"Pacific" => array(
+			"seas" => array( "Arafura Sea", "Bali Sea", "Banda Sea", "Bering Sea", "Bismarck Sea", "Bohai Sea", "Bohol Sea(aka Mindanao Sea)", "Camotes Sea", "Celebes Sea", "Ceram Sea",
+				"Chilean Sea", "Sea of Chiloé", "Coral Sea", "East China Sea", "Flores Sea", "Gulf of Alaska", "Gulf of California(aka Sea of Cortés)", "Gulf of Carpentaria", "Gulf of Thailand",
+				"Halmahera Sea", "Java Sea", "Koro Sea", "Mar de Grau", "Molucca Sea", "Philippine Sea", "Salish Sea", "Savu Sea", "Sea of Japan", "Sea of Okhotsk", "Seto Inland Sea", "Sibuyan Sea",
+				"Solomon Sea", "South China Sea", "Sulu Sea", "Tasman Sea", "Visayan Sea", "Yellow Sea" )
+		),
+		"Atlantic" => array(
+			"seas" => array(  
+				"Baltic Sea" => array( "Archipelago Sea", "Bothnian Sea", "Central Baltic Sea", "Gulf of Bothnia", "Gulf of Finland", "Gulf of Riga", "Oresund Strait", "Sea of Åland" ),
+				"Mediterranean Sea" => array( "Aegean Sea", "Mirtoon Sea", "Sea of Crete", "Thracian Sea", "Adriatic Sea", "Alboran Sea", "Balearic Sea", "Catalan Sea", "Cilician Sea",
+					"Gulf of Sidra", "Ionian Sea", "Levantine Sea", "Libyan Sea", "Ligurian Sea", "Sea of Sardinia", "Sea of Sicily", "Tyrrhenian Sea" ),
+				"Others" => array( "Argentine Sea", "Bay of Biscay", "Bay of Campeche", "Bay of Fundy", "Black Sea", "Caribbean Sea", "Celtic Sea", "Chesapeake Bay", "Davis Strait",
+					"Denmark Strait", "English Channel", "Gulf of Guinea", "Gulf of Maine", "Gulf of Mexico", "Gulf of St. Lawrence", "Gulf of Venezuela", "Irish Sea", "Labrador Sea", "Marmara Sea",
+					"North Sea", "Norwegian Sea", "Sargasso Sea", "Sea of Azov", "Sea of the Hebrides", "Wadden Sea" )
+			)
+		),
+		"Indian" => array(
+			"seas" => array( "Andaman Sea", "Arabian Sea", "Bay of Bengal", "Gulf of Aden", "Gulf of Oman", "Laccadive Sea", "Mozambique Channel", "Persian Gulf", "Red Sea", "Timor Sea" )
+		),
+		"Southern" => array(
+			"seas" => array( "Amundsen Sea", "Bass Strait", "Bellingshausen Sea", "Cooperation Sea", "Cosmonauts Sea", "Davis Sea", "D'Urville Sea", "Drake Passage", "Great Australian Bight",
+				"Gulf St Vincent", "King Haakon VII Sea", "Lazarev Sea", "Mawson Sea", "Riiser-Larsen Sea", "Ross Sea", "Scotia Sea", "Somov Sea", "Spencer Gulf", "Weddell Sea" )
+		)
+	),
+	"continents" => array( "North America", "South America", "Asia", "Africa", "Europe", "Australia",  ),
+	"regions" => array( "South-East Asia", "North America", "Central America", "South America", "Caribbean", "Western Europe", "Southern Europe", "Eastern Europe",
+		"Northern Europe", "Northern Africa", "Western Africa", "Central Africa", "Southern Africa", "Eastern Africa", "Western Asia", "Southern Asia", "Western Asia", "South-East Asia",
+		"Australia/New-Zealand", "Micronesia", "Polynesia", "Hawaii", "Caledonia"),
+	"countries" => array("Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", 
+		"Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", 
+		"Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahrain", 
+		"Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", 
+		"Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", 
+		"Bouvet Island", "Brazil", "British Indian Ocean Territory", "British 
+		Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", 
+		"Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", 
+		"Central African Republic", "Chad", "Chile", "China", "Christmas 
+		Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", 
+		"Cook Islands", "Costa Rica", "Cote d\'Ivoire", "Croatia", "Cuba", 
+		"Cyprus", "Czech Republic", "Democratic Republic of the Congo", 
+		"Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", 
+		"Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", 
+		"Estonia", "Ethiopia", "Faeroe Islands", "Falkland Islands", "Fiji", 
+		"Finland", "Former Yugoslav Republic of Macedonia", "France", "French 
+		Guiana", "French Polynesia", "French Southern Territories", "Gabon", 
+		"Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", 
+		"Grenada", "Guadeloupe", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", 
+		"Guyana", "Haiti", "Heard Island and McDonald Islands", "Honduras", 
+		"Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", 
+		"Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", 
+		"Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", 
+		"Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", 
+		"Lithuania", "Luxembourg", "Macau", "Madagascar", "Malawi", "Malaysia", 
+		"Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", 
+		"Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia", "Moldova", 
+		"Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", 
+		"Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", 
+		"Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", 
+		"Niger", "Nigeria", "Niue", "Norfolk Island", "North Korea", "Northern 
+		Marianas", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New 
+		Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn Islands", 
+		"Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", 
+		"Russia", "Rwanda", "Sqo Tome and Principe", "Saint Helena", "Saint 
+		Kitts and Nevis", "Saint Lucia", "Saint Pierre and Miquelon", "Saint 
+		Vincent and the Grenadines", "Samoa", "San Marino", "Saudi Arabia", 
+		"Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", 
+		"Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", 
+		"South Georgia and the South Sandwich Islands", "South Korea", "South 
+		Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Svalbard and Jan 
+		Mayen", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", 
+		"Tajikistan", "Tanzania", "Thailand", "The Bahamas", "The Gambia", 
+		"Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", 
+		"Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Virgin Islands", 
+		"Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United 
+		States", "United States Minor Outlying Islands", "Uruguay", 
+		"Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Wallis 
+		and Futuna", "Western Sahara", "Yemen", "Yugoslavia", "Zambia", 
+		"Zimbabwe"
+ 	)
+);
 
 
 $direction = array("Horizontal", "Vertical", "Diagonal", "Wavy", "Random");

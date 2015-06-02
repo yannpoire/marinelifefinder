@@ -69,3 +69,98 @@ $text = preg_replace('/\s+/', ' ', $text);
 
 
 ************************* Get join date
+
+
+*******************Table for fishes SQL
+
+	CREATE TABLE mlf_fish (
+        fid INT AUTO_INCREMENT PRIMARY KEY,
+		fstatus TINYINT DEFAULT 1,
+        falias VARCHAR(150) NOT NULL,
+        
+		fcname VARCHAR(150) NOT NULL,
+		fothercnames VARCHAR(150) NOT NULL,
+		fbinomialfirst VARCHAR(150) NOT NULL,
+		fbinomiallast VARCHAR(150) NOT NULL,
+		ftaxon VARCHAR(150) NOT NULL,
+		
+		fsummary VARCHAR NOT NULL,
+		fcontent TEXT NOT NULL,
+		
+		fprimarycolors VARCHAR(150) NOT NULL,
+		fsecondarycolors VARCHAR(150) NOT NULL,
+		
+		fgeneralshape VARCHAR(150) NOT NULL,
+		fsize SMALLINT NOT NULL,
+		fbodyrings TINYINT NOT NULL,
+		
+		fabvertebraes SMALLINT NOT NULL,
+		fcavertebraes VARCHAR(150) NOT NULL,
+		
+		fheadshape VARCHAR(80) NOT NULL,
+		fheadsize VARCHAR(50) NOT NULL,
+		
+		fmouthshape VARCHAR(150) NOT NULL,
+		fmouthposition VARCHAR(40) NOT NULL,
+		fmouthsizetohead VARCHAR(40) NOT NULL,
+		fmouthreltoeyes VARCHAR(30) NOT NULL,
+		fmouthteethvis TINYINT NOT NULL,
+		
+		feyessizetohead VARCHAR(30) NOT NULL,
+		feyesposition VARCHAR(30) NOT NULL,
+		
+		flaterallineshape VARCHAR(100) NOT NULL,
+		flaterallinespores TINYINT NOT NULL,
+		
+		foperculums VARCHAR(40) NOT NULL,
+		fholes TINYINT NOT NULL,
+		fslits TINYINT NOT NULL,
+		
+		fscalessize VARCHAR(40) NOT NULL,
+		fscalestype VARCHAR(30) NOT NULL,
+		flateralscales TINYINT NOT NULL,
+		ftraversescalesover TINYINT NOT NULL,
+		ftraversescalesunder TINYINT NOT NULL,
+		fpredorsalscales TINYINT NOT NULL,
+		
+		fupperarmsrakers TINYINT NOT NULL,
+		flowerarmsrakers TINYINT NOT NULL,
+		
+		fdorsalfinshape VARCHAR(150) NOT NULL,
+		fdorsalfinretractable TINYINT NOT NULL,
+		fdorsalfinspines TINYINT NOT NULL,
+		fdorsalfinrays TINYINT NOT NULL,
+		
+		fcaudalfinshape VARCHA(150) NOT NULL,
+		fcaudalfintype VARCHA(30) NOT NULL,
+		fcaudalfinspines TINYINT NOT NULL,
+		fcaudalfinrays TINYINT NOT NULL,
+		
+		fanalfinsshape VARCHAR(100) NOT NULL,
+		fanalfinsspines TINYINT NOT NULL,
+		fanalfinsrays TINYINT NOT NULL,
+		
+		fpelvicfinsshape
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		fpageurl VARCHAR (150) NOT NULL,
+		fcreated INT UNSIGNED NOT NULL,
+		fmodified INT UNSIGNED NOT NULL,
+		fusername VARCHAR(50) NOT NULL
+);
+
+
+
+

@@ -14,19 +14,15 @@
 			<h1>A view of all the branches in the tree</h1>
 			<h2>See all the branches and leaves of the whole tree</h2>
 			<p>As this Marine Life Finder directory grows, caching, performance and speed will have to be tested so be patient...</p><br />
-			<div class="wholetree"><ul>
+			<div class="wholetree">
 			<?php
-				$aliases = array(); 
 				$tree = new MLFTree($db);
-        		$results = $tree->showBranchesList();
-				//print_r($results);
-				foreach ($results as $result) {
-					//$count[] = $result['balias']);
-					echo '<li><a href="#">'.$result['bname']."</a></li>";
-				}
-							
+        		$tree->showBranchesList('animalia');
+				$tree2 = new MLFTree($db);
+        		$tree2 ->showBranchesList('osteichthyes');	
 			 ?>
-			</u></div>
+			 
+			</div>
 		</div>
 		<div class="col-md-3">
 			<?php include_once 'adminnav.php'; ?>

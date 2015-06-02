@@ -102,25 +102,76 @@ class MLFTree {
 			 * 
 			 */
 		
-	public function showBranchesList () {
-			$parentbranch = 'animalia';
-			$sql = "SELECT node.bname, node.balias, node.lft, node.bfrom FROM mlf_tree AS node, mlf_tree AS parent WHERE node.lft BETWEEN parent.lft AND parent.rgt AND parent.balias = :parent ORDER BY node.lft";
+	public function showBranchesList ($root) {
+			//$parentbranch = 'animalia';
+			$sql = "SELECT node.bname , node.balias, node.lft, node.bfrom FROM mlf_tree AS node, mlf_tree AS parent WHERE node.lft BETWEEN parent.lft AND parent.rgt AND parent.balias = :parentbalias GROUP BY node.bname ORDER BY node.lft";
 			if ( $stmt = $this->_db->prepare($sql) ) {
-				$stmt->bindParam(":parent", $parentbranch, PDO::PARAM_STR);
-				//$stmt->bindParam(":rgt", $row['rgt'], PDO::PARAM_STR);
+				$stmt->bindParam(":parentbalias", $root, PDO::PARAM_STR);
 				$stmt->execute();
 				$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-				return $results;
 				$stmt->closeCursor();
+				$parents = array();
+				foreach ($results as $result) {
+					$bfrom = $result['bfrom'];
+					$bname = $result['bname'];
+					$balias = $result['balias'];
+					
+					
+					$i =0;
+					
+					while ( $i <= count($results) ) {
+						if (!array_key_exists($bfrom, $parents)) {
+							$parents[$bfrom] = 1;
+							$i++;
+						}
+						if (array_key_exists($bfrom, $parents)) {
+							$parents[$bfrom]++;
+							$i++;
+						}
+					}	
+				}
+				//var_dump($parents);
+				$listcount = count($parents);
+				foreach ($results as $result) {
+					$bfrom = $result['bfrom'];
+					$bname = $result['bname'];
+					$balias = $result['balias'];
+					if (array_key_exists($bfrom, $parents)) {
+						unset($parents[$bfrom]);	
+						echo "<ul>";
+						
+					}
+					if (!array_search($bfrom, $parents)) {
+						echo "<li><a href='/displaybranch.php?pname=".$balias."' target='_self' class='branchname'>".$bname."</a>";
+					} else {
+						echo "</ul>/UL";
+						echo "No count for this one";
+					}
+				}
+				echo str_repeat("</ul></li>", $listcount);
 			}
 	}
 	
-	public function pruneBranch() {
-		
-	}		
-	
-	public function deleteBranch () {
-		echo"";
+	public function branchDdown ($root) {
+		if (!isset($root)) {
+			$root = "animalia";
+		}
+		echo "In function";
+		$sql = "SELECT node.bname, node.balias, node.lft FROM mlf_tree AS node, mlf_tree AS parent WHERE node.lft BETWEEN parent.lft AND parent.rgt AND parent.balias = :parentbalias GROUP BY node.bname ORDER BY node.lft";
+		if ( $stmt = $this->_db->prepare($sql) ) {
+			$stmt->bindParam(":parentbalias", $root, PDO::PARAM_STR);
+			$stmt->execute();
+			$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$stmt->closeCursor();
+			echo "<option value=''></option>";
+			foreach ($results as $result) {
+				echo "<option value='".$result['balias']."'>".$result['bname']."</option>";
+			}
+		}		
+	}
+
+	public function pruneBranch () {
+		echo "Prune Branch";
 	}
 							
 }					
