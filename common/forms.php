@@ -5,15 +5,19 @@ function numDdown ($limit) {
 }
 
 function customDdown ($values) {
-	foreach ($values as $l) {
-		echo '<option id="'  .$l.  '" value="'.$l.'" />&nbsp;'.$l.'</option>';
+	foreach ($values as $el) {
+		echo '<option id="'  .strtolower($el).  '" value="'.$el.'" />&nbsp;'.$el.'</option>';
 	}
 }
 
 function checkBox ($values) {
-	foreach ($values as $l) {
-		echo '<option id="'  .$l.  '" value="'.$l.'" />&nbsp;'.$l.'</option>';
+	foreach ($values as $el) {
+		echo '<option id="'  .strtolower($el).  '" value="'.$el.'" />&nbsp;'.$el.'</option>';
 	}
+}
+
+function timedMsg($msg, $state) {
+	echo "<div class='".$state." timedmsg'><div class='container'><span>".$msg."</span></div></div>";
 }
 
 ?>

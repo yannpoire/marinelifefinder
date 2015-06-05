@@ -67,10 +67,6 @@ $text = preg_replace('/\s+/', ' ', $text);
 
 
 
-
-************************* Get join date
-
-
 *******************Table for fishes SQL
 
 	CREATE TABLE mlf_fish (
@@ -80,25 +76,38 @@ $text = preg_replace('/\s+/', ' ', $text);
         
 		fcname VARCHAR(150) NOT NULL,
 		fothercnames VARCHAR(150) NOT NULL,
+		ffamilycname VARCHAR(150) NOT NULL,
+		
 		fbinomialfirst VARCHAR(150) NOT NULL,
 		fbinomiallast VARCHAR(150) NOT NULL,
-		ftaxon VARCHAR(150) NOT NULL,
+		fclassification VARCHAR(150) NOT NULL,
 		
-		fsummary VARCHAR NOT NULL,
+		fsummary TEXT NOT NULL,
 		fcontent TEXT NOT NULL,
+		
+		fjuvdistinct TINYINT DEFAULT 0,
+		ffemdistinct TINYINT DEFAULT 0,
 		
 		fprimarycolors VARCHAR(150) NOT NULL,
 		fsecondarycolors VARCHAR(150) NOT NULL,
-		
+		fpatternsmarks VARCHAR(150) NOT NULL,
 		fgeneralshape VARCHAR(150) NOT NULL,
+		
+		fjuvprimarycolors VARCHAR(150) NOT NULL,
+		fjuvsecondarycolors VARCHAR(150) NOT NULL,
+		fjuvpatternsmarks VARCHAR(150) NOT NULL,
+		fjuvgeneralshape VARCHAR(150) NOT NULL,
+		
+		ffemprimarycolors VARCHAR(150) NOT NULL,
+		ffemsecondarycolors VARCHAR(150) NOT NULL,
+		ffempatternsmarks VARCHAR(150) NOT NULL,
+		ffemgeneralshape VARCHAR(150) NOT NULL,
+				
 		fsize SMALLINT NOT NULL,
 		fbodyrings TINYINT NOT NULL,
-		
-		fabvertebraes SMALLINT NOT NULL,
-		fcavertebraes VARCHAR(150) NOT NULL,
-		
+			
 		fheadshape VARCHAR(80) NOT NULL,
-		fheadsize VARCHAR(50) NOT NULL,
+		fheadsizetobody VARCHAR(50) NOT NULL,
 		
 		fmouthshape VARCHAR(150) NOT NULL,
 		fmouthposition VARCHAR(40) NOT NULL,
@@ -109,12 +118,12 @@ $text = preg_replace('/\s+/', ' ', $text);
 		feyessizetohead VARCHAR(30) NOT NULL,
 		feyesposition VARCHAR(30) NOT NULL,
 		
-		flaterallineshape VARCHAR(100) NOT NULL,
+		flaterallinesshape VARCHAR(100) NOT NULL,
 		flaterallinespores TINYINT NOT NULL,
 		
 		foperculums VARCHAR(40) NOT NULL,
-		fholes TINYINT NOT NULL,
-		fslits TINYINT NOT NULL,
+		fholes TINYINT DEFAULT 0,
+		fslits TINYINT DEFAULT 0,
 		
 		fscalessize VARCHAR(40) NOT NULL,
 		fscalestype VARCHAR(30) NOT NULL,
@@ -125,42 +134,108 @@ $text = preg_replace('/\s+/', ' ', $text);
 		
 		fupperarmsrakers TINYINT NOT NULL,
 		flowerarmsrakers TINYINT NOT NULL,
-		
+				
 		fdorsalfinshape VARCHAR(150) NOT NULL,
-		fdorsalfinretractable TINYINT NOT NULL,
+		fdorsalfinspatterns VARCHAR(150) NOT NULL,
+		fdorsalfinsplit TINYINT DEFAULT 0,
+		fdorsalfinretractable TINYINT DEFAULT 0,
 		fdorsalfinspines TINYINT NOT NULL,
 		fdorsalfinrays TINYINT NOT NULL,
-		
-		fcaudalfinshape VARCHA(150) NOT NULL,
-		fcaudalfintype VARCHA(30) NOT NULL,
+				
+		fcaudalfinshape VARCHAR(150) NOT NULL,
+		fcaudalfintype VARCHAR(30) NOT NULL,
+		fcaudalfinpatterns VARCHAR(150) NOT NULL,
 		fcaudalfinspines TINYINT NOT NULL,
 		fcaudalfinrays TINYINT NOT NULL,
-		
+			
 		fanalfinsshape VARCHAR(100) NOT NULL,
+		fanalfinspatterns VARCHAR(150) NOT NULL,
 		fanalfinsspines TINYINT NOT NULL,
 		fanalfinsrays TINYINT NOT NULL,
 		
-		fpelvicfinsshape
+		fpelvicfinsshape VARCHAR(40) NOT NULL,
+		fpelvicfinspatterns VARCHAR(80) NOT NULL,
+		fpelvicfinsspines TINYINT NOT NULL,
+		fpelvicfinsrays TINYINT NOT NULL,
+		fpelvicfinsclaspers TINYINT DEFAULT 0,
+		fpelvicfinsfuseddisc TINYINT DEFAULT 0,
 		
+		fpectoralfinsshape VARCHAR(60) NOT NULL,
+		fpectoralfinspatterns VARCHAR(80) NOT NULL,
+		fpectoralfinsspines TINYINT NOT NULL,
+		fpectoralfinsrays TINYINT NOT NULL,
 		
+		fadiposefin TINYINT DEFAULT 0,
 		
+		fabvertebraes SMALLINT NOT NULL,
+		fcavertebraes VARCHAR(150) NOT NULL,
 		
+		fschoolingsize VARCHAR(60) NOT NULL,
+		fschoolingdensity VARCHAR(60) NOT NULL,
+		fmotion VARCHAR(150) NOT NULL,
+		fdiet VARCHAR(150) NOT NULL,
+		ffeeding VARCHAR(150) NOT NULL,
+		ftimeactive VARCHAR(30) NOT NULL,
 		
+		fcourting TEXT NOT NULL,
+		fspecialbehavior TEXT NOT NULL,
 		
+		fhabitat VARCHAR(60) NOT NULL,
+		fhabitattype VARCHAR(40) NOT NULL,
+		fmigratory TINYINT DEFAULT 0,
+		fmigratorystart VARCHAR(20) NOT NULL,
+		fmigratoryend VARCHAR(20) NOT NULL,
 		
+		foceans VARCHAR(150) NOT NULL,
+		fseas VARCHAR(250) NOT NULL,
+		fcontinents TEXT NOT NULL,
+		fregions TEXT NOT NULL,
+		fcountries TEXT NOT NULL,
 		
+		fimages VARCHAR(1000) NOT NULL,
+		fimagesexternal VARCHAR(1000) NOT NULL,
+		fvideos VARCHAR(1000) NOT NULL,
+		fvideosexternal VARCHAR(1000) NOT NULL,
 		
-		
-		
-		
-		
+		ffishbaselink VARCHAR(200) NOT NULL,
+		wikipedialink VARCHAR(200) NOT NULL,
+		wormslink VARCHAR(200) NOT NULL,
+		itislink VARCHAR(200) NOT NULL,
 		
 		fpageurl VARCHAR (150) NOT NULL,
+		fmetadesc VARCHAR (200) NOT NULL,
+		fmetakeys VARCHAR(200) NOT NULL,
+				
 		fcreated INT UNSIGNED NOT NULL,
 		fmodified INT UNSIGNED NOT NULL,
 		fusername VARCHAR(50) NOT NULL
 );
 
-
+fstatus, falias, fcname, fothercnames, ffamilycname, fbinomialfirst, 
+fbinomiallast, fclassification, fsummary, fcontent, fjuvdistinct, 
+ffemdistinct, fprimarycolors, fsecondarycolors, fpatternsmarks, 
+fgeneralshape, fjuvprimarycolors, fjuvsecondarycolors, 
+fjuvpatternsmarks, fjuvgeneralshape, ffemprimarycolors, 
+ffemsecondarycolors, ffempatternsmarks, ffemgeneralshape, fsize, 
+fbodyrings, fheadshape, fheadsizetobody, fmouthshape, fmouthpositionww, 
+fmouthsizetohead, fmouthreltoeyes, fmouthteethvis, feyessizetohead, 
+feyesposition, flaterallinesshape, flaterallinespores, foperculums, 
+fholes, fslits, fscalessize, fscalestype, flateralscales, 
+ftraversescalesover, ftraversescalesunder, fpredorsalscales, 
+fupperarmsrakers, flowerarmsrakers, fdorsalfinshape, 
+fdorsalfinspatterns, fdorsalfinsplit, fdorsalfinretractable, 
+fdorsalfinspines, fdorsalfinrays, fcaudalfinshape, fcaudalfintype, 
+fcaudalfinpatterns, fcaudalfinspines, fcaudalfinrays, fanalfinsshape, 
+fanalfinspatterns, fanalfinsspines, fanalfinsrays, fpelvicfinsshape4, 
+fpelvicfinspatterns, fpelvicfinsspines, fpelvicfinsrays, 
+fpelvicfinsclaspers, fpelvicfinsfuseddisc, fpectoralfinsshape, 
+fpectoralfinspatterns, fpectoralfinsspines, fpectoralfinsrays, 
+fadiposefin, fabvertebraes, fcavertebraes, fschoolingsize, 
+fschoolingdensity, fmotion, fdiet, ffeeding, ftimeactive, fcourting, 
+fspecialbehavior, fhabitat, fhabitattype, fmigratory, fmigratorystart, 
+fmigratoryend, foceans, fseas, fcontinents, fregions, fcountries, 
+fimages, fimagesexternal, fvideos, fvideosexternal, ffishbaselink, 
+wikipedialink, wormslink, itislink, fpageurl, fmetadesc, fmetakeys, 
+fcreated, fmodified, fusername
 
 

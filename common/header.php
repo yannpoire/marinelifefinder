@@ -18,6 +18,4 @@
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>css/main.css">
 	<link rel="stylesheet" href="<?php echo BASE_URL; ?>css/mystyle.css">
 	<script src="<?php echo BASE_URL; ?>js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-</head>
-<body>
 	<!--[if lt IE 8]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->

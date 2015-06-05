@@ -1,3 +1,43 @@
+  .ui-tabs-vertical { width: 55em; }
+  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 10em; }
+  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+  .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
+  .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 44em;}
+
+div.success, div.failure, div.warning {
+	width: 1170px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.success {
+	background-color: #356635;
+}
+
+div.failure {
+	background-color: #A92222;
+}
+
+div.warning {
+	background-color: #EB8F00;
+}
+
+div.timedmsg {
+	width: 100%;
+	position: fixed;
+	top: 50px;
+	right: 0;
+	left: 0;
+	padding: 12px 0;
+	color: #FFF;
+	font-size: 1.3em;
+	z-index:1500;
+	display: none;
+	opacity: 0.9;
+	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.02) outset;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.02) outset;
+}
 
 
 /* The whole tree ul wrapper */
@@ -37,5 +77,168 @@ div.adminnav ul {
 
 footer {
 	margin-top: 20px;
+	padding-top: 10px;
 }
 
+ul.tablist {
+	margin-top: 12px;
+}
+
+ul.tablist li {
+	list-style-type: none;
+	font-size: 1.1em;
+}
+
+
+/* FORMS */
+
+div.form-style legend {
+	font-size: 1.6em;
+	margin: 20px 0 10px;
+}
+
+div.form-style label {
+	display: block;
+	margin-bottom: 8px;
+}
+
+div.form-style fieldset {
+	margin: 10px 0 18px;
+}
+
+div.form-style input[type="text"],
+div.form-style textarea,
+div.form-style select {
+	font-size: 1.1em;
+	height: 32px;
+	margin: 0;
+	outline: 0;
+	padding: 6px;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin-bottom: 20px;
+    width: 100%;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.02) inset;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.02) inset;
+    border-radius: 5px;
+}
+
+div.form-style input[type="checkbox"] {
+	height: 26px;
+	width: 26px;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.02) inset;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.02) inset;
+    border-radius: 5px;
+	
+}
+
+div.form-style select.tiny-width,
+div.form-style input.tiny-width,
+div.form-style label.tiny-width {
+	display: inline-block;
+}
+
+div.form-style input.tiny-width,
+div.form-style select.tiny-width {
+	width: 60px;
+}
+
+div.form-style select.multiple,
+div.form-style textarea {
+	height: 70px;
+}
+
+div.form-style input.half-width,
+div.form-style select.half-width {
+	width: 42%;
+	display: inline-block;
+	margin-right: 2%;
+}
+
+/*
+div.form-style input[type="text"],
+div.form-style input[type="date"],
+div.form-style input[type="datetime"],
+div.form-style input[type="email"],
+div.form-style input[type="number"],
+div.form-style input[type="search"],
+div.form-style input[type="time"],
+div.form-style input[type="url"],
+div.form-style textarea,
+div.form-style select {
+    background: rgba(255,255,255,.1);
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 0;
+    outline: 0;
+    padding: 7px;
+    width: 100%;
+    box-sizing: border-box; 
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; 
+    background-color: #e8eeef;
+    color:#8a97a0;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    margin-bottom: 30px;
+    
+}
+
+div.form-style input[type="text"]:focus,
+div.form-style input[type="date"]:focus,
+div.form-style input[type="datetime"]:focus,
+div.form-style input[type="email"]:focus,
+div.form-style input[type="number"]:focus,
+div.form-style input[type="search"]:focus,
+div.form-style input[type="time"]:focus,
+div.form-style input[type="url"]:focus,
+div.form-style textarea:focus,
+div.form-style select:focus {
+    background: #d2d9dd;
+}
+div.form-style select{
+    -webkit-appearance: menulist-button;
+    height:30px;
+}
+div.form-style .number {
+    background: #1abc9c;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    border-radius: 15px 15px 15px 0px;
+}
+
+div.form-style input[type="submit"],
+div.form-style input[type="button"] {
+    position: relative;
+    display: block;
+    padding: 19px 39px 18px 39px;
+    color: #FFF;
+    margin: 0 auto;
+    background: #1abc9c;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    width: 100%;
+    border: 1px solid #16a085;
+    border-width: 1px 1px 3px;
+    margin-bottom: 10px;
+}
+div.form-style input[type="submit"]:hover,
+div.form-style input[type="button"]:hover {
+    background: #109177;
+}
+
+.tiny-ddown {
+	display: inline-block;
+	width: 60px;
+} */

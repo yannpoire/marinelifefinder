@@ -88,6 +88,8 @@ class MLFTree {
 					$stmt->bindParam(":bsummary", $bs, PDO::PARAM_STR);
 				    $stmt->execute();
             		$stmt->closeCursor();
+					
+					header("Location: ../admin/addbranch.php?status=1");
         		} catch(PDOException $e) {
         			echo '<br />There should be an error here';
 					echo $e->getMessage();
@@ -163,7 +165,6 @@ class MLFTree {
 			$stmt->execute();
 			$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			$stmt->closeCursor();
-			echo "<option value=''></option>";
 			foreach ($results as $result) {
 				echo "<option value='".$result['balias']."'>".$result['bname']."</option>";
 			}

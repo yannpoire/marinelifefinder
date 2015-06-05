@@ -31,7 +31,7 @@ if(!empty($_POST['action']) && $_POST['action'] == 'addbranch' && isset ($_SESSI
 				break;
 		}
 	}
-	
+	//echo "Growing branch";
 	$treeObj->growBranch($bn, $ba, $bc, $bf, $bt, $bs);
 
 } else {
