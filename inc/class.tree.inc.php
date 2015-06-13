@@ -113,14 +113,11 @@ class MLFTree {
 				$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				$stmt->closeCursor();
 				$parents = array();
-				foreach ($results as $result) {
+				foreach ($results as &$result) {
 					$bfrom = $result['bfrom'];
 					$bname = $result['bname'];
 					$balias = $result['balias'];
-					
-					
 					$i =0;
-					
 					while ( $i <= count($results) ) {
 						if (!array_key_exists($bfrom, $parents)) {
 							$parents[$bfrom] = 1;
@@ -132,9 +129,10 @@ class MLFTree {
 						}
 					}	
 				}
+				unset($result);
 				//var_dump($parents);
 				$listcount = count($parents);
-				foreach ($results as $result) {
+				foreach ($results as &$result) {
 					$bfrom = $result['bfrom'];
 					$bname = $result['bname'];
 					$balias = $result['balias'];
@@ -158,7 +156,6 @@ class MLFTree {
 		if (!isset($root)) {
 			$root = "animalia";
 		}
-		echo "In function";
 		$sql = "SELECT node.bname, node.balias, node.lft FROM mlf_tree AS node, mlf_tree AS parent WHERE node.lft BETWEEN parent.lft AND parent.rgt AND parent.balias = :parentbalias GROUP BY node.bname ORDER BY node.lft";
 		if ( $stmt = $this->_db->prepare($sql) ) {
 			$stmt->bindParam(":parentbalias", $root, PDO::PARAM_STR);

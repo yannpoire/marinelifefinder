@@ -6,18 +6,21 @@ function numDdown ($limit) {
 
 function customDdown ($values) {
 	foreach ($values as $el) {
-		echo '<option id="'  .strtolower($el).  '" value="'.$el.'" />&nbsp;'.$el.'</option>';
+		echo '<option class="selcolor-'  .strtolower($el).  '" value="'.$el.'" />'.$el.'</option>';
 	}
 }
 
 function checkBox ($values) {
 	foreach ($values as $el) {
-		echo '<option id="'  .strtolower($el).  '" value="'.$el.'" />&nbsp;'.$el.'</option>';
+		echo '<option class="selcolor-'  .strtolower($el).  '" value="'.$el.'" />'.$el.'</option>';
 	}
 }
 
 function timedMsg($msg, $state) {
 	echo "<div class='".$state." timedmsg'><div class='container'><span>".$msg."</span></div></div>";
 }
+
+
+
 
 ?>

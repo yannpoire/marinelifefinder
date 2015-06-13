@@ -1,12 +1,14 @@
 <?php
 	include_once "common/base.php";
 	$pageTitle = "Welcome on Marine Life Finder";
-	include_once ROOT_PATH."common/header.php";
-	include_once ROOT_PATH."common/mainnav.php";
-	
+	include_once ROOT_PATH."common/header.php";	
 ?>
 </head>
 <body>
+<?php
+	include_once ROOT_PATH."common/mainnav.php";
+	include_once ROOT_PATH."admin/adminnav.php";
+?>
     <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
 	<div class="container">
@@ -71,8 +73,26 @@
 				<!-- END OF IF STATEMENT -->
 			<?php endif; ?>			
 		</div>
-	</div>
-	<div class="row">
-		<?php include_once(ROOT_PATH."common/footer.php"); ?>
-	</div>
+	</div>		
 </div>
+<?php include_once(ROOT_PATH."common/footer.php"); ?>
+<script>
+		$(function(){
+			$('.adminnav > li').bind('mouseover', openSubMenu);
+			$('.adminnav > li').bind('mouseout', closeSubMenu);
+			function openSubMenu() {
+				$(this).find('ul').css('visibility', 'visible');	
+			};
+			function closeSubMenu() {
+				$(this).find('ul').css('visibility', 'hidden');	
+			};	   
+		});
+	</script>
+	<script>
+		$(function() {
+			if ($('div.timedmsg')) {
+				$( "div.timedmsg" ).slideDown( 1800, function() {
+			  	}).delay( 5000 ).slideUp(1600);
+			 }
+		});
+	</script>

@@ -17,10 +17,8 @@ $branchranks =array("Unranked", "Cladistic", "Empire", "Kingdom", "Subkingdom", 
 
 // Colors  
 $tints = array("White", "Grey", "Black", "Silvery", "Golden");
-$colorbase = array("Blue", "Pink", "Olive", "Yellow", "Magenta", "Purple", "Green", "Brown", "Orange", "Teal", "Red");
+$colorbase = array("Blue", "Pink", "Olive", "Yellow", "Magenta", "Purple", "Green", "Brown", "Orange", "Teal", "Red", "Violet");
 $colors = array_merge($tints, $colorbase);
-
-
 
  /*
 	 * Fishes gnathostomata includes sharks to bony fishes but not hagfish in craniata
@@ -35,10 +33,10 @@ $gnathostomata = array(
 		"Boxfish", "Emperorfish", "Pipefish", "Sea Horses", "Frogfish", "Catfish", "Snappers", "Groupers", "Sweetlips",
 		"Pompanos"),
 
-	"generalshape" => array(	"Round", "Elongated", "Spade", "Squared", "Diamond", "Snake-like", "Tapered", "Disc-vertical", "Disc-horizontal", "Squared", "Drop-like", "Irregular" ),
+	"generalshape" => array(	"Round", "Elongated", "Oblong", "Spade", "Diamond", "Snake-like", "Tapered", "Disc-vertical", "Disc-horizontal", "Squared", "Drop-like", "Irregular" ),
 	
 	"mouth" => array(
-		"shape" => array( "Beak", "Big lips", "Crocodile like",  "Elongated", "Short", "Sideway", "Terminal", "Tubular", "Tubular Snout", "Under", "Upward" ),
+		"shape" => array( "Beak", "Big lips", "Crocodile like",  "Elongated", "Short", "Sideway", "Tubular", "Tubular Snout", "Under", "Upward", "Normal", "Longer Lower Jaw" ),
 		"lipssize" => array( "Not apparent", "Small", "Medium", "Big", "Upper", "Lower"),
 		"position" => array("Under", "Terminal", "Over"),
 		"sizetohead" => array( "Tiny", "Small", "Normal", "Big", "Oversized" ),
@@ -75,34 +73,34 @@ $gnathostomata = array(
 		"dorsal" => array ( 
 			"shape" => array("Triangular", "Pointed", "Elongated", "Attached to caudal", "Spined" ),
 			"spacing" => array("Notched (Spined)", "Continuous", "Separated"),
-			"patterns" => array("Dotted", "Spotted", "Lined", "Banded", "Saddled", "Blotched", "Clear rays", "Margins" )
+			"patterns" => array("Dotted", "Spotted", "Lined", "Banded", "Saddled", "Blotched", "Clear rays", "Margins", "Colored Tip")
 		),
 		
 		"caudal" => array( 
-			"shape" => array("Rounded", "Truncated", "Lunate", "Forked", "Marginated", "Pointed", "Indented", "Curled" ),
-			"type" => array( "Heterocercal", "Homocercal" ),
-			"patterns" => array("Dotted", "Spotted", "Lined", "Banded", "Blotched", "Clear rays", "Margins" )
+			"shape" => array("Rounded", "Truncated", "Lunate", "Forked", "Marginated", "Pointed", "Indented", "Curled", "Uneven" ),
+			"type" => array( "Heterocercal", "Homocercal", "Reversed Heterocercal", "Protocercal", "Diphycercal" ),
+			"patterns" => array("Dotted", "Spotted", "Lined", "Banded", "Blotched", "Clear rays", "Margins", "Colored Tip" )
 		),
 		
 		"anal" => array(
 			"shape" => array("Rounded", "Triangle", "Pointy", "None"),
-			"patterns" => array("Dotted", "Spotted", "Lined", "Banded", "Blotched", "Clear rays", "Margins" )
+			"patterns" => array("Dotted", "Spotted", "Lined", "Banded", "Blotched", "Clear rays", "Margins", "Colored Tip" )
 		),
 		
 		"pelvic" => array(
 			"shape" => array("None", "Rounded", "Triangular", "Lobed", "Arched"),
 			"position" => array( "Abdominal", "Thoracic, Jugular", "Mental (attached to chin, eyes)"),
-			"patterns" => array("Dotted", "Spotted", "Lined", "Banded", "Blotched", "Clear rays", "Margins" )
+			"patterns" => array("Dotted", "Spotted", "Lined", "Banded", "Blotched", "Clear rays", "Margins", "Colored Tip" )
 		),
 		
 		"pectoral" => array(
 			"shape" => array( "Rounded", "Oversized", "Pointy", "Crescent", "Arched", "Leg-like"),
-			"patterns" => array("Dotted", "Spotted", "Lined", "Banded", "Blotched", "Clear rays", "Margins" )
+			"patterns" => array("Dotted", "Spotted", "Lined", "Banded", "Blotched", "Clear rays", "Margins", "Colored Tip" )
 		)
 	),
 	"behavior" => array(
 		"schooling" => array(
-			"size" => array( "Solitary", "Pairs", "4 - 10",  ),
+			"size" => array( "Solitary", "Pairs", "4 - 10", "10 - 30", "30 - 100", "100 - 500", "500+" ),
 			"density" => array("Tight", "Medium", "Scarce")
 		),
 		"motion" => array( "Wave caudal tail", "Flapping pectorals fins", "Ondulates dorsal and anal fins", "Curled Tail", "Ondulates 			whole body", "Walk with leg-like pectoral fins", "Crawls with enlarged pectoral fins", ),
@@ -111,7 +109,7 @@ $gnathostomata = array(
 		"timeactive" => array("Diurnal", "Nocturnal", "Crepuscular")
 	),
 	
-	"habitat" => array( "Open Water", "Deep Open Water", "Reef", "Sand", "Algaes", "Corals", "Rocks", "Burrowed", "Anemones", 		"Under Rocks", "Cracks", "Cave" ),
+	"habitat" => array( "Open Water", "Deep Open Water", "Reef", "Sand", "Algaes", "Corals", "Rocks", "Burrowed", "Anemones", 		"Under Rocks", "Cracks", "Cave", "Pebbles" ),
 	"habitattype" => array( "Pelagic", "Benthic", "Benthopelagic" )
 
 );

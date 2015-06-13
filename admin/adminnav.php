@@ -1,23 +1,39 @@
-<div class="adminnav">
-	<h3>Admin Menu</h3>
-	<h4>Creatures</h4>
-	<ul>
-		<li><a href="displaylife.php">Display all the organisms</a></li>
-		<li><a href="givelife.php">Create a new creature</a></li>
-		<li><a href="managelife.php">Modify an existing creature</a></li>
-		<li><a href="deletelife.php">Delete a creature</a></li>
-	</ul>
-	<h4>Branches</h4>
-	<ul>
-		<li><a href="viewfulltree.php" target="_self">View branches in the tree</a></li>
-		<li><a href="addbranch.php" target="_self">Add a branch in the tree</a></li>
-		<li><a href="prunebranch.php">Prune a branch from the tree</a></li>
-	</ul>
-	<h4>Pages</h4>
-	<ul>
-		<li><a href="pagemanager.php">View all pages</a></li>
-		<li><a href="pagecreator.php">Add a page</a></li>
-		<li><a href="#">Edit a page</a></li>
-		<li><a href="#">Delete a page</a></li>
+<div class="adminnav-wrapper">
+	<ul class="adminnav">
+		<li>
+			Creatures
+			<ul>
+				<li><a href="#">Display all the organisms (Disabled)</a></li>
+				<li><a href="<?php echo BASE_URL; ?>admin/givelife.php">Create a new creature</a></li>
+				<li><a href="<?php echo BASE_URL; ?>admin/fishmanager.php">Manage fish table</a></li>
+				<li><a href="#">Delete a creature(Disabled)</a></li>
+			</ul>
+		</li>
+		<li>
+			Branches
+			<ul>
+				<li><a href="<?php echo BASE_URL; ?>admin/viewfulltree.php">View branches in the tree</a></li>
+				<li><a href="<?php echo BASE_URL; ?>admin/addbranch.php">Add a branch in the tree</a></li>
+				<li><a href="#">Prune a branch from the tree(Disabled)</a></li>
+			</ul>
+		</li>
+		<li>
+			Pages
+			<ul>
+				<li><a href="<?php echo BASE_URL; ?>admin/pagemanager.php">View all pages</a></li>
+				<li><a href="<?php echo BASE_URL; ?>admin/pagecreator.php">Add a page</a></li>
+				<li><a href="#">Edit a page(Disabled)</a></li>
+				<li><a href="#">Delete a page(Disabled)</a></li>
+			</ul>
+		</li>
+		<li>
+			Fields
+			<ul>
+				<li><a href="<?php echo BASE_URL; ?>admin/fieldsview.php">View all pages</a></li>
+				<li><a href="<?php echo BASE_URL; ?>admin/fieldcreator.php">Add a field</a></li>
+				<li><a href="#">Edit a field(Disabled)</a></li>
+				<li><a href="#">Delete a field(Disabled)</a></li>
+			</ul>
+		</li>
 	</ul>
 </div>

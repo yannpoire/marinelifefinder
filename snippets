@@ -239,3 +239,31 @@ wikipedialink, wormslink, itislink, fpageurl, fmetadesc, fmetakeys,
 fcreated, fmodified, fusername
 
 
+	if (isset($_POST) && !empty($_POST)) {
+			foreach ($_POST as $key => $value) {
+				if (isset($value) && is_array($value)) {
+					print_r($value)."<br />";
+					$mkstr = join(", " , $value);
+					$$key = $mkstr;
+					echo "Key = ".$$key."<br />";
+				}
+			}
+		}
+		
+		
+CREATE TABLE mlf_fields (
+        fieldID INT AUTO_INCREMENT PRIMARY KEY,
+		fieldname VARCHAR(150) NOT NULL,
+        fielddescription TEXT NOT NULL,
+        fieldgroup VARCHAR(30) NOT NULL,
+        fieldtype VARCHAR(30) NOT NULL,
+        fieldvaluetype VARCHAR(30) NOT NULL,
+        fielddefaultvalue TEXT NOT NULL,
+        username VARCHAR(150) NOT NULL,
+        created INT UNSIGNED NOT NULL,
+        modified INT UNSIGNED NOT NULL
+        
+)
+        		
+		
+

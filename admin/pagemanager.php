@@ -25,7 +25,7 @@
 	</div>
 	<div class="row">
 		<table class="pagelist" border="1" cellpadding="4" width="100%">
-		<thead><td>Status</td><td>Title link to page</td><td>Alias</td><td>Category</td><td>Meta Desccription</td><td>Meta keywords</td><td>Page URL name</td></tr></thead>
+		<thead><td>Status</td><td>Title link to page</td><td>Alias</td><td>Category</td><td>Meta Description</td><td>Meta keywords</td><td>Page URL name</td></tr></thead>
 	 	<?php 
 			$pages = new MLFPages($db);
 			$scope = "";

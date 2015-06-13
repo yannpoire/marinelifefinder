@@ -1,11 +1,8 @@
-	<div class="row">
-		<div class="col-xs-12"
-			<footer>
-					<p>Copyright 2015 Yann Poir&eacute;</p>
-			</footer>
-		</div>
-	</div>
-</div> <!-- /container -->
+<div class="footer-wrapper">
+		<footer>
+			<span>Copyright 2015 Yann Poir&eacute;</span><span><a href="http://www.yannpoire.com">yannpoire.com</a></span><span>Share on:</span><span>Facebook</span>
+		</footer>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script>window.jQuery || document.write('<script src="<?php echo BASE_URL; ?>js/vendor/jquery-2.1.4.min.js"><\/script>')</script>

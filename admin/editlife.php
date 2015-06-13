@@ -23,15 +23,17 @@
 		switch ($status) {
 			case 1:
 				$msg = "Success! The lifeform has been added to the Database";
+		timedMsg($msg, "success");
 				break;
 			case 2:
 				$msg = "Failed! The lifeform already exist in the Database";
+		timedMsg($msg, "warning");
 				break;
 			default:
 				$msg = "Failed something went wrong... Very wrong... Very very wrong...";
+		timedMsg($msg, "failure");
 				break;
 		}
-		timedMsg($msg, $state);
 	}
 ?>
 <div class="container">
@@ -934,5 +936,58 @@
 	</form>
 </div>
 <?php include_once(ROOT_PATH."common/footer.php"); ?>
+<script>
+		$(function(){
+			$('.adminnav > li').bind('mouseover', openSubMenu);
+			$('.adminnav > li').bind('mouseout', closeSubMenu);
+			function openSubMenu() {
+				$(this).find('ul').css('visibility', 'visible');	
+			};
+			function closeSubMenu() {
+				$(this).find('ul').css('visibility', 'hidden');	
+			};	   
+		});
+</script>
+<script>
+	$(function() {
+		if ($('div.timedmsg')) {
+			$( "div.timedmsg" ).slideDown( 1800, function() {
+		  	}).delay( 5000 ).slideUp(1600);
+		 }
+	});
+</script>
+<script>
+	$(function() {
+		$( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+		$( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+		$( "div.juvenileform").hide(); $( "div.female").hide();
+		$( "#juvdistinct" ).click(function () {
+			if (this.value == 0) {
+				$("div.juvenileform").hide();
+			} else {
+				$("div.juvenileform").show();
+			}
+			
+		});
+		$( "#femdistinct" ).click(function () {
+			if (this.value == 0) {
+				$("div.female").hide();
+			} else {
+				$("div.female").show();
+			}
+			
+		});
+	});
+</script>
 
 <script type="text/javascript" src="<?php echo BASE_URL; ?>plugins/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+	tinymce.init({
+	    selector: "textarea.content",
+	    plugins : [ "link, image, hr, anchor, pagebreak, media, wordcount, table, responsivefilemanager"],
+	    image_advtab: true,
+		external_filemanager_path:"../plugins/filemanager/",
+		filemanager_title:"Responsive Filemanager" ,
+		external_plugins: { "filemanager" : "plugins/responsivefilemanager/plugin.min.js"}
+	 });
+</script>

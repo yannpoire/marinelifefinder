@@ -1,9 +1,85 @@
-  .ui-tabs-vertical { width: 55em; }
-  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 10em; }
-  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
-  .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
-  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
-  .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 44em;}
+/*Style for Marine Life Finder
+ * Copyright 2015 Yann Poire 
+ * 
+ * 
+ */
+
+/* Top bar admin menu */
+
+div.adminnav-wrapper {
+	display: block;
+	width: 100%;
+	right: 0;
+	left: 0;
+	margin-top: -9px;
+	padding: 0;
+	color: #FFF;
+	font-size: 1.1em;
+	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.02) outset;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.02) outset;
+    background-color: #19477B;
+    min-height: 44px;
+    z-index: 30;
+}
+
+ul.adminnav {
+	width: 1170px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0;
+	background-color: #19477B;
+}
+
+ul.adminnav li {
+	list-style:none;
+	float:left;
+	padding: 8px 8px 8px 15px;
+	display: block;
+}
+
+.adminnav li a:link, .adminnav li a:visited {
+	display:block;
+	text-decoration:none;
+	/* padding: 0.5em 2em; */
+	margin:0;
+	color: #FFF;
+}
+
+.adminnav li a:hover {
+	background-color:#0CF;	
+}
+
+/*style the sub menu*/
+.adminnav li ul {
+	position: absolute;
+	visibility: hidden;
+	margin: 8px 0 0;
+	padding: 0 12px 0;
+	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.02) outset;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.02) outset;
+    border-radius: 5px;
+    background-color: #19477B;
+    z-index: 30;
+}
+
+.adminnav li ul li {
+	display:inline;
+	float:none;
+	padding: 0;
+	padding-left: 12px;
+}
+
+.adminnav li ul li a:link, .adminnav li ul li a:visited {
+	/* background-color:#09F; */
+	width: auto;
+}
+
+.adminnav li ul li a:hover {
+	background-color: #005299;	
+}
+
+
+/* Top bar message */
 
 div.success, div.failure, div.warning {
 	width: 1170px;
@@ -40,7 +116,29 @@ div.timedmsg {
 }
 
 
+/* Tabs */
+
+  .ui-tabs-vertical { width: 55em; }
+  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 10em; }
+  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+  .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
+  .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 44em;}
+  
+ul.tablist {
+	margin-top: 12px;
+}
+
+ul.tablist li {
+	list-style-type: none;
+	font-size: 1.1em;
+}
+  
+
+
+
 /* The whole tree ul wrapper */
+
 div.wholetree {
 	font-weight: bold;
 }
@@ -75,18 +173,28 @@ div.adminnav ul {
 	-webkit-padding-start: 0px;
 }
 
-footer {
+
+
+/* FOOTER */
+
+div.footer-wrapper {
 	margin-top: 20px;
-	padding-top: 10px;
+	width: 100%;
+	padding: 12px 0;
+	background-color: #19477B;
+	-webkit-box-shadow: 0 8px 0 rgba(100,100,100,0.2) inset;
+    box-shadow: 0 4px 0 rgba(100,100,100,0.2) inset;
 }
 
-ul.tablist {
-	margin-top: 12px;
+footer {
+	width: 1170px;
+	margin-right: auto;
+	margin-left: auto;
+	color: #fff;
 }
 
-ul.tablist li {
-	list-style-type: none;
-	font-size: 1.1em;
+footer span {
+	margin-left: 12px;
 }
 
 

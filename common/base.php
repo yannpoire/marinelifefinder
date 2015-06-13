@@ -16,8 +16,9 @@ include_once ROOT_PATH."inc/config.inc.php";
 try {
 	$dsn = "mysql:host=".DB_HOST.";dbname=".DB_NAME;
 	$db = new PDO($dsn, DB_USER, DB_PASS);
+	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 } catch (PDOException $e) {
 	echo 'Connection failed: ' . $e->getMessage();
+	print_r($db->errorInfo());
 	exit;
 }
-?>
