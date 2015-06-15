@@ -10,13 +10,6 @@ $(function(){
 });
 
 $(function() {
-	if ($('div.timedmsg')) {
-		$( "div.timedmsg" ).slideDown( 1800, function() {
-	  	}).delay( 5000 ).slideUp(1600);
-	 }
-});
-
-$(function() {
 	$( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
 	$( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
 	$( "div.juvenileform").hide(); $( "div.female").hide();
@@ -38,11 +31,4 @@ $(function() {
 	});
 });
 
-tinymce.init({
-    selector: "textarea.content",
-    plugins : [ "link, image, hr, anchor, pagebreak, media, wordcount, table, responsivefilemanager"],
-    image_advtab: true,
-	external_filemanager_path:"../plugins/filemanager/",
-	filemanager_title:"Responsive Filemanager" ,
-	external_plugins: { "filemanager" : "plugins/responsivefilemanager/plugin.min.js"}
- });
+
