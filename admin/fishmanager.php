@@ -42,14 +42,15 @@
 						echo "<tr>";
 					}
 					$binomial = $fish['fbinomialfirst']." ".strtolower($fish['fbinomiallast']);
-					echo "<td>"
-					.$binomial."</td><td><a class=\"binomial\" href=\"editlife.php?fid=".$fish['fid']."\">"
-					.$fish['fcname']. "</a></td><td>"
-					.$fish['ffamilycname']."</td><td>"
-					.$fish['fclassification']. "</td><td>"
-					.$fish['fmetadesc']."</td><td>"
-					.$fish['fmetakeys']."</td><td>"
-					.$fish['fmodified']."</td></tr>";
+					echo "<td><span class=\"binomial\">"
+						.$binomial."</span></td><td>
+						<a href=\"editlife.php?fid=".$fish['fid']."\">"
+						.$fish['fcname']. "</a></td><td>"
+						.$fish['ffamilycname']."</td><td>"
+						.$fish['fclassification']. "</td><td>"
+						.$fish['fmetadesc']."</td><td>"
+						.$fish['fmetakeys']."</td><td>"
+						.$fish['fmodified']."</td></tr>";
 				}
 				
 			?>

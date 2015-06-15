@@ -4,7 +4,7 @@
 	include_once ROOT_PATH."admin/values.php";
 	include_once ROOT_PATH."inc/class.fields.inc.php";
 	include_once ROOT_PATH."common/header.php";
-	$lifeObj = new MLFLife;
+	$fieldObj = new MLFFields($db);
 ?>
 </head>
 <body>
@@ -19,37 +19,34 @@
 		<p>All the possible fields of forms</p>
 	</div>
 	<div class="row">
-        <table class="table table-condensed" width="100%">
+        <table class="table table-condensed table-striped" width="100%">
 		<thead>
 			<tr>
-				<td>Field ID</td>
-				<td>Field Name</td>
-				<td>Field Alias</td>
-				<td>Field Description</td>
-				<td>Field Group</td>
-				<td>Field Type</td>
-				<td>Field Value Type</td>
-				<td>Default Value</td>
+				<td width="10%">Name</td>
+				<td width="10%">Alias</td>
+				<td width="30%">Description</td>
+				<td width="10%">Group</td>
+				<td width="10%">Set</td>
+				<td width="10%">Type</td>
+				<td width="10%">Value Type</td>
+				<td width="10%">Default Value</td>
 			</tr>
 		</thead>
 		<tbody>
 			<?php
-				$fishes = $lifeObj->fetchLife("Fish");
-				foreach ($fishes as $fish) {
-					if ($fish['fstatus'] == 0) {
-						echo "<tr class=\"warning\">";
-					} else {
-						echo "<tr>";
-					}
-					$binomial = $fish['fbinomialfirst']." ".strtolower($fish['fbinomiallast']);
-					echo "<td>"
-					.$binomial."</td><td><a class=\"binomial\" href=\"editlife.php?fid=".$fish['fid']."\">"
-					.$fish['fcname']. "</a></td><td>"
-					.$fish['ffamilycname']."</td><td>"
-					.$fish['fclassification']. "</td><td>"
-					.$fish['fmetadesc']."</td><td>"
-					.$fish['fmetakeys']."</td><td>"
-					.$fish['fmodified']."</td></tr>";
+				$fields = $fieldObj->fetchFields("all");
+				foreach ($fields as $field) {
+					echo "<tr><td>"
+					."<a href=\"fieldeditor.php?id=".$field['fieldID']."\">".$field['fieldname']. "</a>"
+					."</td><td>"
+					.$field['fieldalias']."</td><td>"
+					.$field['fielddescription']. "</td><td>"
+					.$field['fieldgroup']."</td><td>"
+					.$field['fieldset']."</td><td>"
+					.$field['fieldtype']."</td><td>"
+					.$field['fieldvaluetype']."</td><td>"
+					.$field['fielddefaultvalue']."</td>"
+					."</tr>";
 				}
 				
 			?>

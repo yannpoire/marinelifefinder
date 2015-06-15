@@ -79,43 +79,6 @@ ul.adminnav li {
 }
 
 
-/* Top bar message */
-
-div.success, div.failure, div.warning {
-	width: 1170px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-div.success {
-	background-color: #356635;
-}
-
-div.failure {
-	background-color: #A92222;
-}
-
-div.warning {
-	background-color: #EB8F00;
-}
-
-div.timedmsg {
-	width: 100%;
-	position: fixed;
-	top: 50px;
-	right: 0;
-	left: 0;
-	padding: 12px 0;
-	color: #FFF;
-	font-size: 1.3em;
-	z-index:1500;
-	display: none;
-	opacity: 0.9;
-	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.02) outset;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.02) outset;
-}
-
-
 /* Tabs */
 
   .ui-tabs-vertical { width: 55em; }
@@ -203,11 +166,6 @@ footer span {
 div.form-style legend {
 	font-size: 1.6em;
 	margin: 20px 0 10px;
-}
-
-div.form-style label {
-	display: block;
-	margin-bottom: 8px;
 }
 
 div.form-style fieldset {
@@ -350,3 +308,7 @@ div.form-style input[type="button"]:hover {
 	display: inline-block;
 	width: 60px;
 } */
+
+.binomial {
+	font-style: italic;
+}

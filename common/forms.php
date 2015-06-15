@@ -16,11 +16,4 @@ function checkBox ($values) {
 	}
 }
 
-function timedMsg($msg, $state) {
-	echo "<div class='".$state." timedmsg'><div class='container'><span>".$msg."</span></div></div>";
-}
-
-
-
-
 ?>

@@ -16,7 +16,7 @@ class MLFForms {
 	  * createField will echo field for from entry or can prepoplulate a form for edit
 	  */
 	
-	public function createField ($fieldarr) {
+	public function displayField ($fieldarr) {
 		foreach ($fieldarr as $field => $properties) {
 			if ($fieldarr['edit'] == 1) {
 				// Need to connect to DB

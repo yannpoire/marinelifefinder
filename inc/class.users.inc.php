@@ -40,7 +40,7 @@ class MLFUsers {
                 return "<h2> Error </h2>" . "<p> Sorry, that email is already in use. " . "Please try again. </p>";
             }
             if ( !$this->sendVerificationEmail($u, $v) ) {
-                return "<h2> Error </h2>" . "<p> There was an error sending your" . " verification email. Please " . "<a href='mailto:help@coloredlists.com'>contact " . "us</a> for support. We apologize for the " . "inconvenience. </p>";
+                return "<h2> Error </h2>" . "<p> There was an error sending your" . " verification email. Please " . "<a href='mailto:help@marinelifefinder.com'>contact " . "us</a> for support. We apologize for the " . "inconvenience. </p>";
             }
             $stmt->closeCursor();
         }
@@ -59,12 +59,12 @@ class MLFUsers {
              * If the UserID was successfully
              * retrieved, create a default list.
              */
-            $sql = "INSERT INTO mlf_favorites (userid, favorite) VALUES ($userID, $url)";
+            /*$sql = "INSERT INTO mlf_favorites (userid, favorite) VALUES ($userID, $url)";
             if(!$this->_db->query($sql)) {
                 return "<h2> Error </h2>" . "<p> Your account was created, but " . "creating your first list failed. </p>";
             } else {
                 return "<h2> Success! </h2>" . "<p> Your account was successfully " . "created with the username <strong>$u</strong>." . " Check your email!";
-            }
+            } */
         } else {
             return "<h2> Error </h2><p> Couldn't insert the " . "user information into the database. </p>";
         }
@@ -196,7 +196,7 @@ EMAIL;
      * @return mixed    an array of info or FALSE on failure
      */
     public function retrieveAccountInfo() {
-        $sql = "SELECT userid, ver_code FROM mlf_users WHERE username=:user";
+        $sql = "SELECT id, ver_code FROM mlf_users WHERE username=:user";
         try {
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':user', $_SESSION['username'], PDO::PARAM_STR);
@@ -243,7 +243,7 @@ EMAIL;
     {
         if ( isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == 1) {
             // Delete list items
-            $sql = "DELETE FROM mlf_list_items WHERE ListID=( SELECT favorites FROM lists WHERE userid=:user LIMIT 1 ";
+           /* $sql = "DELETE FROM mlf_list_items WHERE ListID=( SELECT favorites FROM lists WHERE userid=:user LIMIT 1 ";
             try {
                 $stmt = $this->_db->prepare($sql);
                 $stmt->bindParam(":user", $_POST['user-id'], PDO::PARAM_INT);
@@ -265,6 +265,7 @@ EMAIL;
             catch(PDOException $e) {
                 die($e->getMessage());
             }
+		    */
 
             // Delete the user
             $sql = "DELETE FROM mlf_users WHERE userid=:user AND username=:email";

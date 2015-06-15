@@ -8,7 +8,9 @@ $lifeObj = new MLFLife();
 
 if (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn']==1) {
 
-	if(!empty($_GET) )
+	if(!empty($_GET) ) {
+		
+	}
 	
 	if(!empty($_POST['action']) ) {
 		$lifegroup = $_POST['lifegroup'];

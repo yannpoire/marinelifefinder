@@ -94,7 +94,7 @@ class MLFLife {
 		
 	// Convert the $_POST multidimensional array to an regular array of string values
 	
-		$exlcuded = array("lifegroup", "modified", "created", "createlife", "action");
+		$excluded = array("lifegroup", "modified", "created", "createlife", "action");
 		
 		foreach ($_POST as $key => &$value) {
 			if (!in_array($key, $_POST)) {

@@ -7,31 +7,37 @@
 	include_once ROOT_PATH."common/header.php";
 
 	include_once ROOT_PATH."common/forms.php";
-	$lifeObj = new MLFLife;
-	$treeObj = new MLFTree;
+	$lifeObj = new MLFLife();
+	$treeObj = new MLFTree();
 ?>
 </head>
 <body>
 <?php
 	include_once ROOT_PATH."common/mainnav.php";
 	include_once ROOT_PATH."admin/adminnav.php";
-?>
-<?php 
-	include_once ROOT_PATH."common/mainnav.php";
+
 	if(isset($_GET['status'])) {
 		$status = $_GET['status'];
 		switch ($status) {
 			case 1:
-				$msg = "Success! The lifeform has been added to the Database";
+				$msg = "<div class=\"alert alert-success alert-dismissable\">
+					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+					<span aria-hidden=\"true\">&times;</span>
+					</button><strong>Success!</strong> The creature has been entered in the database</div>";
 				break;
 			case 2:
-				$msg = "Failed! The lifeform already exist in the Database";
+				$msg = "<div class=\"alert alert-warning alert-dismissable\">
+					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+					<span aria-hidden=\"true\">&times;</span>
+					</button><strong>Warning!</strong> The creature already exist in the database</div>";
 				break;
 			default:
-				$msg = "Failed something went wrong... Very wrong... Very very wrong...";
+				$msg = "<div class=\"alert alert-danger alert-dismissable\">
+					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+					<span aria-hidden=\"true\">&times;</span>
+					</button><strong>Houston!</strong> We have a problem...</div>";
 				break;
 		}
-		timedMsg($msg, $state);
 	}
 ?>
 <div class="container">
@@ -933,6 +939,18 @@
 	</div>
 	</form>
 </div>
-<?php include_once(ROOT_PATH."common/footer.php"); ?>
 
+<?php include_once(ROOT_PATH."common/footer.php"); ?>
 <script type="text/javascript" src="<?php echo BASE_URL; ?>plugins/tinymce/tinymce.min.js"></script>
+<script>
+tinymce.init({
+    selector: "textarea.content",
+    plugins : [ "link, image, hr, anchor, pagebreak, media, wordcount, table, responsivefilemanager"],
+    image_advtab: true,
+	external_filemanager_path:"../plugins/filemanager/",
+	filemanager_title:"Responsive Filemanager" ,
+	external_plugins: { "filemanager" : "plugins/responsivefilemanager/plugin.min.js"}
+ });
+</script>
+
+
