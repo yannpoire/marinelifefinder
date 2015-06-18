@@ -4,9 +4,19 @@
 	include_once ROOT_PATH."common/header.php";
 	include_once ROOT_PATH."common/mainnav.php";
 	include_once ROOT_PATH."admin/values.php";
+	include_once '../inc/class.pages.inc.php';
+	include_once '../inc/class.fields.inc.php';
+	$pageObj = new MLFPages;
+	if ($_GET) {
+		$edit = TRUE;
+		$pageID = $_GET['pageID'];
+		$page = $pageObj->fetchPages($pageID);
+		$action = "updatepage";
+	} else {
+		$edit = FALSE;
+		$action = "createpage";
+	}
 ?>
-<!-- <script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script> -->
-<script type="text/javascript" src="<?php echo BASE_URL; ?>plugins/ckeditor/ckeditor.js"></script> 
 </head>
 <body>
 <?php
@@ -22,11 +32,16 @@
 	</div>
 	<div class="row form-style">
 		<div class="col-md-10">
-		<form method="post" role="form" action="../db-interaction/pages.php">		
+		<form method="post" role="form" action="../db-interaction/pages.php">
+<?php
+
+
+
+?>		
 			<fieldset>	
 				<legend>New page details</legend>
 				<label for="pagetitle">Name of the new page*</label>
-					<input name="pagetitle" type="text" placeholder="Name of the page" required="required" autofocus="autofocus">
+				<input name="pagetitle" type="text" placeholder="Name of the page" required="required" autofocus="autofocus" value="">
 				
 				<input name="pagealias" type="hidden" value="pagealiasval">		
 				<label for="pagecat">Choose page category</label>

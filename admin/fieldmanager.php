@@ -35,6 +35,7 @@
 		<tbody>
 			<?php
 				$fields = $fieldObj->fetchFields("all");
+				var_dump($fields);
 				foreach ($fields as $field) {
 					echo "<tr><td>"
 					."<a href=\"fieldeditor.php?id=".$field['fieldID']."\">".$field['fieldname']. "</a>"

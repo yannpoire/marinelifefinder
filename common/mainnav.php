@@ -27,7 +27,7 @@
 				            <li><a href="<?php echo BASE_URL; ?>admin/fishmanager.php">Manage fishes</a></li>
 				            <li class="divider"></li>
 				            <li><a href="<?php echo BASE_URL; ?>admin/viewfulltree.php">View branches in the tree</a></li>
-				            <li><a href="<?php echo BASE_URL; ?>admin/addbranch.php">Add a branch in the tree</a></li>
+				            <li><a href="<?php echo BASE_URL; ?>admin/branchcreator.php">Add a branch in the tree</a></li>
 				            <li class="divider"></li>
 				            <li><a href="<?php echo BASE_URL; ?>admin/pagemanager.php">View all pages</a></li>
 				            <li><a href="<?php echo BASE_URL; ?>admin/pagecreator.php">Add a page</a></li>

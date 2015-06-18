@@ -43,6 +43,22 @@ class MLFPages {
 		}
 	}
 	
+	public function getPage($pageID) {
+		if(isset($pageID) && !empty($pageID)) {
+			$sql = "SELECT * FROM mlf_pages WHERE pageID = :pageID LIMIT 1";
+			try {
+				$stmt = $this->$_db->prepare($sql);
+				$stmt->bindParam(":pageID", $pageID, PDO::PARAM_INT);
+				$stmt->execute();
+            	$page = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				$stmt->closeCursor();
+			} catch (PDOException $e) {
+            	return FALSE;
+			}
+			return $page;
+		}
+	}
+	
 	public function fetchPages($scope) {
 		if (empty($scope)) {
 			$sql = "SELECT pagestatus, pagetitle, pagealias, pagecat, pagecontent, metadesc, metakeys, pageurl FROM mlf_pages GROUP BY pagetitle ASC";
