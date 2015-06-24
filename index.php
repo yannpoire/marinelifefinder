@@ -8,6 +8,8 @@
 <?php
 	include_once ROOT_PATH."common/mainnav.php";
 	include_once ROOT_PATH."admin/adminnav.php";
+	include_once ROOT_PATH."inc/class.modules.inc.php";
+	$modulesObj = new MLFModules;
 ?>
     <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
@@ -42,36 +44,41 @@
 	<hr>
 	
 	<div class="row">
-		<div>
-			<?php if(isset($_SESSION['LoggedIn']) && isset($_SESSION['username']) && $_SESSION['LoggedIn']==1):	?>
-				<!-- IF LOGGED IN -->
-			<!-- Content here -->
-			<p>Welcome</p>
-			<ul>
-				<li>
-					<a href="admin/addbranch.php">Add a branch</a>
-			    </li>
-			</ul>
-				<p><a href="<?php echo BASE_URL; ?>logout.php" class="button" role="button">Log out</a> <a href="<?php echo BASE_URL; ?>account.php" class="button">Your Account</a></p>
-			<?php else: ?>
-				<!-- IF LOGGED OUT -->
-				<!-- Alternate content here -->
-			<p>You are NOT logged in!</p>
-			<ul id="list">
-				<li class="colorRed">
-					<span>Walk the dog</span>
-				</li>
-				<li class="colorBlue">
-					<span>Pick up dry cleaning</span>
-				</li>
-				<li class="colorGreen">
-					<span>Milk</span>
-				</li>
-			</ul>
-			<img src="<?php echo BASE_URL; ?>/images/newlist.jpg" alt="Your new list here!" />
-				<p><a class="btn btn-default" href="<?php echo BASE_URL; ?>signup.php">Sign up</a> &nbsp; <a class="btn btn-default" href="login.php" role="button">Log in</a></p>
-				<!-- END OF IF STATEMENT -->
-			<?php endif; ?>			
+		<div class="col-md-8">
+			<div>
+				<?php if(isset($_SESSION['LoggedIn']) && isset($_SESSION['username']) && $_SESSION['LoggedIn']==1):	?>
+					<!-- IF LOGGED IN -->
+				<!-- Content here -->
+				<p>Welcome</p>
+				<ul>
+					<li>
+						<a href="admin/addbranch.php">Add a branch</a>
+				    </li>
+				</ul>
+					<p><a href="<?php echo BASE_URL; ?>logout.php" class="button" role="button">Log out</a> <a href="<?php echo BASE_URL; ?>account.php" class="button">Your Account</a></p>
+				<?php else: ?>
+					<!-- IF LOGGED OUT -->
+					<!-- Alternate content here -->
+				<p>You are NOT logged in!</p>
+				<ul id="list">
+					<li class="colorRed">
+						<span>Walk the dog</span>
+					</li>
+					<li class="colorBlue">
+						<span>Pick up dry cleaning</span>
+					</li>
+					<li class="colorGreen">
+						<span>Milk</span>
+					</li>
+				</ul>
+				<img src="<?php echo BASE_URL; ?>/images/newlist.jpg" alt="Your new list here!" />
+					<p><a class="btn btn-default" href="<?php echo BASE_URL; ?>signup.php">Sign up</a> &nbsp; <a class="btn btn-default" href="login.php" role="button">Log in</a></p>
+					<!-- END OF IF STATEMENT -->
+				<?php endif; ?>			
+			</div>
+		</div>
+		<div class="col-md-4">
+			<?php $modulesObj->fishoftheday(); ?>
 		</div>
 	</div>		
 </div>

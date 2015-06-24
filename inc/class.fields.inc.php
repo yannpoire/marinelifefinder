@@ -1,4 +1,4 @@
-
+<?php
 /*
  List of function of CLASS MLFFields
  
@@ -9,8 +9,8 @@
  createField() create field with POST in mlf_field DB for the field creator form
  no args
  
- getField()
- accepts 1 arg as $fieldID which is the unique ID of a field
+ getFields()
+ accepts 1 arg as $fieldIDs which is an array of fields unique ID to fetch and output as row in an result array
  return array of fields $fields by ID
  
  updateField()
@@ -19,15 +19,9 @@
  assembleField() create the HTML output of field to insert in the form
  accepts 2 args as $field which is an array of key values for one field and $edit which is to fetch values from DB or create an empty field with 	defaults values
  return a string which contain the html for the whole form field
- 
- 
- 
- 
- 
- 
- 
+  
  */
-<?php
+
 
 class MLFFields {
 	
@@ -67,7 +61,7 @@ class MLFFields {
 		if ($scope === "all") {
 			$sql = "SELECT * FROM mlf_fields ORDER BY fieldalias";
 		} else {
-			$sql = "SELECT ".$scope." FROM mlf_fields WHERE fieldalias = :fieldalias LIMIT 1";
+			$sql = "SELECT fieldalias FROM mlf_fields WHERE fieldalias = :fieldalias LIMIT 1";
 		}
 
 		try {
@@ -93,9 +87,9 @@ class MLFFields {
 			
 		if (!empty($_POST['fieldalias'])){
 			
-			$this->fetchFields($_POST['fieldalias']);
-			if ($fieldsresults) {
-				header("Location: ../admin/fieldcreator.php?status=2&field=".$_POST['fieldalias']);
+			$fieldsresults = $this->fetchFields($_POST['fieldalias']);
+			if (!empty($fieldsresults)) {
+				header("Location: ../admin/fieldeditor.php?status=2&field=".$_POST['fieldalias']);
 				exit;
 			}
 			
@@ -129,38 +123,52 @@ class MLFFields {
 				return FALSE;
 			}
 			
-			header("Location: ../admin/fieldcreator.php?status=1&field=".$_POST['fieldalias']);
+			header("Location: ../admin/fieldeditor.php?status=1&field=".$_POST['fieldalias']);
 		}
 	}
 
 	/*
-	 * getFIeld takes a field unique id fieldID and get the properties from the DB
+	 * getField takes a field unique id fieldID and get the properties from the DB
 	 * It returns an array of all the values of the row as key => value
 	 */
 
-	public function getField ($fieldID) {
-		if(!empty($fieldID)) {
-			
-			$sql = "SELECT * FROM mlf_fields WHERE fieldID = :fieldID LIMIT 1";
-			
-			try {
-				$stmt = $this->_db->prepare($sql);
-				$stmt->bindParam(':fieldID', $fieldID, PDO::PARAM_INT);
-				$stmt->execute();
-				$field = $stmt->fetch(PDO::FETCH_ASSOC);
-				$stmt->closeCursor();
-			} catch (PDOException $e) {
-				echo 'Error inserting into DB: ' . $e->getMessage();
-				print_r($db->errorInfo());
-				return FALSE;
-			}
-			
-			return $field;
-			
-		} else {
-			echo "This field does not exist";
+	public function getFields ($fieldIDs) {
+		// Split the string of IDs in an array if required
+		if (!is_array($fieldIDs) && is_string($fieldIDs)) {
+			$fieldIDs = explode(",", trim($fieldIDs));
 		}
+		
+		// If array not empty and has a length of exactly 1
+		if(!empty($fieldIDs) && count($fieldIDs) == 1) {
+			$fieldtoget = $fieldIDs[0];			
+			$sql = "SELECT * FROM mlf_fields WHERE fieldID = ".$fieldtoget." LIMIT 1";
+		
+		// If array not emty and has a length of more than one	
+		} elseif (!empty($fieldIDs) && count($fieldIDs) > 1) {
+			$fieldstoget = "\"".implode("\",\"", $fieldIDs)."\"";
+			$sql = "SELECT * FROM mlf_fields WHERE fieldID IN (".$fieldstoget.")";
+		} else {
+			echo "No fields requested";
+		}
+		
+		try {
+			$stmt = $this->_db->prepare($sql);
+			$stmt->execute();
+			$fields = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$stmt->closeCursor();
+		} catch (PDOException $e) {
+			echo 'Error inserting into DB: ' . $e->getMessage();
+			print_r($db->errorInfo());
+			return FALSE;
+		}
+		return $fields;
 	}
+
+	/*
+	 *
+	 * Updates the values of the fields in the DB fields table
+	 *  
+	 */
 	
 	public function updateField () {
 		if (isset($_POST) && !empty($_POST)) {
@@ -176,7 +184,7 @@ class MLFFields {
 			}
 			
 			// Get the difference between the posted values and the current DB values with getField function
-			$currentfield = $this->getField($field['fieldID']);
+			$currentfield = $this->getFields($field['fieldID']);
 			$diff = array_diff($field, $currentfield);
 			if(empty($diff)) {
 				echo "Same same and no different";
@@ -219,110 +227,137 @@ class MLFFields {
 	 * 
 	 * ADD $VALUES FOR EDITING AN EXISTING FIELD
 	 */
-	public function assembleForm ($fields, $edit) {
-		if (isset($fields) && !empty($fields)) {
-			$formfields = "";
+	public function assembleForm ($fieldIDs, $edit) {
 			
-			//Divide fields into fieldsets for display according to fieldset column
-			$fieldsets = array();
-			foreach ($fields as $field => $fieldvalues) {
-				if(!in_array($field['fieldset'], $fieldsets)) {
-					$fieldsets[$field['fieldset']] = $fieldvalues;
-				}
-			}
-			
-			//Create HTML for fieldsets with legend including all their fields
-			
-			foreach ($fieldsets as $fieldset) {
-				
-				$formfield .= "<fieldset><Legend"
-			}
-		}
-		
-		
-		if ($edit === TRUE) {
-			foreach ($fields as $field) {
-				$completefield = $this->assembleField($field, TRUE);
-			}
-		} else {
-			foreach ($fields as $field) {
-				$completefield = $this->assembleField($$field, FALSE);
-			}
-		}
-		
-	}
+		//Get the fields values to create each fields
+		$fields = $this->getFields(explode(",", $fieldIDs));
 
-	public function assembleField ($fielddata, $edit) {
+		//Declare $fieldsets and divide fields into fieldsets for display according to fieldset column
+		$fieldsets = array();
+		
+		//Create key for each field groups
+		foreach ($fields as $id => $array) {
+			if(!in_array($array['fieldset'], $fieldsets)) {
+				$fieldsets[$array['fieldset']] = "<fieldset><legend>".$array['fieldset']."</legend>";
+			}
+		}
+		foreach ($fields as $id => $array) {
+			//Get assembled fields from function
+				$fieldsets[$array['fieldset']] .= $this->assembleField($array, FALSE);	
+		}
+		// Close the fieldsets opened in key creation above
+		foreach ($fieldsets as $set) {
+			$set .= "</fieldset>";
+			echo $set;
+		}	
+	}
+	
+	private function assembleField ($fielddata, $edit) {
+		
+		
 		if (is_array($fielddata) && !empty($fielddata)) {
-			$field = "<div class=\"field-group ".$fielddata['fieldgroupclass']."\">\n<label for=\"".$fielddata['fieldalias']."\">".$fielddata['fieldname']."</label>\n";
+			$field = "<div class=\" ".$fielddata['fieldsetclass']."\"><label for=\"".$fielddata['fieldalias']."\">";
 			switch ($fielddata['fieldtype']) {
 				case "text" :
-					$field .= "<input class=\"".$fielddata['fieldclass']."\" name=\"".$fielddata['alias']." type=\"text\" ";
+					$field .= $fielddata['fieldname']."</label><input class=\"".$fielddata['fieldclass']."\" name=\"".$fielddata['fieldalias']."\" type=\"text\" ";
 					if($edit == TRUE) {
 						$field .= "value=\"".$fielddata['fieldvalue']."\">";
 					} else {
 						$field .="value=\"".$fielddata['fielddefaultvalue']."\">";
 					}
 					break;
+					
 				case "checkbox" :
-					$field .= "<input class=\"".$fielddata['fieldclass']."\" name=\"".$fielddata['alias']." type=\"text\" ";
+					$field .= "<input class=\"".$fielddata['fieldclass']."\" name=\"".$fielddata['alias']."\" type=\"text\" ";
 					if($edit == TRUE) {
-						$field .= "value=\"".$fielddata['fieldvalue']."\">\n";
+						$field .= "value=\"".$fielddata['fieldvalue']."\">";
 					} else {
-						$field .="value=\"".$fielddata['fielddefaultvalue']."\">\n";
+						$field .="value=\"".$fielddata['fielddefaultvalue']."\">";
 					}
+					$field .= $fielddata['fieldname']."</label>";
+					break;
+					
 				case "radio" :
-					$field .= $field .= "<input class=\"".$fielddata['fieldclass']."\" name=\"".$fielddata['alias']." type=\"radio\" ";
+					$field .= $fielddata['fieldname']."</label><input class=\"".$fielddata['fieldclass']."\" name=\"".$fielddata['alias']."\" type=\"radio\" ";
 					if($edit == TRUE) {
-						$field .= "value=\"".$fielddata['fieldvalue']."\">\n";
+						$field .= "value=\"".$fielddata['fieldvalue']."\">";
 					} else {
-						$field .="value=\"".$fielddata['fielddefaultvalue']."\">\n";
+						$field .="value=\"".$fielddata['fielddefaultvalue']."\">";
 					}
+					$field .= $fielddata['fieldname']."</label>";
+					break;
+					
 				case "textarea" :
-					$field .= "<textarea class=\"".$fielddata['fieldclass']."\" name=\"".$fielddata['fieldalias'].">";
+					$field .= "<textarea class=\"".$fielddata['fieldclass']."\" name=\"".$fielddata['fieldalias']."\">";
 					if($edit == TRUE) {
-						$field .= $fielddata['fieldvalue']."</textarea>\n";
+						$field .= $fielddata['fieldvalue']."</textarea>";
 					} else {
-						$field .= $fielddata['fielddefaultvalue']."</textarea>\n";
+						$field .= $fielddata['fielddefaultvalue']."</textarea>";
 					}
 					break;
-				case "textareatinymce" :
-					$field .= "<textarea class=\"tinymcearea ".$fielddata['fieldclass']."\" name=\"".$fielddata['fieldalias'].">";
+					
+				case "textarea-tinymce" :
+					$field .= "</label><textarea class=\"tinymcearea ".$fielddata['fieldclass']."\" name=\"".$fielddata['fieldalias']."\">";
 					if($edit == TRUE) {
-						$field .= $fielddata['fieldvalue']."</textarea>\n";
+						$field .= $fielddata['fieldvalue']."</textarea>";
 					} else {
-						$field .= $fielddata['fielddefaultvalue']."</textarea>\n";
+						$field .= $fielddata['fielddefaultvalue']."</textarea>";
 					}
 					break;
+					
 				case "select" :
-					$field .="<select class=\"form-control\" name=\"".$fielddata['fieldalias'].">";
+					$field .= $fielddata['fieldname']."</label><select class=\"form-control\" name=\"".$fielddata['fieldalias']."\">";
 					$options = explode(",", trim($fielddata['fielddefaultvalue']));
-					$fieldvalues = explode(",", trim($values));
 					foreach ($options as $option) {
+						$option = trim($option);
 						if (in_array($option, $fieldvalues)) {
-							$field .= "<option value=\"".strtolower($option)."\" selected=\"selected\">".$option."</option>";
+							$field .= "<option value=\"".$option."\" selected=\"selected\">".$option."</option>";
 						} else {
-							$field .= "<option value=\"".strtolower($option)."\">".$option."</option>";
+							$field .= "<option value=\"".$option."\">".$option."</option>";
 						}
 					}
 					break;
-				case "multiselect" :
-					$field .="<select class=\"form-control\" name=\"".$fielddata['fieldalias']." multiple=\"multiple\">";
+					
+				case "multi-select" :
+					$field .= $fielddata['fieldname']."</label><select class=\"form-control\" name=\"".$fielddata['fieldalias']."[]\" multiple=\"multiple\">";
 					$options = explode(",", trim($fielddata['fielddefaultvalue']));
-					$fieldvalues = explode(",", trim($values));
-					foreach ($options as $option) {
-						if (in_array($option, $fieldvalues)) {
-							$field .= "<option value=\"".strtolower($option)."\" selected=\"selected\">".$option."</option>";
-						} else {
-							$field .= "<option value=\"".strtolower($option)."\">".$option."</option>";
+					$fieldvalues = array();
+					if ($edit = TRUE) {
+						foreach ($options as $option) {
+							$option = trim($option);
+							if (in_array($option, $fieldvalues)) {
+								$field .= "<option value=\"".$option."\" selected=\"selected\">".$option."</option>";
+							} else {
+								$field .= "<option value=\"".$option."\">".$option."</option>";
+							}
+						}
+					} else {
+						foreach ($options as $option) {
+								$field .= "<option value=\"".$option."\">".$option."</option>";
 						}
 					}
+					$field .= "</select>";
 					break;
 			}
 			$field .= "</div>";
 			return $field;
+			unset($field);
 		}
 	}
+
+	/*
+	 * Take a string of comma separated values or array of values and display the fields with fieldsets
+	 * NEED TO ADD SUPPORT FOR TABS
+	 */
+	public function displayFields ($fieldIDs, $edit) {
+		if (!isset($fieldIDs) && empty($fieldsIDs)) {
+			echo "Empty query is not good";
+		} elseif (!is_array($fieldIDs)) {
+			$fieldIDs = explode(",", $fieldIDs);
+		}
+		$this->assembleForm($fieldIDs, $edit);
+	}
+
 }
 
 ?>

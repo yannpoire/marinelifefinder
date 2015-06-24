@@ -23,51 +23,66 @@ class MLFLife {
 			
         }
     }
+
 	
-	public function showLife($url) {
-		$sql = "SELECT * FROM mlf_pages WHERE pagealias= :pageurl LIMIT 1";
-		try {
-			$stmt = $this->_db->prepare($sql);
-			$stmt->bindParam(':pageurl', $url, PDO::PARAM_STR);
-			$stmt->execute();
-			$result = $stmt->fetch(PDO::FETCH_ASSOC);
-			$stmt->closeCursor();
-			if (isset($result) && $result['pagestatus'] == 0) {
-				echo "This is not published";
-				$result = NULL;
-				header("Location : index.php");
-			} else {
-				return $result;
-			}
-		} catch (PDOException $e) {
-            return FALSE;
-		}
-	}
+	/*
+	 * 
+	 * fetchLife query the DB to get the values back for a specific life form or all in a group
+	 * @ param string $group group of life
+	 * @ param string $id the unique id of a life form or empty for all in group
+	 * @ return array $results array of row array
+	 * 
+	 */
 	
-	public function fetchLife($lifegroup) {
-		if (empty($lifegroup)) {
-			echo "Needs life group to operate. Precise what you are looking for";
-		} else {
-			switch ($lifegroup) {
+	public function fetchLife($group, $id) {
+		
+		if (isset($group) && !empty($group)) {
+			
+			// Set default field names which are common to all in array
+			$defaults = array("status");
+			$cols = array("id", "alias", "cname", "othercnames", "familycname", "binomialfirst", "binomiallast", "classification", "summary", "content");
+			
+			// Define sql query from groups and ids or all from group if id is empty
+			switch ($group) {
+				
 				case 'Fish' :
-					$sql = "SELECT fid, fstatus, falias, fcname, ffamilycname, fbinomialfirst, fbinomiallast, fclassification, fmetadesc, fmetakeys, fmodified FROM mlf_fish GROUP BY fbinomialfirst ORDER BY fbinomiallast";
+					// If id is present make a query for one row for the requested id
+					if (!empty($id)) {
+						foreach ($cols as $key => $value) {
+							$cols[$key] = "f".$value;
+						}
+						$select = implode(", ", $defaults).", ".implode(", ", $cols);
+						$sql = "SELECT ".$select." FROM mlf_fish WHERE fid = ".$id." LIMIT 1";
+					
+					// If no id is present then request all rows from db for a given group	
+					} else {
+						$sql = "SELECT * from mlf_fish GROUP BY fbinomialfirst ORDER BY fbinomiallast";
+					}
 					break;
+					
 				case 'Nudibranch' :
 					$sql = "SELECT * FROM mlf_nudi GROUP BY nbinomialfirst ORDER BY fbinomiallast";
 					break;
+					
 				default:
 					echo "Something went wrong";
 					break;
 			}
+			
+			// Run the assembled sql query to fetch results
 			try {
 				$stmt = $this->_db->prepare($sql);
 				$stmt->execute();
-            	$fishes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            	$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				$stmt->closeCursor();
-				return $fishes;
+
 			} catch (PDOException $e) {
+				echo 'Error inserting into DB: ' . $e->getMessage();
+				print_r($db->errorInfo());
 				return FALSE;
 			}
+			
+			return $results;
 		}
 	}
 	

@@ -16,26 +16,6 @@
 	include_once ROOT_PATH."common/mainnav.php";
 	include_once ROOT_PATH."admin/adminnav.php";
 ?>
-<?php 
-	include_once ROOT_PATH."common/mainnav.php";
-	if(isset($_GET['status'])) {
-		$status = $_GET['status'];
-		switch ($status) {
-			case 1:
-				$msg = "Success! The lifeform has been added to the Database";
-		timedMsg($msg, "success");
-				break;
-			case 2:
-				$msg = "Failed! The lifeform already exist in the Database";
-		timedMsg($msg, "warning");
-				break;
-			default:
-				$msg = "Failed something went wrong... Very wrong... Very very wrong...";
-		timedMsg($msg, "failure");
-				break;
-		}
-	}
-?>
 <div class="container">
 	<div class="row">
 		<h1>Enter a new lifeform in the directory</h1>

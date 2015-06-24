@@ -20,10 +20,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-			<form method="post" action="../db-interaction/search.php?showresults=TRUE" role="form">
-				<input name="action" type="hidden" value="quicksearch">
-				<?php echo $fieldObj->assembleForm("1,2,3,4,8", FALSE); ?>
-				<input class="button" name="quicksearch" type="submit" value="Find my creature!">
+			<form method="post" action="../db-interaction/life.php" role="form">
+				<input name="action" type="hidden" value="lifeedit">
+					<?php echo $fieldObj->assembleForm("1,2,3,4,5,6", FALSE); ?>
+				<input class="button" name="lifeedit" type="submit" value="Add my creature!">
 			</form>
 			</div>
 		</div>
