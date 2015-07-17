@@ -11,7 +11,7 @@ if(!empty($_POST['action'])) {
 		case 'quicksearch' :
 			
 			$_SESSION['results'] = $searchObj->searchLife();
-			//header("Location: ../search/results.php");
+			header("Location: ../search/results.php");
 			break;
 			
 		case 'advancedsearch' :

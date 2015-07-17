@@ -88,7 +88,7 @@ $gnathostomata = array(
 		),
 		
 		"pelvic" => array(
-			"shape" => array("None", "Rounded", "Triangular", "Lobed", "Arched"),
+			"shape" => array("None", "Rounded", "Triangular", "Lobed", "Arched", "Attached"),
 			"position" => array( "Abdominal", "Thoracic, Jugular", "Mental (attached to chin, eyes)"),
 			"patterns" => array("Dotted", "Spotted", "Lined", "Banded", "Blotched", "Clear rays", "Margins", "Colored Tip" )
 		),
@@ -103,7 +103,7 @@ $gnathostomata = array(
 			"size" => array( "Solitary", "Pairs", "4 - 10", "10 - 30", "30 - 100", "100 - 500", "500+" ),
 			"density" => array("Tight", "Medium", "Scarce")
 		),
-		"motion" => array( "Wave caudal tail", "Flapping pectorals fins", "Ondulates dorsal and anal fins", "Curled Tail", "Ondulates 			whole body", "Walk with leg-like pectoral fins", "Crawls with enlarged pectoral fins", ),
+		"motion" => array( "Wave caudal tail", "Flapping pectorals fins", "Ondulates dorsal and anal fins", "Curled Tail", "Ondulates 	whole body", "Walk with leg-like pectoral fins", "Crawls with enlarged pectoral fins" ),
 		"diet" => array("Herbivore", "Carnivore", "Omnivore", "Filter Feeder", "Smaller fishes", "Plankton", "Corals", "Jellyfish", 			"Algaes", "Encephalopods", "Crustaceas", "Cannibalism", "Zooplankton", "Phytoplankton"  ),
 		"feeding" => array("Ambush", "Chase", "Cooperate", "Dash", "Lure", "Opens Shells", ),
 		"timeactive" => array("Diurnal", "Nocturnal", "Crepuscular")
@@ -162,56 +162,55 @@ $opisthobranchia = array();
 		"South-East Asia",	"Australia/New-Zealand", "Micronesia", "Polynesia", "Hawaii", "Caledonia"
 	),
 	
-	"countries" => array("Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", 
+	"countries" => array("Albania", "Algeria", "American Samoa",
 		"Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", 
-		"Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahrain", 
-		"Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", 
-		"Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", 
+		"Aruba", "Australia", "Bahrain", 
+		"Bangladesh", "Barbados", "Belgium", "Belize", "Benin", 
+		"Bermuda", "Bosnia and Herzegovina",
 		"Bouvet Island", "Brazil", "British Indian Ocean Territory", "British 
-		Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", 
+		Virgin Islands", "Brunei", "Bulgaria",
 		"Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", 
-		"Central African Republic", "Chad", "Chile", "China", "Christmas 
+		"Chile", "China", "Christmas 
 		Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", 
 		"Cook Islands", "Costa Rica", "Cote d\'Ivoire", "Croatia", "Cuba", 
-		"Cyprus", "Czech Republic", "Democratic Republic of the Congo", 
+		"Cyprus", "Democratic Republic of the Congo", 
 		"Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", 
 		"Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", 
-		"Estonia", "Ethiopia", "Faeroe Islands", "Falkland Islands", "Fiji", 
+		"Estonia", "Faeroe Islands", "Falkland Islands", "Fiji", 
 		"Finland", "Former Yugoslav Republic of Macedonia", "France", "French 
 		Guiana", "French Polynesia", "French Southern Territories", "Gabon", 
 		"Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", 
 		"Grenada", "Guadeloupe", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", 
 		"Guyana", "Haiti", "Heard Island and McDonald Islands", "Honduras", 
-		"Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", 
+		"Hong Kong", "Iceland", "India", "Indonesia", "Iran", "Iraq", 
 		"Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", 
-		"Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", 
-		"Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", 
-		"Lithuania", "Luxembourg", "Macau", "Madagascar", "Malawi", "Malaysia", 
-		"Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", 
-		"Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia", "Moldova", 
-		"Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", 
-		"Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", 
+		"Kenya", "Kiribati", "Kuwait",
+		"Latvia", "Lebanon", "Liberia", "Libya", 
+		"Lithuania", "Macau", "Madagascar", "Malaysia", 
+		"Maldives", "Malta", "Marshall Islands", "Martinique", 
+		"Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia",
+		"Monaco", "Montenegro", "Montserrat", "Morocco", 
+		"Mozambique", "Myanmar", "Namibia", "Nauru", "Netherlands", 
 		"Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", 
 		"Niger", "Nigeria", "Niue", "Norfolk Island", "North Korea", "Northern 
 		Marianas", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New 
-		Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn Islands", 
+		Guinea", "Peru", "Philippines", "Pitcairn Islands", 
 		"Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", 
-		"Russia", "Rwanda", "Sqo Tome and Principe", "Saint Helena", "Saint 
+		"Russia", "Sao Tome and Principe", "Saint Helena", "Saint 
 		Kitts and Nevis", "Saint Lucia", "Saint Pierre and Miquelon", "Saint 
-		Vincent and the Grenadines", "Samoa", "San Marino", "Saudi Arabia", 
-		"Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", 
-		"Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", 
-		"South Georgia and the South Sandwich Islands", "South Korea", "South 
-		Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Svalbard and Jan 
-		Mayen", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", 
-		"Tajikistan", "Tanzania", "Thailand", "The Bahamas", "The Gambia", 
+		Vincent and the Grenadines", "Samoa", "Saudi Arabia", 
+		"Senegal", "Seychelles", "Sierra Leone", "Singapore", 
+		"Slovenia", "Solomon Islands", "Somalia", "South Africa", 
+		"South Georgia and the South Sandwich Islands", "South Korea", 
+		"Spain", "Sri Lanka", "Sudan", "Suriname", "Svalbard and Jan 
+		Mayen", "Sweden", "Syria", "Taiwan", 
+		"Tanzania", "Thailand", "The Bahamas", "The Gambia", 
 		"Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", 
-		"Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Virgin Islands", 
-		"Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United 
+		"Turks and Caicos Islands", "Tuvalu", "Virgin Islands", 
+		"Ukraine", "United Arab Emirates", "United Kingdom", "United 
 		States", "United States Minor Outlying Islands", "Uruguay", 
-		"Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Wallis 
-		and Futuna", "Western Sahara", "Yemen", "Yugoslavia", "Zambia", 
-		"Zimbabwe"
+		"Vanuatu", "Venezuela", "Vietnam", "Wallis 
+		and Futuna", "Western Sahara", "Yemen", "Yugoslavia"
  	)
 );
 

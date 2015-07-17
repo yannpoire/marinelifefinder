@@ -39,29 +39,28 @@ class MLFLife {
 		if (isset($group) && !empty($group)) {
 			
 			// Set default field names which are common to all in array
-			$defaults = array("status");
-			$cols = array("id", "alias", "cname", "othercnames", "familycname", "binomialfirst", "binomiallast", "classification", "summary", "content");
+			$defaults = array("status", "alias");
+			
+			$cols = array("cname", "othercnames", "familycname", "binomialfirst", "binomiallast", "classification", "summary", "content");
 			
 			// Define sql query from groups and ids or all from group if id is empty
 			switch ($group) {
 				
-				case 'Fish' :
+				case 'fish' :
 					// If id is present make a query for one row for the requested id
-					if (!empty($id)) {
-						foreach ($cols as $key => $value) {
-							$cols[$key] = "f".$value;
-						}
+					if (!empty($id) && $id != "All") {
+						$defaults[] = "fishID";
 						$select = implode(", ", $defaults).", ".implode(", ", $cols);
-						$sql = "SELECT ".$select." FROM mlf_fish WHERE fid = ".$id." LIMIT 1";
+						$sql = "SELECT ".$select." FROM mlf_fish WHERE fishID = ".$id." LIMIT 1";
 					
 					// If no id is present then request all rows from db for a given group	
-					} else {
-						$sql = "SELECT * from mlf_fish GROUP BY fbinomialfirst ORDER BY fbinomiallast";
+					} elseif (!empty($id) && $id == "All") {
+						$sql = "SELECT * from mlf_fish GROUP BY binomialfirst ORDER BY binomiallast";
 					}
 					break;
 					
 				case 'Nudibranch' :
-					$sql = "SELECT * FROM mlf_nudi GROUP BY nbinomialfirst ORDER BY fbinomiallast";
+					$sql = "SELECT * FROM mlf_nudi GROUP BY binomialfirst ORDER BY binomiallast";
 					break;
 					
 				default:
@@ -70,6 +69,7 @@ class MLFLife {
 			}
 			
 			// Run the assembled sql query to fetch results
+			
 			try {
 				$stmt = $this->_db->prepare($sql);
 				$stmt->execute();
@@ -93,11 +93,9 @@ class MLFLife {
 		
 		switch ($lifegroup) {
 			case "Fish" :
-				$pre ="f";
 				$table = "fish";
 				break;
 			case "Nudi" :
-				$pre ="n";
 				$table = "nudi";
 				break;
 			default :
@@ -105,7 +103,7 @@ class MLFLife {
 				break;
 		}
 		
-		$queryarr[$pre.'alias'] = strtolower($_POST['binomialfirst']."-".$_POST['binomiallast']);
+		$queryarr['alias'] = strtolower($_POST['binomialfirst']."-".$_POST['binomiallast']);
 		
 	// Convert the $_POST multidimensional array to an regular array of string values
 	
@@ -114,20 +112,20 @@ class MLFLife {
 		foreach ($_POST as $key => &$value) {
 			if (!in_array($key, $_POST)) {
 				if (is_string($value) && strlen($value) > 0) {
-					$queryarr[$pre.$key] = $value;
+					$queryarr[$key] = $value;
 				} elseif 	(is_array($value) && count($value) > 0) {
 					$paramval = join(", " , $value);
-					$queryarr[$pre.$key] = $paramval;
+					$queryarr[$key] = $paramval;
 					unset($paramval);
 				}
 			}
 		}
 		
 	// See if it exist in the DB already using the alias which is the binomial of the fish
-		$sql = "SELECT ".$pre."alias FROM mlf_".$table." WHERE ".$pre."alias = :falias LIMIT 1";
+		$sql = "SELECT alias FROM mlf_".$table." WHERE alias = :alias LIMIT 1";
 		try {
 			$stmt = $this->_db->prepare($sql);
-			$stmt->bindParam(':falias', $queryarr['falias'], PDO::PARAM_STR);
+			$stmt->bindParam(':alias', $queryarr['alias'], PDO::PARAM_STR);
 			$stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 			$stmt->closeCursor();
@@ -144,12 +142,12 @@ class MLFLife {
 		
 		// Doesnt Exist
 		// If it doesnt exist in the DB insert the values of $queryarr in the appropriate table in the DB
-		$queryarr['fcreated'] = (int)time();
-		$queryarr['fmodified'] = (int)time();
-		$queryarr['fusername'] = $_SESSION['username'];
+		$queryarr['created'] = (int)time();
+		$queryarr['modified'] = (int)time();
+		$queryarr['username'] = $_SESSION['username'];
 		$cols = implode(",", array_keys($queryarr));
 		$vals = preg_replace("/,/", ",:", $cols);
-		$sql = "INSERT INTO mlf_fish (".$cols.") VALUES (:".$vals.")";
+		$sql = "INSERT INTO mlf_".$table." (".$cols.") VALUES (:".$vals.")";
 		//echo "MySQL query string = ".$sql."<br>";
 		try {
 			$stmt = $this->_db->prepare($sql);

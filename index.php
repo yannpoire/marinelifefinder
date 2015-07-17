@@ -27,7 +27,7 @@
 		<div class="col-md-4">
 			<h2>Quick Search</h2>
 			<p>As most fishes have distinct traits, it is quite easy to narrow down what family and species he belongs to and what it his name. Try this interactive search using the most common but efficient criterias when identifying marine life.</p>
-			<p><a class="btn btn-default" href="<?php echo BASE_URL; ?>pages/searchsplash.php" role="button">Start searching &raquo;</a></p>
+			<p><a class="btn btn-default" href="<?php echo BASE_URL; ?>search/quicksearch.php" role="button">Start searching &raquo;</a></p>
 		</div>
 		<div class="col-md-4">
 			<h2>Advanced Search</h2>
@@ -93,13 +93,5 @@
 			function closeSubMenu() {
 				$(this).find('ul').css('visibility', 'hidden');	
 			};	   
-		});
-	</script>
-	<script>
-		$(function() {
-			if ($('div.timedmsg')) {
-				$( "div.timedmsg" ).slideDown( 1800, function() {
-			  	}).delay( 5000 ).slideUp(1600);
-			 }
 		});
 	</script>

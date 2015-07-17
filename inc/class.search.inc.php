@@ -25,7 +25,28 @@ class MLFSearch {
         }
     }
 	
-	
+	public function checkStatus ($group, $id) {
+		if (!empty($group) && !empty($id)) {
+			$sql = "SELECT id FROM mlf_".strtolower($group)." WHERE id = ".$id." LIMIT 1";
+			try {
+				$stmt = $this->_db->prepare($sql);
+				$stmt->execute();
+				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				$stmt->closeCursor();
+				
+			} catch (PDOException $e) {
+				echo 'Error inserting into DB: ' . $e->getMessage();
+				print_r($db->errorInfo());
+				return FALSE;
+			}
+			if ($result['status'] == 1) {
+				return TRUE;
+			} else {
+				echo "Not published";
+				return FALSE;
+			}
+		}
+	}
 
 	
 	public function searchLife () {
@@ -33,7 +54,7 @@ class MLFSearch {
 		if (isset($_POST) && !empty($_POST)) {
 			$searchexact = $searchmatch = "";
 			$excluded = array("action", "quicksearch");
-			$cols = "fcname, fothercnames, fbinomialfirst, fbinomiallast, fsummary";
+			$cols = "id, cname, othercnames, binomialfirst, binomiallast, summary";
 
 			foreach ($_POST as $key => &$value) {
 				if(is_array($value)) {
@@ -48,7 +69,7 @@ class MLFSearch {
 		}
 		
 		$searchexact = rtrim($searchexact, ", ");
-		$sql = "SELECT ".$cols." FROM mlf_fish WHERE ".$searchexact." LIMIT 10";
+		$sql = "SELECT ".$cols." FROM mlf_fish WHERE ".$searchexact." AND status = 1 LIMIT 20";
 		echo $sql;
 		try {
 			$stmt = $this->_db->prepare($sql);
@@ -64,7 +85,7 @@ class MLFSearch {
 		
 		$searchmatch = rtrim($searchmatch, " AND ");
 		
-		$sql = "SELECT ".$cols." FROM mlf_fish WHERE ".$searchmatch." LIMIT 50";
+		$sql = "SELECT ".$cols." FROM mlf_fish WHERE ".$searchmatch." AND status = 1 LIMIT 50";
 		echo $sql;
 		
 		try {
@@ -102,34 +123,41 @@ class MLFSearch {
 	
 	public function displayResults ($results) {
 		
-		
-		
-		
+		echo "<div class=\"row\"><div class=\"col-md-12\"><h2>Exact matches</h2>";
 		if (isset($results['exact']) && !empty($results['exact'])) {
-			echo "<div class=\"row\"><div class=\"col-md-12\"><h2>Exact matches</h2>";
+			
 			$exactmatch = $results['exact'];
 			foreach ($exactmatch as $key => $value) {
-				echo "<div class=\"col-md-4\"><a href=\"../viewlife.php?group=fish&fid=".$value['fid']."\">",
+				echo "<div class=\"col-md-4\"><a href=\"../viewlife.php?group=fish&fid=".$value['id']."\">",
 				"<h3>".$value['fcname']."</h3>",
 				"<img src=\"\">",
-				"<span class=\"binomial\">".$value['fbinomialfirst'].$value['fbinomiallast']."</span>",
-				"<p>".$value['fsummary']."</p>",
+				"<span class=\"binomial\">".$value['binomialfirst'].$value['binomiallast']."</span>",
+				"<p>".$value['summary']."</p>",
 				"<span>Show more</span>";		
 			}
-			echo "</a></div></div></div>";
+			echo "</a></div>";
+		} elseif (isset($results['exact']) && empty($results['exact'])) {
+			echo "No exact match for this search";
 		}
+				
+		echo "</div></div>",
+			"<div class=\"row\"><div class=\"col-md-12\"><h2>Partial matches</h2>";
 		
 		if (isset($results['partial']) && !empty($results['partial'])) {
-			echo "<div class=\"row\"><div class=\"col-md-12\"><h2>Partial matches</h2>";
+			
 			$partialmatch = $results['partial'];
 			echo "";
 			foreach ($partialmatch as $key => $value) {
-				echo "<div class=\"col-md-4\">",
-				"<h3>".$value['fcname']."</h3>",
-				"<span class=\"binomial\">".$value['fbinomialfirst'].$value['fbinomiallast']."</span>";	
+				echo "<div class=\"col-md-4\"><a href=\"../viewlife.php?group=fish&fid=".$value['id']."\">",
+				"<h3>".$value['cname']."</h3>",
+				"<span class=\"binomial\">".$value['binomialfirst'].$value['binomiallast']."</span>";	
 			}
-			echo "</div></div></div>";
+			echo "</a></div>";
+		} elseif (isset($results['partial']) && empty($results['partial'])) {
+			echo "No partial match found";
 		}
+		echo "</div></div>";
+		
 		
 	}
 	

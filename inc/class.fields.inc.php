@@ -253,8 +253,7 @@ class MLFFields {
 	}
 	
 	private function assembleField ($fielddata, $edit) {
-		
-		
+			
 		if (is_array($fielddata) && !empty($fielddata)) {
 			$field = "<div class=\" ".$fielddata['fieldsetclass']."\"><label for=\"".$fielddata['fieldalias']."\">";
 			switch ($fielddata['fieldtype']) {

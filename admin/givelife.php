@@ -6,7 +6,6 @@
 	include_once ROOT_PATH."inc/class.tree.inc.php";
 	include_once ROOT_PATH."common/header.php";
 
-	include_once ROOT_PATH."common/forms.php";
 	$lifeObj = new MLFLife();
 	$treeObj = new MLFTree();
 ?>
@@ -16,29 +15,8 @@
 	include_once ROOT_PATH."common/mainnav.php";
 	include_once ROOT_PATH."admin/adminnav.php";
 
-	if(isset($_GET['status'])) {
-		$status = $_GET['status'];
-		switch ($status) {
-			case 1:
-				$msg = "<div class=\"alert alert-success alert-dismissable\">
-					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
-					<span aria-hidden=\"true\">&times;</span>
-					</button><strong>Success!</strong> The creature has been entered in the database</div>";
-				break;
-			case 2:
-				$msg = "<div class=\"alert alert-warning alert-dismissable\">
-					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
-					<span aria-hidden=\"true\">&times;</span>
-					</button><strong>Warning!</strong> The creature already exist in the database</div>";
-				break;
-			default:
-				$msg = "<div class=\"alert alert-danger alert-dismissable\">
-					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
-					<span aria-hidden=\"true\">&times;</span>
-					</button><strong>Houston!</strong> We have a problem...</div>";
-				break;
-		}
-	}
+
+
 ?>
 <div class="container">
 	<div class="row">
@@ -71,7 +49,7 @@
 				<legend>Group*</legend>
 				
 					<select id="lifegroup" name="lifegroup">
-						<?php customDdown($lifegroups); ?>
+						
 					</select>
 					
 				</fieldset>
@@ -87,7 +65,7 @@
 					<label for="familycname">Family Common Name</label>
 					<select id="familycname" name="familycname">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['familycname']);  ?>
+						
 					</select>
 				
 				</fieldset>
@@ -103,7 +81,7 @@
 					<label for="classification">Taxon, Clade, Rank</label>
 					<select id="classification" name="classification">
 						<option value="undefined">Not defined yet</option>
-						<?php $treeObj->branchDdown("animalia"); ?>
+						
 					</select>
 				
 				</fieldset>
@@ -155,12 +133,12 @@
 					<label for="primarycolors">Primary color(s)</label>
 					<select id="primarycolors" name="primarycolors[]" multiple="multiple" class="multiple half-width">
 						<option value=""></option>
-						<?php customDdown($colors); ?>
+					
 					</select>
 					<label for="secondarycolors">Secondary color(s)</label>
 					<select id="secondarycolors" name="secondarycolors[]" multiple="multiple" class="multiple half-width">
 						<option value=""></option>
-						<?php customDdown($colors); ?>
+						
 					</select>
 				
 				</fieldset>
@@ -170,7 +148,7 @@
 					<label for="patternsmarks">Patterns & Marks</label>
 					<select id="patternsmarks" name="patternsmarks[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($visuals); ?>
+						
 					</select>	
 				</fieldset>
 				
@@ -180,7 +158,7 @@
 					<label for="generalshape">General shape</label>
 					<select id="generalshape" name="generalshape[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['generalshape']); ?>
+						
 					</select>
 					
 					<p>Size is the average length of a full growth adult.</p>
@@ -192,7 +170,7 @@
 					<label for="bodyrings" class="tiny-width">Number of Rings</label>
 					<select id="bodyrings" name="bodyrings" class="tiny-width">
 						<option value=""></option>
-						<?php numDdown(20); ?>
+						
 					</select>
 				
 				</fieldset>
@@ -205,13 +183,14 @@
 					<label for="juvprimarycolors">Primary color(s) of juvenile</label>
 					<select id="juvprimarycolors" name="juvprimarycolors[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($colors); ?>
+					
 					</select>
 					
 					<label for="juvsecondarycolors">Secondary color(s) of juvenile</label>
 					<select id="juvsecondarycolors" name="juvsecondarycolors[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($colors); ?>
+						
+						
 					</select>
 				
 				</fieldset>
@@ -222,7 +201,7 @@
 					<label for="juvpatternsmarks">Patterns & Marks of juvenile</label>
 					<select id="juvpatternsmarks" name="juvpatternsmarks[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($visuals); ?>
+					
 					</select>
 					
 				</fieldset>
@@ -233,7 +212,7 @@
 					<label for="juvgeneralshape">General shape of juvenile</label>
 					<select id="juvgeneralshape" name="juvgeneralshape[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['generalshape']); ?>
+						
 					</select>
 				
 				</fieldset>
@@ -248,13 +227,13 @@
 					<label for="femprimarycolors">Primary color(s) of female</label>
 					<select id="femprimarycolors" name="femprimarycolors[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($colors); ?>
+						
 					</select>
 					
 					<label for="femsecondarycolors">Secondary color(s) of female</label>
 					<select id="femsecondarycolors" name="femsecondarycolors[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($colors); ?>
+						
 					</select>
 				
 				</fieldset>
@@ -265,7 +244,7 @@
 					<label for="fempatternsmarks">Patterns & Marks of female</label>
 					<select id="fempatternsmarks" name="fempatternsmarks[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($visuals); ?>
+						
 					</select>
 					
 				</fieldset>
@@ -276,7 +255,7 @@
 					<label for="femgeneralshape">General shape of female</label>
 					<select id="femgeneralshape" name="femgeneralshape[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['generalshape']); ?>
+						
 					</select>
 				
 				</fieldset>
@@ -295,13 +274,13 @@
 					<label for="headshape">Head shape</label>
 					<select id="headshape" name="headshape[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['head']['shape']); ?>
+						
 					</select>
 					
 					<label for="headsizetobody">Head size relative to body</label>
 					<select id="headsizetobody" name="headsizetobody[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['head']['sizetobody']); ?>
+						
 					</select>
 				
 				</fieldset>
@@ -314,25 +293,25 @@
 					<label for="mouthshape">Mouth shape</label>
 					<select id="mouthshape" name="mouthshape[]"  multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['mouth']['shape']); ?>
+						
 					</select>
 					
 					<label for="mouthposition">Mouth position</label>
 					<select id="mouthposition" name="mouthposition">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['mouth']['position']); ?>
+						
 					</select>
 					
 					<label for="mouthsizetohead">Mouth size relative to head</label>
 					<select id="mouthsizetohead" name="mouthsizetohead[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['mouth']['sizetohead']); ?>
+						
 					</select>
 				
 					<label for="mouthreltoeyes">Mouth ending relative to eye</label>
 					<select id="mouthreltoeyes" name="mouthreltoeyes">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['mouth']['reltoeyes']); ?>
+						
 					</select>
 					
 					<label for="mouthteethvis"  class="tiny-width">Teeth Visible (when mouth closed)</label>
@@ -351,13 +330,13 @@
 					<label for="eyessizetohead">Eyes size relative to head</label>
 					<select id="eyessizetohead" name="eyessizetohead[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['eyes']['sizetohead']); ?>
+					
 					</select>
 					
 					<label for="eyesposition">Eyes position</label>
 					<select id="eyesposition" name="eyesposition">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['eyes']['position']); ?>
+				
 					</select>
 				
 				</fieldset>
@@ -370,13 +349,13 @@
 					<label for="laterallinesshape">Lateral Line shape</label>
 					<select id="laterallinesshape" name="laterallinesshape">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['laterallines']['shape']); ?>
+			
 					</select>
 					
 					<label for="laterallinespores" class="tiny-width">Number of lateral line pores</label>
 					<select id="laterallinespores" name="laterallinespores" class="tiny-width">
 						<option value=""></option>
-						<?php numDdown(20); ?>
+					
 					</select>
 					
 				</fieldset>
@@ -389,7 +368,8 @@
 					<label for="operculums">Operculums or Gill Covers</label>
 					<select id="operculums" name="operculums[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['operculums']); ?>
+						
+
 					</select>
 					
 					<label for="holes" class="tiny-width">Holes are present instead</label>
@@ -401,7 +381,7 @@
 					<label for="slits">Number of Slits if any</label>
 					<select id="slits" name="slits">
 						<option value=""></option>
-						<?php numDdown(8); ?>
+						
 					</select>
 					
 				</fieldset>
@@ -414,37 +394,37 @@
 					<label for="scalessize">Scale Size</label>
 					<select id="scalessize" name="scalessize[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['scales']['size']); ?>
+						
 					</select>
 					
 					<label for="scalestype">Scale Type</label>
 					<select id="scalestype" name="scalestype">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['scales']['type']); ?>
+						
 					</select>
 					
 					<label for="lateralscales" class="tiny-width">Lateral or longitudinal Scale Count</label>
 					<select id="lateralscales" name="lateralscales" class="tiny-width">
 						<option value=""></option>
-						<?php numDdown(50); ?>
+					
 					</select>
 					
 					<label for="traversescalesover" class="tiny-width">Top Traverse Scale Count (over lateral line)</label>
 					<select id="traversescalesover" name="traversescalesover" class="tiny-width">
 						<option value=""></option>
-						<?php numDdown(30); ?>
+					
 					</select>
 					
 					<label for="traversescalesunder" class="tiny-width">Bottom Traverse Scale Count (under lateral line)</label>
 					<select id="traversescalesunder" name="traversescalesunder" class="tiny-width">
 						<option value=""></option>
-						<?php numDdown(30); ?>
+				
 					</select>
 					
 					<label for="predorsalscales" class="tiny-width">Predorsal Scale Count (from top of head to first dorsal spine)</label>
 					<select id="predorsalscales" name="predorsalscales" class="tiny-width">
 						<option value=""></option>
-						<?php numDdown(30); ?>
+			
 					</select>
 					
 				</fieldset>	
@@ -457,13 +437,13 @@
 					<label for="upperarmrakers" class="tiny-width">Number of gill rakers on upper arm</label>
 					<select id="upperarmrakers" name="upperarmrakers" class="tiny-width">
 						<option value=""></option>
-						<?php numDdown(20); ?>
+						
 					</select><br />
 					
 					<label for="lowerarmrakers" class="tiny-width">Number of gill rakers on upper arm</label>
 					<select id="lowerarmrakers" name="lowerarmrakers" class="tiny-width">
 						<option value=""></option>
-						<?php numDdown(20); ?>
+				
 					</select>
 					
 				</fieldset>
@@ -480,13 +460,13 @@
 					<label for="dorsalfinshape">Dorsal fin shape</label>
 					<select id="dorsalfinshape" name="dorsalfinshape[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['fins']['dorsal']['shape']); ?>
+						
 					</select>
 					
 					<label for="dorsalfinpatterns">Dorsal fin patterns</label>
 					<select id="dorsalfinpatterns" name="dorsalfinpatterns[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['fins']['dorsal']['patterns']); ?>
+						
 					</select>
 					
 					<label for="dorsalfinsplit">Dorsal is split in</label>
@@ -504,12 +484,12 @@
 	
 					<label for="dorsalfinspines" class="tiny-width">Number of spines</label>
 					<select id="dorsalfinspines" name="dorsalfinspines" class="tiny-width">
-						<?php numDdown(15); ?>
+		
 					</select><br />
 					
 					<label for="dorsalfinrays" class="tiny-width">Number of rays</label>
 					<select id="dorsalfinrays" name="dorsalfinrays" class="tiny-width">
-						<?php numDdown(30); ?>
+			
 					</select>
 					
 				</fieldset>
@@ -522,31 +502,31 @@
 					<label for="caudalfinshape">Caudal fin shape (tail)</label>
 					<select id="caudalfinshape" name="caudalfinshape[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['fins']['caudal']['shape']); ?>
+					
 					</select>
 					
 					<label for="caudalfintype">Caudal fin type (tail)</label>
 					<select id="caudalfintype" name="caudalfintype">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['fins']['caudal']['type']); ?>
+					
 					</select>
 					
 					<label for="caudalfinpatterns">Caudal fin patterns</label>
 					<select id="caudalfinpatterns" name="caudalfinpatterns[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['fins']['caudal']['patterns']); ?>
+				
 					</select>
 					
 					<label for="caudalfinspines" class="tiny-width">Number of spines</label>
 					<select id="caudalfinspines" name="caudalfinspines" class="tiny-width">
 						<option value=""></option>
-						<?php numDdown(15); ?>
+					
 					</select><br />
 					
 					<label for="caudalfinrays" class="tiny-width">Number of rays</label>
 					<select id="caudalfinrays" name="caudalfinrays" class="tiny-width">
 						<option value=""></option>
-						<?php numDdown(30); ?>
+				
 					</select>
 					
 				</fieldset>
@@ -559,22 +539,22 @@
 					<label for="analfinshape">Anal fin shape</label>
 					<select id="analfinshape" name="analfinshape[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['fins']['anal']['shape']); ?>
+						
 					</select>
 					
 					<select id="analfinpatterns" name="analfinpatterns[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['fins']['anal']['patterns']); ?>
+						
 					</select>
 					
 					<label for="analfinsspines" class="tiny-width">Number of spines</label>
 					<select id="analfinsspines" name="analfinsspines" class="tiny-width">
-						<?php numDdown(15); ?>
+						
 					</select><br />
 					
 					<label for="analfinsrays" class="tiny-width">Number of rays</label>
 					<select id="analfinsrays" name="analfinsrays" class="tiny-width">
-						<?php numDdown(30); ?>
+			
 					</select>
 					
 				</fieldset>
@@ -587,23 +567,23 @@
 					<label for="pelvicfinsshape">Pelvic fin shape</label>
 					<select id="pelvicfinsshape" name="pelvicfinsshape[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['fins']['pelvic']['shape']); ?>
+					
 					</select>
 					
 					<label for="pelvicfinspatterns">Pelvic fin patterns</label>
 					<select id="pelvicfinspatterns" name="pelvicfinspatterns[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['fins']['pelvic']['patterns']); ?>
+				
 					</select>
 							
 					<label for="pelvicfinsspines" class="tiny-width">Number of spines</label>
 					<select id="pelvicfinsspines" name="pelvicfinsspines" class="tiny-width">
-						<?php numDdown(15); ?><br />
+				
 					</select>
 					
 					<label for="pelvicfinsrays" class="tiny-width">Number of rays</label>
 					<select id="pelvicfinsrays" name="pelvicfinsrays" class="tiny-width">
-						<?php numDdown(30); ?>
+				
 					</select><br />
 					
 					<label for="pelvicfinsclaspers" class="tiny-width">Pelvic fins have claspers</label>
@@ -628,23 +608,23 @@
 					<label for="pectoralfinsshape">Pectoral fin shape (on the side near head)</label>
 					<select id="pectoralfinsshape" name="pectoralfinsshape[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['fins']['pectoral']['shape']); ?>
+						
 					</select>
 					
 					<label for="pectoralfinspatterns">Pectoral fin patterns or marks</label>
 					<select id="pectoralfinspatterns" name="pectoralfinspatterns[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['fins']['pectoral']['patterns']); ?>
+			
 					</select>
 
 					<label for="pectoralfinsspines" class="tiny-width">Number of spines</label>
 					<select id="pectoralfinsspines" name="pectoralfinsspines" class="tiny-width">
-						<?php numDdown(15); ?>
+						
 					</select><br />
 					
 					<label for="pectoralfinsrays" class="tiny-width">Number of spines</label>
 					<select id="pectoralfinsrays" name="pectoralfinsrays" class="tiny-width">
-						<?php numDdown(30); ?>
+
 					</select>
 					
 				</fieldset>
@@ -670,13 +650,13 @@
 					<label for="abvertebraes" class="tiny-width">Number of Abdominal Vertebraes</label>
 					<select id="abvertebraes" name="abvertebraes" class="tiny-width">
 						<option value=""></option>
-						<?php numDdown(30); ?>
+
 					</select><br />
 				
 					<label for="cavertebraes" class="tiny-width">Number of Caudal Vertebraes</label>
 					<select id="cavertebraes" name="cavertebraes" class="tiny-width">
 						<option value=""></option>
-						<?php numDdown(30); ?>
+
 					</select>
 			
 			</div>
@@ -693,13 +673,13 @@
 					<label for="schoolingsize">Size of schools or groups</label>
 					<select id="schoolingsize" name="schoolingsize[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['behavior']['schooling']['size']); ?>
+				
 					</select>
 					
 					<label for="schoolingdensity">Density of schools or groups</label>
 					<select id="schoolingdensity" name="schoolingdensity[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['behavior']['schooling']['size']); ?>
+						
 					</select>
 					
 				</fieldset>
@@ -711,7 +691,7 @@
 					<label for="motion">Motion</label>
 					<select id="motion" name="motion[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['behavior']['motion']) ?>
+	
 					</select>
 
 				</fieldset>
@@ -723,13 +703,13 @@
 					<label for="diet">Diet what it feeds on</label>
 					<select id="diet" name="diet[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['behavior']['diet']) ?>
+	
 					</select>
 
 					<label for="feeding">Ways of acquiring food</label>
 					<select id="feeding" name="feeding[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['behavior']['feeding']) ?>
+	
 					</select>
 
 				</fieldset>
@@ -740,7 +720,7 @@
 					<label for="timeactive">Time most active, feeding, hunting</label>
 					<select id="timeactive" name="timeactive[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['behavior']['timeactive']) ?>
+				
 					</select>
 					
 				</fieldset>
@@ -751,7 +731,7 @@
 					<p>Some species have very specific mating rituals</p>
 					
 					<label for="courting">What are the courting or mating behaviors</label>
-					<textarea id="courting" name="courting" rows="6" cols="50"></textarea>
+
 					
 				</fieldset>
 				
@@ -777,7 +757,7 @@
 					<label for="habitat">Habitat</label>
 					<select id="habitat" name="habitat[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['habitat']) ?>
+				
 					</select>
 					
 					<p>Where the fish lives in the water column</p>
@@ -785,7 +765,7 @@
 					<label for="habitattype">Habitat type</label>
 					<select id="habitattype" name="habitattype">
 						<option value=""></option>
-						<?php customDdown($gnathostomata['habitattype']) ?>
+	
 					</select>
 					
 					<p>Is this fish a migratory species and if so when does they migrate</p>
@@ -800,13 +780,13 @@
 					<label for="migratorystart">Migration start about</label>
 					<select id="migratorystart" name="migratorystart">
 						<option value=""></option>
-						<?php customDdown($months) ?>
+		
 					</select>
 					
 					<label for="migratoryend">To the month of</label>
 					<select id="migratoryend" name="migratoryend">
 						<option value=""></option>
-						<?php customDdown($months) ?>
+
 					</select>
 
 				</fieldset>
@@ -828,13 +808,13 @@
 					<label for="oceans">Oceans</label>
 					<select multiple="multiple" id="oceans" name="oceans[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($oceans); ?>
+					
 					</select>
 					
 					<label for="seas">Seas</label>
 					<select multiple="multiple" id="seas" name="seas[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($seas); ?>
+	
 					</select>
 					
 				</fieldset>
@@ -845,19 +825,19 @@
 					<label for="continents">Continents</label>
 					<select id="continents" name="continents[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($distribution['continents']); ?>
+					
 					</select>
 					
 					<label for="regions">Regions</label>
 					<select id="regions" name="regions[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($distribution['regions']); ?>
+				
 					</select>
 					
 					<label for="regions">Countries</label>
 					<select id="countries" name="countries[]" multiple="multiple" class="multiple">
 						<option value=""></option>
-						<?php customDdown($distribution['countries']); ?>
+		
 					</select>
 					
 				</fieldset>

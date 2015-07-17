@@ -32,7 +32,7 @@ class MLFModules {
 
 	public function fishoftheday () {
 		// $sql = "SELECT fid, fcname FROM mlf_fish WHERE fid = ".rand(1, 3)." LIMIT 1";
-		$sql = "SELECT fid, fcname FROM mlf_fish WHERE fid = 3 LIMIT 1";
+		$sql = "SELECT fishID, cname FROM mlf_fish WHERE fishID = 4 LIMIT 1";
 		
 		try {
 			$stmt = $this->_db->prepare($sql);
@@ -45,14 +45,14 @@ class MLFModules {
 			return FALSE;
 		}
 		
-		// var_dump($fishoftheday);
+		if(!empty($fishoftheday)) {
+				
+			$name = $fishoftheday[0];
 		
-		$name = $fishoftheday[0];
-		
-		echo "<h3>Fish of the Day</h1>",
-		"<h4>".$name['fcname']."</h4>",
-		"<p><a href=\"#\">Learn more about >></p>";
-		
+			echo "<h3>Fish of the Day</h1>",
+			"<h4>".$name['cname']."</h4>",
+			"<p><a href=\"#\">Learn more about >></p>";
+		}		
 	}
 }
 
